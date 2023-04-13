@@ -7,7 +7,7 @@ export default function OrderWaitRider() {
     <div>
         <NavBar />
         <div>
-            OrderWaitRider
+            OrderWaitRider ควย
         </div>
         <Footer />
     </div>

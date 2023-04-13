@@ -7,7 +7,7 @@ export default function OrderWaitAcept() {
     <div>
       <NavBar />
       <div>
-        OrderWaitAcept
+        OrderWaitAcept ควย
       </div>
       <Footer />
     </div>
