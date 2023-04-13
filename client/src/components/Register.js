@@ -2,11 +2,14 @@ import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
-export default function Login() {
+export default function Register() {
   return (
+
     <div>
         <NavBar />
-          this is login page
+        <div>
+            Register
+        </div>
         <Footer />
     </div>
   )

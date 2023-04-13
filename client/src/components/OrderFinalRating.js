@@ -2,11 +2,13 @@ import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
-export default function Login() {
+export default function OrderFinalRating() {
   return (
     <div>
         <NavBar />
-          this is login page
+        <div>
+            OrderFinalRating
+        </div>
         <Footer />
     </div>
   )

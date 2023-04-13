@@ -2,12 +2,14 @@ import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
-export default function Login() {
+export default function OrderWaitAcept() {
   return (
     <div>
-        <NavBar />
-          this is login page
-        <Footer />
+      <NavBar />
+      <div>
+        OrderWaitAcept
+      </div>
+      <Footer />
     </div>
   )
 }

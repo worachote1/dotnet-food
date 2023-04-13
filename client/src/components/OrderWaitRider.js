@@ -2,11 +2,13 @@ import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
-export default function Login() {
+export default function OrderWaitRider() {
   return (
     <div>
         <NavBar />
-          this is login page
+        <div>
+            OrderWaitRider
+        </div>
         <Footer />
     </div>
   )
