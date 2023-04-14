@@ -6,6 +6,8 @@ using static BasicASPTutorial.Controllers.UserController;
 
 namespace dotnet_foodRelease.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class OrdersController : Controller
     {
         private static List<Order> ordersList = new List<Order>

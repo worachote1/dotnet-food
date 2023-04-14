@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_foodRelease.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class FoodShopController : Controller
     {
         private static List<FoodShop> invoiceItemsList = new List<FoodShop>

@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BasicASPTutorial.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ShopItemController : Controller
     {
         private static List<shopItems> shopItemsList = new List<shopItems>

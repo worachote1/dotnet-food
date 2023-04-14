@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BasicASPTutorial.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private static List<User> users = new List<User>
