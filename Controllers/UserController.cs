@@ -41,7 +41,7 @@ namespace BasicASPTutorial.Controllers
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
-            // User[] items = users.ToArray();
+            // testing-1 branch -->
             return Ok(
                 users
             );
