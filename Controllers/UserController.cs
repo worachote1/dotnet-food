@@ -3,8 +3,7 @@ using BasicASPTutorial.Models;
 using Microsoft.AspNetCore.Mvc;
 // using Microsoft.EntityFrameworkCore;
 
-// dfghjkl;''f;qlerjmk,l;.qrfemjk,l
-// after hard reset
+
 namespace BasicASPTutorial.Controllers
 {
     [ApiController]
@@ -43,7 +42,6 @@ namespace BasicASPTutorial.Controllers
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
-            // testing-1 branch -->
             return Ok(
                 users
             );
