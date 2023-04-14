@@ -2,8 +2,9 @@
 {
     public class Order
     {
-        public Invoice Invoice { get; set; }
+        public int Id { get; set; }
 
-        public string deliveryName { get; set; }
+        public Invoice invoice { get; set; }
+        public User deliveryMan { get; set; }
     }
 }

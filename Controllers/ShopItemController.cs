@@ -1,5 +1,6 @@
 ﻿using BasicASPTutorial.Data;
 using BasicASPTutorial.Models;
+using dotnet_foodRelease.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,13 +15,13 @@ namespace BasicASPTutorial.Controllers
                        itemName = "Noodles",
                        itemPrice = 50.0,
                        type = "MAIN",
-                       imgPath = "https://test.com"
+                       imgPath = "https://test.com/img.jpg"
             },
         };
 
-        private readonly shopItemDataContext _context;
+        private readonly ShopItemsDataContext _context;
 
-        public ShopItemController(shopItemDataContext context)
+        public ShopItemController(ShopItemsDataContext context)
         {
             _context = context;
         }
@@ -31,13 +32,13 @@ namespace BasicASPTutorial.Controllers
         {
 
 
-            return Ok(await _context.ShopItems.ToListAsync());
+            return Ok(await _context.shopItems.ToListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<shopItems>> Get(int id)
         {
-            var foodItems = await _context.ShopItems.FindAsync(id);
+            var foodItems = await _context.shopItems.FindAsync(id);
             if (foodItems == null)
             {
                 return BadRequest("Food ID Not Found");
@@ -48,25 +49,25 @@ namespace BasicASPTutorial.Controllers
         [HttpPost]
         public async Task<ActionResult<List<shopItems>>> AddFoods(shopItems shopItem)
         {
-            _context.ShopItems.Add(shopItem);
+            _context.shopItems.Add(shopItem);
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.ShopItems.ToListAsync());
+            return Ok(await _context.shopItems.ToListAsync());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<shopItems>> Delete(int id)
         {
-            var dbfoodItems = await _context.ShopItems.FindAsync(id);
+            var dbfoodItems = await _context.shopItems.FindAsync(id);
             if (dbfoodItems == null)
             {
                 return BadRequest("Food ID Not Found");
             }
 
-            _context.ShopItems.Remove(dbfoodItems);
+            _context.shopItems.Remove(dbfoodItems);
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.ShopItems.ToListAsync());
+            return Ok(await _context.shopItems.ToListAsync());
         }
 
     }

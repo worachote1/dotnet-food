@@ -1,16 +1,33 @@
 using BasicASPTutorial.Data;
+using dotnet_foodRelease.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DataContext>(
+builder.Services.AddDbContext<UserDataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
 )
     );
-builder.Services.AddDbContext<shopItemDataContext>(
+builder.Services.AddDbContext<ShopItemsDataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ShopItemConnection")
+)
+    );
+builder.Services.AddDbContext<InvoiceItemsDataContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("InvoiceItemConnection")
+)
+    );
+builder.Services.AddDbContext<FoodShopContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("FoodShopConnection")
+)
+    );
+builder.Services.AddDbContext<InvoiceContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("InvoiceConnection")
+)
+    );
+builder.Services.AddDbContext<OrderContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrderConnection")
 )
     );
 
