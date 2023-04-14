@@ -46,7 +46,7 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{username}")]
         public async Task<ActionResult<User>> Get(string username)
         {
             var user = await _context.Users.FindAsync(username);
@@ -81,7 +81,7 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{username}")]
         public async Task<ActionResult<User>> Delete(string username)
         {
             var dbuser = await _context.Users.FindAsync(username);
