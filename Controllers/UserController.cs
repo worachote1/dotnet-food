@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 // using Microsoft.EntityFrameworkCore;
 
 // dfghjkl;''f;qlerjmk,l;.qrfemjk,l
+// after hard reset
 namespace BasicASPTutorial.Controllers
 {
     [ApiController]
