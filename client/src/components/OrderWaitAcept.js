@@ -1,34 +1,33 @@
 import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import '../index.css'
-import { Oval } from 'react-loader-spinner'
+import { MagnifyingGlass } from 'react-loader-spinner'
 
 export default function OrderWaitAcept() {
   return (
     <div>
       <NavBar />
       <div className='mx-auto bg-scale-300 h-screen'>
-        {/* Waiting Progress */}
-        <div className='flex-col items-center bg-teal-400'>
+        
+        {/* Waiting Acept */}
+        <div className='flex flex-col items-center bg-teal-400'>
           <div className='spinner-container p-2'>
-          <Oval 
-            height={200}
-            width={200}
-            color="orange"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel='loading-indicator'
-            secondaryColor="white"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
+            <MagnifyingGlass 
+              visible={true}
+              height="200"
+              width="200"
+              ariaLabel="MagnifyingGlass-loading"
+              wrapperStyle={{}}
+              wrapperClass="MagnifyingGlass-wrapper"
+              glassColor = 'orange'
+              color = 'white'
+            />
           </div>
-          <h1 className='text-3xl font-bold mx-auto text-orange-400 p-4 text-center'>Order Status : Waiting For Accept Order</h1>
-          <h4 className='text-2xl text-orange-400 mx-auto p-2 text-center'>Waiting for a moment...</h4>
+          <h1 className='text-3xl font-bold mx-auto text-white p-4 text-center'>Order Status : Waiting For Accept Order</h1>
+          <h4 className='text-2xl text-white mx-auto p-2 text-center'>Waiting for a moment...</h4>
         </div>
-        {/* Order */}
+
+        {/* Order Information */}
         <div className='p-8'></div>
         <div class="flex flex-row px-10 py-4 bg-teal-200">
           <div class='flex flex-none flex-row bg-sky-600 rounded w-20 h-20 items-center justify-center'><h1 className='text-3xl font-bold'>2</h1></div>

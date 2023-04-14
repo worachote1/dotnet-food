@@ -8,7 +8,7 @@ import OrderWaitRider from './OrderWaitRider'
 
 export default function OrderListInfo() {
 
-  const [status,setStatus] = useState("waiting_accept")
+  const [status,setStatus] = useState("final_rating")
   let default_component = <div>
         <NavBar />
         <div>
