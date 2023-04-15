@@ -83,12 +83,10 @@ export default function Main() {
 
   // for test foodShops data to display in each div
   let test_foodShop_div = []
-  // setFoodShop(test_foodShop_data)
-  
-  test_foodShop_data.map((item) => {
+  foodShop.map((item) => {
     
       test_foodShop_div.push(
-        <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Name}`} >
+        <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Id}`} >
           <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
           <div className="card-body">
             <h2 className="card-title"> {item.Name} </h2>
@@ -96,11 +94,8 @@ export default function Main() {
             <div className="card-actions justify-end">
               <Link 
               to={
-                {
-                  pathname : `/shop/:${item.Id}`,
-                  state : {foodShop_data : item}
-                }}
-              > 
+                `/shop/${item.Id}`
+              }> 
                 <button className="btn btn-primary">See more</button>
               </Link>            
             </div>
@@ -108,6 +103,11 @@ export default function Main() {
         </div>)
     })
   
+
+  // test for setFoodShop from fake data
+  useEffect(()=>{
+    setFoodShop(test_foodShop_data)
+  },[])
 
   // testfetch user api
   const getUserApi = () => {
