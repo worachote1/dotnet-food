@@ -48,7 +48,11 @@ export default function OrderListInfo() {
                       </dl>
                     </div>
 
-                    <div class="flex flex-1 items-center justify-end gap-2">
+                    <div class="ml-3 items-center justify-start">
+                      X
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-start gap-2">
                       <form>
                         <label for="Line1Qty" class="sr-only"> Quantity </label>
 
@@ -85,15 +89,19 @@ export default function OrderListInfo() {
                       </dl>
                     </div>
 
-                    <div class="flex flex-1 items-center justify-end gap-2">
+                    <div class="ml-3 items-center justify-start">
+                      X
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-start gap-2">
                       <form>
-                        <label for="Line2Qty" class="sr-only"> Quantity </label>
+                        <label for="Line1Qty" class="sr-only"> Quantity </label>
 
                         <input
                           type="number"
                           min="1"
                           value="1"
-                          id="Line2Qty"
+                          id="Line1Qty"
                           class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                         />
                       </form>
@@ -122,15 +130,19 @@ export default function OrderListInfo() {
                       </dl>
                     </div>
 
-                    <div class="flex flex-1 items-center justify-end gap-2">
+                    <div class="ml-3 items-center justify-start">
+                      X
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-start gap-2">
                       <form>
-                        <label for="Line3Qty" class="sr-only"> Quantity </label>
+                        <label for="Line1Qty" class="sr-only"> Quantity </label>
 
                         <input
                           type="number"
                           min="1"
                           value="1"
-                          id="Line3Qty"
+                          id="Line1Qty"
                           class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                         />
                       </form>
@@ -170,7 +182,7 @@ export default function OrderListInfo() {
                       <span
                         class="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-1500"
                       >
-                        <img 
+                        <img
                           src = "https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
                           alt = ""
                           class = "h-4 w-4 mr-2"
