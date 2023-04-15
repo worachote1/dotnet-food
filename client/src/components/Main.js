@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Main() {
 
   const [user, setUser] = useState("")
   const [foodShop, setFoodShop] = useState("")
 
-  let test_foodShop_count = 6
+  let test_foodShop_count = 5
   let test_foodShop_div = []
-  for (let i = 0; i < test_foodShop_count; i++) {
+  for (let test_id = 1; test_id <= test_foodShop_count; test_id++) {
     test_foodShop_div.push(
-      <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${i}`}>
+      <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${test_id}`}>
         <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
         <div className="card-body">
           <h2 className="card-title">ชื่อร้าน (Name) + จํานวนดาว</h2>
           <p>ที่อยู่ร้าน (address)</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">See more</button>
+            <Link to={`/shop/:${test_id}`}> 
+              <button className="btn btn-primary">See more</button>
+            </Link>            
           </div>
         </div>
       </div>)
@@ -52,6 +55,7 @@ export default function Main() {
       })
   }
 
+
   useEffect(() => {
     getUserApi()
   }, [])
@@ -68,7 +72,7 @@ export default function Main() {
       </div>
 
       <div className='top-rated-menu-section '>
-        <p className='text-4'>Top rated menu</p>
+        <p className='text-center text-4xl text-red-500' style={{fontFamily : "Anton, sans-serif"}}>TOP MENU</p>
         <div className="carousel w-full">
           <div id="slide1" className="carousel-item relative">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
@@ -76,7 +80,7 @@ export default function Main() {
             <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
             <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">ชื่อร้าน 1 (Name) + จํานวนดาว</h2>
+                <h2 className="card-title">เมนูอันดับ 1 (Name) + จํานวนดาว</h2>
                 <p>ที่อยู่ร้าน (address)</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-success">Add menu</button>
@@ -93,7 +97,7 @@ export default function Main() {
             <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
               <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">ชื่อร้าน 2 (Name) + จํานวนดาว</h2>
+                <h2 className="card-title">เมนูอันดับ 2 (Name) + จํานวนดาว</h2>
                 <p>ที่อยู่ร้าน (address)</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-success">Add menu</button>
@@ -111,7 +115,7 @@ export default function Main() {
             <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
               <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">ชื่อร้าน 3 (Name) + จํานวนดาว</h2>
+                <h2 className="card-title">เมนูอันดับ 3 (Name) + จํานวนดาว</h2>
                 <p>ที่อยู่ร้าน (address)</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-success">Add menu</button>
@@ -128,7 +132,7 @@ export default function Main() {
             <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
               <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">ชื่อร้าน 4 (Name) + จํานวนดาว</h2>
+                <h2 className="card-title">เมนูอันดับ 4 (Name) + จํานวนดาว</h2>
                 <p>ที่อยู่ร้าน (address)</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-success">Add menu </button>
@@ -144,6 +148,7 @@ export default function Main() {
       </div>
 
       <div className='all-foodShop-section mt-5 '>
+        <p className='text-center text-4xl text-red-500' style={{fontFamily : "Anton, sans-serif"}}>FOOD SHOP</p>
         <div className='foodshop-container flex flex-wrap justify-center'>
           {test_foodShop_div}
 
