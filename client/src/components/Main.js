@@ -3,26 +3,111 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function Main() {
 
-  const [user, setUser] = useState("")
-  const [foodShop, setFoodShop] = useState("")
+  let test_foodShop_data = [
+    {
+      Id : 1,
+      Name : "KMITL-RES",
+      imgPath : "https://test.com/img.jpg",
+      address : "sample address",
+      totalRating : 1000,
+      totalVote : 1000,
+      // itemList 
+      itemList : [
+        {
+          id : 1,
+          itemName : "Noodles",
+          itemPrice : 50.0,
+          type : "MAIN",
+          imgPath : "https://test.com/img.jpg"
+        },
+        {
+          id : 2,
+          itemName : "Noodles2",
+          itemPrice : 75.0,
+          type : "MAIN",
+          imgPath : "https://test.com/img.jpg"
+        }]  
+    },{
+      Id : 2,
+      Name : "KMITL-RES 2",
+      imgPath : "https://test.com/img.jpg",
+      address : "sample address",
+      totalRating : 1000,
+      totalVote : 1000,
+      // itemList 
+      itemList : [
+        {
+          id : 1,
+          itemName : "Pizza",
+          itemPrice : 420.0,
+          type : "MAIN",
+          imgPath : "https://test.com/img.jpg"
+        }
+      ]      
+    },
+    {
+      Id : 3,
+      Name : "KMITL-RES 3",
+      imgPath : "https://test.com/img.jpg",
+      address : "sample address",
+      totalRating : 1000,
+      totalVote : 1000,
+      // itemList 
+      itemList : [
+        {
+          id : 1,
+          itemName : "ข้าวมันไก่ทอด",
+          itemPrice : 60.0,
+          type : "MAIN",
+          imgPath : "https://test.com/img.jpg"
+        },{
+          id : 2,
+          itemName : "ข้าวผัด",
+          itemPrice : 50.0,
+          type : "MAIN",
+          imgPath : "https://test.com/img.jpg"        
+        },{
+        id : 3,
+        itemName : "ผัดหมี่",
+        itemPrice : 55.0,
+        type : "MAIN",
+        imgPath : "https://test.com/img.jpg"
+        }
+      ]        
+    }
+   ]
+  
 
-  let test_foodShop_count = 5
+  const [user, setUser] = useState("")
+  const [foodShop, setFoodShop] = useState([])
+
+  // for test foodShops data to display in each div
   let test_foodShop_div = []
-  for (let test_id = 1; test_id <= test_foodShop_count; test_id++) {
-    test_foodShop_div.push(
-      <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${test_id}`}>
-        <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
-        <div className="card-body">
-          <h2 className="card-title">ชื่อร้าน (Name) + จํานวนดาว</h2>
-          <p>ที่อยู่ร้าน (address)</p>
-          <div className="card-actions justify-end">
-            <Link to={`/shop/:${test_id}`}> 
-              <button className="btn btn-primary">See more</button>
-            </Link>            
+  // setFoodShop(test_foodShop_data)
+  
+  test_foodShop_data.map((item) => {
+    
+      test_foodShop_div.push(
+        <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Name}`} >
+          <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title"> {item.Name} </h2>
+            <p> {item.address} </p>
+            <div className="card-actions justify-end">
+              <Link 
+              to={
+                {
+                  pathname : `/shop/:${item.Id}`,
+                  state : {foodShop_data : item}
+                }}
+              > 
+                <button className="btn btn-primary">See more</button>
+              </Link>            
+            </div>
           </div>
-        </div>
-      </div>)
-  }
+        </div>)
+    })
+  
 
   // testfetch user api
   const getUserApi = () => {
@@ -33,6 +118,7 @@ export default function Main() {
       })
       .then((data) => {
         console.log("get user success !")
+        console.log(data)
         setUser(data)
       })
       .catch((err) => {
@@ -60,9 +146,9 @@ export default function Main() {
     getUserApi()
   }, [])
 
-  useEffect(() => {
-    getFoodShop()
-  })
+  // useEffect(() => {
+  //   getFoodShop()
+  // })
 
 
   return (
@@ -151,7 +237,7 @@ export default function Main() {
         <p className='text-center text-4xl text-red-500' style={{fontFamily : "Anton, sans-serif"}}>FOOD SHOP</p>
         <div className='foodshop-container flex flex-wrap justify-center'>
           {test_foodShop_div}
-
+          
         </div>
       </div>
 
