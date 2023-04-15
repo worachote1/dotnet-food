@@ -9,10 +9,10 @@ export default function Main() {
   let test_foodShop_div = []
   for (let i = 0; i < test_foodShop_count; i++) {
     test_foodShop_div.push(
-      <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+      <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${i}`}>
         <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
         <div className="card-body">
-          <h2 className="card-title">ชื่อร้าน (Name)</h2>
+          <h2 className="card-title">ชื่อร้าน (Name) + จํานวนดาว</h2>
           <p>ที่อยู่ร้าน (address)</p>
           <div className="card-actions justify-end">
             <button className="btn btn-primary">See more</button>
@@ -54,9 +54,11 @@ export default function Main() {
 
   useEffect(() => {
     getUserApi()
-    getFoodShop()
   }, [])
 
+  useEffect(() => {
+    getFoodShop()
+  })
 
 
   return (
@@ -64,16 +66,92 @@ export default function Main() {
       <div>
         get User data fom UserController <span className='text-green-500'> {JSON.stringify(user)} </span>
       </div>
-      <div className='all-foodShop-section'>
-        <div className='foodshop-container flex flex-wrap'>
-            {test_foodShop_div}
+
+      <div className='top-rated-menu-section '>
+        <p className='text-4'>Top rated menu</p>
+        <div className="carousel w-full">
+          <div id="slide1" className="carousel-item relative">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+            <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">ชื่อร้าน 1 (Name) + จํานวนดาว</h2>
+                <p>ที่อยู่ร้าน (address)</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
+              <a href="#slide4" className="btn btn-circle">❮</a>
+              <a href="#slide2" className="btn btn-circle">❯</a>
+            </div>
+          </div>
+          <div id="slide2" className="carousel-item relative">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">ชื่อร้าน 2 (Name) + จํานวนดาว</h2>
+                <p>ที่อยู่ร้าน (address)</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
+              <a href="#slide1" className="btn btn-circle">❮</a>
+              <a href="#slide3" className="btn btn-circle">❯</a>
+            </div>
+          </div>
+          <div id="slide3" className="carousel-item relative ">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">ชื่อร้าน 3 (Name) + จํานวนดาว</h2>
+                <p>ที่อยู่ร้าน (address)</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
+              <a href="#slide2" className="btn btn-circle">❮</a>
+              <a href="#slide4" className="btn btn-circle">❯</a>
+            </div>
+          </div>
+          <div id="slide4" className="carousel-item relative">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">ชื่อร้าน 4 (Name) + จํานวนดาว</h2>
+                <p>ที่อยู่ร้าน (address)</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu </button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
+              <a href="#slide3" className="btn btn-circle">❮</a>
+              <a href="#slide1" className="btn btn-circle">❯</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='all-foodShop-section mt-5 '>
+        <div className='foodshop-container flex flex-wrap justify-center'>
+          {test_foodShop_div}
 
         </div>
       </div>
 
-      <div className='top-rated-menu-section'>
-        top - rate menu slider
-      </div>
+
+
     </div>
   )
 }
