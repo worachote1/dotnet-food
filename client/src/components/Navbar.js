@@ -26,7 +26,7 @@ const NavBar = () => {
                 <Link to='/'>
                     <h1 className='text-2xl sm:text-3xl
                     lg:text-4xl px-2'>
-                        <span className='text-teal-400'>D O T N E T</span> F O O D
+                        <span className='text-teal-400'>D O T N E T</span> Delivery
                     </h1>
                 </Link>
 
@@ -43,15 +43,15 @@ const NavBar = () => {
             {/* Button */}
             <div>
 
-                {/* Go  page */}
-                <Link to={`/profile/:${42}`}>
+                {/* Go delivery mode */}
+                <Link to={`/main-rider`}>
                     <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        profile
+                        Delivery Mode
                     </button>
                 </Link>
-                
+
                 {/* Login */}
                 <Link to='/login'>
                     <button className='hidden
@@ -60,7 +60,24 @@ const NavBar = () => {
                         Log in
                     </button>
                 </Link>
-                
+
+                {/* Register */}
+                <Link to='/register'>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                        Register
+                    </button>
+                </Link>
+
+                {/* Go  page */}
+                <Link to={`/profile/:${42}`}>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                        profile
+                    </button>
+                </Link>
 
                 {/* Logout */}
                 <a>
@@ -72,9 +89,10 @@ const NavBar = () => {
                     //     window.location.reload(false)
                     //     })}
                     >
-                        Log out
+                        Log out 88
                     </button>
                 </a>
+
             </div>
 
 
@@ -102,10 +120,44 @@ const NavBar = () => {
                 </h2>
                 <nav>
                     <ul className='flex flex-col p-4  text-gray-800'>
-                    <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
+                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
                         <li className='text-xl py-4 flex items-center'><MdFavorite size={25} className='mr-4' /> Favorites</li>
                         <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li>
                         {/* <li className='text-xl py-4 flex items-center'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li> */}
+                        
+                        {/* Go delivery Mode */}
+                        <li>
+                            <Link to='/main-rider'>
+                                <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                    Delivery Mode
+                                </button>
+                            </Link>
+
+                        </li>                        
+                        
+                        {/* Login */}
+                        <li>
+                            <Link to='/login'>
+                                <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                    Log in
+                                </button>
+                            </Link>
+
+                        </li>
+
+                        {/* Register */}
+                        <li>
+                            <Link to='/register'>
+                                <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                    Register
+                                </button>
+                            </Link>
+
+                        </li>
+
                         {/* Go page */}
                         <li>
                             <Link to={`/profile/:${42}`}>
@@ -115,36 +167,24 @@ const NavBar = () => {
                                     Profile
                                 </button>
                             </Link>
-                            
-                        </li>
 
-                        {/* Login */}
-                        <li>
-                            <Link to='/login'>
-                                <button className='
-                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Log in
-                                </button>
-                            </Link>
-                            
                         </li>
-
+                        
                         {/* Logout */}
                         <li>
                             <a>
                                 <button className='
                     px-7 py-3 mt-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-                                    // onClick={() => logout(() => {
-                                    //     navigate('/')
-                                    //     window.location.reload(false)
-                                    // })}
+                                // onClick={() => logout(() => {
+                                //     navigate('/')
+                                //     window.location.reload(false)
+                                // })}
                                 >
                                     Log out
                                 </button>
                             </a>
-                            
-
                         </li>
+
                     </ul>
                 </nav>
             </div>
