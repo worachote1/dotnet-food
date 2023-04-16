@@ -11,7 +11,5 @@
         public int totalVote { get; set; }
 
         //Rating Result = totalRating/totalVote
-
-        public List<shopItems> itemsList { get; set; }
     }
 }

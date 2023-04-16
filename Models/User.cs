@@ -9,7 +9,7 @@
         public Boolean isDelivering { get; set; }
         public string address { get; set; }
         public string phoneNum { get; set; }
-        public Controllers.UserController.State state { get; set; }
+        public string state { get; set; }
 
     }
 }

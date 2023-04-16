@@ -3,6 +3,7 @@ using dotnet_foodRelease.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static BasicASPTutorial.Controllers.UserController;
+using static dotnet_foodRelease.Controllers.OrdersController;
 
 namespace dotnet_foodRelease.Controllers
 {
@@ -14,50 +15,31 @@ namespace dotnet_foodRelease.Controllers
         {
             new Order
             {
-                Id = 1,
-                invoice = new Invoice
-                {
-                    id = 1,
-                    date = DateTime.Now,
-                    shopName = "Test",
-                    itemsList = new List<InvoiceItem>
+                orderId = 1,
+                deliveryManName = "XXX",
+                customerName = "xxxxY",
+                orderState = "Sample",
+                itemsList = new List<InvoiceItem>
                     {
                         new InvoiceItem
                         {
-                               id = 1,
-                               shopItems = new shopItems
-                               {
-                                   id = 1,
-                                   itemName = "Noodles",
-                                   itemPrice = 50.0,
-                                   type = "MAIN",
-                                   imgPath = "https://test.com/img.jpg"
-                               },
-                               foodShop = new FoodShop
-                               {
-                                    Id = 1,
-                                    Name = "KMITL-RES",
-                                    imgPath = "https://test.com/img.jpg",
-                                    address = "sample address",
-                                    totalRating = 1000,
-                                    totalVote = 1000,
-                                    itemsList = new List<shopItems> {}
-                               },
-                               amt = 5
+                            itemName = "Item 1",
+                            price = 10.0,
+                            amt = 2
+                        },
+                        new InvoiceItem
+                        {
+                            itemName = "Item 2",
+                            price = 20.0,
+                            amt = 1
+                        },
+                        new InvoiceItem
+                        {
+                            itemName = "Item 3",
+                            price = 5.0,
+                            amt = 3
                         }
                     }
-                },
-
-                deliveryMan = new User {
-                       id = 1,
-                       UserName = "xsectorz",
-                       Password = "test",
-                       isDelivering = false,
-                       address = "KMITL",
-                       phoneNum = "081-0000000",
-                       state = State.IDLE
-                }
-
             }
         };
 

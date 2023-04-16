@@ -16,32 +16,7 @@ namespace dotnet_foodRelease.Controllers
                 id = 1,
                 date = DateTime.Now,
                 shopName = "Test",
-                itemsList = new List<InvoiceItem>
-                {
-                    new InvoiceItem
-                    {
-                           id = 1,
-                           shopItems = new shopItems
-                           {
-                               id = 1,
-                               itemName = "Noodles",
-                               itemPrice = 50.0,
-                               type = "MAIN",
-                               imgPath = "https://test.com/img.jpg"
-                           },
-                           foodShop = new FoodShop
-                           {
-                                Id = 1,
-                                Name = "KMITL-RES",
-                                imgPath = "https://test.com/img.jpg",
-                                address = "sample address",
-                                totalRating = 1000,
-                                totalVote = 1000,
-                                itemsList = new List<shopItems> {}
-                           },
-                           amt = 5
-                    }
-                }
+                idOrder = 1
             }
         };
 

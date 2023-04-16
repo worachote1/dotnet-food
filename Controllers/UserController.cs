@@ -17,8 +17,7 @@ namespace BasicASPTutorial.Controllers
                        Password = "test",
                        isDelivering = false,
                        address = "KMITL",
-                       phoneNum = "081-0000000",
-                       state = State.IDLE
+                       phoneNum = "081-0000000"
             },
             new User { 
                        id = 2,
@@ -26,8 +25,7 @@ namespace BasicASPTutorial.Controllers
                        Password = "123456admin",
                        isDelivering = false,
                        address = "KMITL",
-                       phoneNum = "081-0000000",
-                       state = State.IDLE
+                       phoneNum = "081-0000000"
             }
         };
 
@@ -41,7 +39,6 @@ namespace BasicASPTutorial.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> Get()
         {
-           
 
             return Ok(await _context.Users.ToListAsync());
         }
@@ -95,16 +92,6 @@ namespace BasicASPTutorial.Controllers
 
             return Ok(await _context.Users.ToListAsync());
 
-        }
-
-        public enum State
-        {
-            IDLE = 0, //หน้าต่างเฉยๆไม่ได้ทำอะไร
-            WAITING_CONFIRM = 1, //หน้ารอสั่งสำหรับผู้สั่ง
-            WAITING_DELIVERY = 2, //หน้ารอส่งสำหรับผู้สั่ง
-            WAITING_RATING_CUSTOMER = 3, //อยู่หน้ารอให้ดาว สำหรับผู้สั่ง
-            WAITING_RATING_DELIVERY = 4, //อยู่หน้ารอให้ดาว สำหรับคนส่ง
-            
         }
 
     }

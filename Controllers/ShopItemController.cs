@@ -17,7 +17,9 @@ namespace BasicASPTutorial.Controllers
                        itemName = "Noodles",
                        itemPrice = 50.0,
                        type = "MAIN",
-                       imgPath = "https://test.com/img.jpg"
+                       imgPath = "https://test.com/img.jpg",
+                       totalItemOrder = 0,
+                       fromWhichFoodShop = "KMITL-RES"
             },
         };
 
@@ -45,6 +47,42 @@ namespace BasicASPTutorial.Controllers
             {
                 return BadRequest("Food ID Not Found");
             }
+            return Ok(foodItems);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<shopItems>> addCount(int id, int count)
+        {
+            var foodItems = await _context.shopItems.FindAsync(id);
+            if (foodItems == null)
+            {
+                return BadRequest("Food ID Not Found");
+            }
+
+            foodItems.totalItemOrder += count;
+
+            _context.shopItems.Add(foodItems);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(foodItems);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<shopItems>> setCount(int id, int count)
+        {
+            var foodItems = await _context.shopItems.FindAsync(id);
+            if (foodItems == null)
+            {
+                return BadRequest("Food ID Not Found");
+            }
+
+            foodItems.totalItemOrder = count;
+
+            _context.shopItems.Add(foodItems);
+
+            await _context.SaveChangesAsync();
+
             return Ok(foodItems);
         }
 

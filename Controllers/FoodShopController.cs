@@ -19,7 +19,6 @@ namespace dotnet_foodRelease.Controllers
                 address = "sample address",
                 totalRating = 1000,
                 totalVote = 1000,
-                itemsList = new List<shopItems> {}
             }
         };
 
@@ -49,6 +48,43 @@ namespace dotnet_foodRelease.Controllers
             }
             return Ok(foodShop);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<FoodShop>> UpdateRating(int id,int rating)
+        {
+            var foodShop = await _context.foodShop.FindAsync(id);
+            if (foodShop == null)
+            {
+                return BadRequest("foodShop ID Not Found");
+            }
+
+            foodShop.totalRating = rating;
+
+            _context.foodShop.Update(foodShop);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(foodShop);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<FoodShop>> UpdateVote(int id, int vote)
+        {
+            var foodShop = await _context.foodShop.FindAsync(id);
+            if (foodShop == null)
+            {
+                return BadRequest("foodShop ID Not Found");
+            }
+
+            foodShop.totalVote = vote;
+
+            _context.foodShop.Update(foodShop);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(foodShop);
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<List<FoodShop>>> AddFoods(FoodShop foodShop)
