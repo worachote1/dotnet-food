@@ -70,6 +70,22 @@ namespace dotnet_foodRelease.Controllers
             return Ok(orders);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Order>> setState(int id, string state)
+        {
+            var orders = await _context.Orders.FindAsync(id);
+            if (orders == null)
+            {
+                return BadRequest("Orders ID Not Found");
+            }
+
+            orders.orderState = state;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(orders);
+        }
+
         [HttpPost]
         public async Task<ActionResult<List<Order>>> AddFoods(Order order)
         {
