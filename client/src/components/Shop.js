@@ -51,7 +51,7 @@ export default function Shop() {
       this is food shop id : {foodShopName}
       <div className='foodShop-section flex flex-wrap justify-center'>
         {test_item_div}
-
+          
       </div>
       <Footer />
     </div>
