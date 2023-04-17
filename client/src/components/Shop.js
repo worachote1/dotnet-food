@@ -7,6 +7,7 @@ export default function Shop() {
 
   const { foodShopId } = useParams();
   const {shop ,setShop} = useState(null);
+  
 
   const getSingleShop = (Id) => {
     fetch(`http://localhost:5000/api/foodShop/${Id}`)
@@ -28,8 +29,9 @@ export default function Shop() {
   return (
     <div>
         <NavBar />
+        this is food shop id : {foodShopId}
         <div>
-            this is food shop id : {foodShopId}
+          
             {/* shop name : {shop} */}
         </div>
         <Footer />
