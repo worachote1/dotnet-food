@@ -134,6 +134,7 @@ export default function Main() {
 
   const [user, setUser] = useState("")
   const [foodShop, setFoodShop] = useState([])
+  const [topMenu , setTopMenu] = useState([]) 
 
   // for test foodShops data to display in each div
   let test_foodShop_div = []
@@ -143,7 +144,7 @@ export default function Main() {
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Id}`} >
         <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
         <div className="card-body">
-          <h2 className="card-title"> {item.Name} </h2>
+          <h2 className="card-title"> {item.Name} + จํานวนดาว</h2>
           <p> {item.address} </p>
           <div className="card-actions justify-end">
             <Link
@@ -207,14 +208,15 @@ export default function Main() {
 
   return (
     <div className="p-4 max-w-[1640px] mx-auto ">
-      <div>
-        get User data fom UserController <span className='text-green-500'> {JSON.stringify(user)} </span>
-      </div>
-
-
-      <div className='top-rated-menu-section'>
-        <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-        <div className="carousel w-full sm:flex sm:justify-center">
+      
+        <div>
+          {/* {user[0]?.userName} */}
+          get User data fom UserController <span className='text-green-500'> {JSON.stringify(user)} </span>
+        </div>
+        
+        <div className='top-rated-menu-section'>
+          <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
+          <div className="carousel w-full sm:flex sm:justify-center">
 
             <div id="slide1" className="carousel-item relative ">
               {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
@@ -222,15 +224,15 @@ export default function Main() {
               <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
                 <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
                 <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 1 (Name) + จํานวนดาว</h2>
-                  <p>ที่อยู่ร้าน (address)</p>
+                  <h2 className="card-title">เมนูอันดับ 1 (ชื่อเมนู) </h2>
+                  <p>ชื่อร้าน + จํานวนดาว</p>
                   <div className="card-actions justify-end">
                     <button className="btn btn-success">Add menu</button>
                   </div>
                 </div>
               </div>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
-                <a href="#slide4" className="btn btn-circle">❮</a>
+                <a href="#slide3" className="btn btn-circle">❮</a>
                 <a href="#slide2" className="btn btn-circle">❯</a>
               </div>
             </div>
@@ -239,8 +241,8 @@ export default function Main() {
               <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
                 <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
                 <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 2 (Name) + จํานวนดาว</h2>
-                  <p>ที่อยู่ร้าน (address)</p>
+                  <h2 className="card-title">เมนูอันดับ 2 (ชื่อเมนู)</h2>
+                  <p>ชื่อร้าน + จํานวนดาว</p>
                   <div className="card-actions justify-end">
                     <button className="btn btn-success">Add menu</button>
                   </div>
@@ -257,8 +259,8 @@ export default function Main() {
               <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
                 <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
                 <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 3 (Name) + จํานวนดาว</h2>
-                  <p>ที่อยู่ร้าน (address)</p>
+                  <h2 className="card-title">เมนูอันดับ 3 (ชื่อเมนู)</h2>
+                  <p>ชื่อร้าน + จํานวนดาว</p>
                   <div className="card-actions justify-end">
                     <button className="btn btn-success">Add menu</button>
                   </div>
@@ -269,20 +271,20 @@ export default function Main() {
                 <a href="#slide1" className="btn btn-circle">❯</a>
               </div>
             </div>
-   
-  
-        </div>
-      </div>
 
-      <div className='all-foodShop-section mt-5 '>
-        <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
-        <div className='foodshop-container flex flex-wrap justify-center'>
-          {test_foodShop_div}
 
+          </div>
         </div>
-      </div>
+
+        <div className='all-foodShop-section mt-5 '>
+          <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
+          <div className='foodshop-container flex flex-wrap justify-center'>
+            {test_foodShop_div}
+
+          </div>
+        </div>
+
       
-
     </div>
   )
 }
