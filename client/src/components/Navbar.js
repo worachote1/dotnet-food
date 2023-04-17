@@ -15,7 +15,7 @@ const NavBar = () => {
     const handle_click_logOut = () => {
         //clear session in browser
 
-        // redirecct to login
+        // redirecct to login 
         navigate("/login")
     }
 
