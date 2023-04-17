@@ -3,14 +3,21 @@ import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose, AiFillTag } from 'react
 
 import { FaUserFriends, FaWallet } from 'react-icons/fa'
 import { MdFavorite, MdHelp } from 'react-icons/md'
+import { SlBasket } from 'react-icons/sl'
 import { Link, useNavigate } from 'react-router-dom'
-
 // import { getUser, logout } from '../services/authorize';
 
 const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
+
+    const handle_click_logOut = () => {
+        //clear session in browser
+
+        // redirecct to login
+        navigate("/login")
+    }
 
     return (
 
@@ -41,10 +48,10 @@ const NavBar = () => {
             </div> */}
 
             {/* Button */}
-            <div>
+            <div className='flex items-center justify-center'>
 
                 {/* Go delivery mode */}
-                <Link to={`/basket`}>
+                <Link to={`/main-rider`}>
                     <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
@@ -56,14 +63,25 @@ const NavBar = () => {
                     <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        BASKET
+                        <div className='flex '>
+                            <SlBasket size={25} />
+                            {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                        </div>
+                    </button>
+                </Link>
+
+                <Link to={`/order/${"worachote"}`}>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
+             md:inline-block'>
+                        your orders
                     </button>
                 </Link>
 
                 {/* Login */}
                 <Link to='/login'>
                     <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Log in
                     </button>
@@ -72,25 +90,20 @@ const NavBar = () => {
                 {/* Register */}
                 <Link to='/register'>
                     <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Register
                     </button>
                 </Link>
 
                 {/* Logout */}
-                <a>
-                    <button className='hidden
-                    "px-7 py-3 mx-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                <button className='hidden
+                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'
-                    // onClick={() => logout(() => {
-                    //     navigate('/')
-                    //     window.location.reload(false)
-                    //     })}
-                    >
-                        Log out 88
-                    </button>
-                </a>
+                    onClick={handle_click_logOut}
+                >
+                    log out
+                </button>
 
             </div>
 
@@ -123,18 +136,45 @@ const NavBar = () => {
                         <li className='text-xl py-4 flex items-center'><MdFavorite size={25} className='mr-4' /> Favorites</li>
                         <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li> */}
                         {/* <li className='text-xl py-4 flex items-center'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li> */}
-                        
+
                         {/* Go delivery Mode */}
                         <li>
                             <Link to='/main-rider'>
                                 <button className='
-                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
                                     Delivery Mode
                                 </button>
                             </Link>
 
-                        </li>                        
-                        
+                        </li>
+
+                        {/* Basket */}
+                        <li className='mt-2'>
+                            <Link to={`/basket`}>
+                                <button className='
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                                    <div className='flex '>
+                                        <SlBasket size={25} />
+                                        {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                                    </div>
+                                </button>
+                            </Link>
+                        </li>
+
+
+                        {/* your orders */}
+                        <li className='mt-2'>
+                            <Link to={`/order/${"worachote"}`}>
+                                <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                    Your orders
+                                </button>
+                            </Link>
+                        </li>
+
+
+
                         {/* Login */}
                         <li className='mt-2'>
                             <Link to='/login'>
@@ -154,22 +194,19 @@ const NavBar = () => {
                                     Register
                                 </button>
                             </Link>
-
                         </li>
-                  
+
                         {/* Logout */}
                         <li className='mt-2'>
-                            <a>
+                            <Link to='/login'>
                                 <button className='
-                    px-7 py-3 mt-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-                                // onClick={() => logout(() => {
-                                //     navigate('/')
-                                //     window.location.reload(false)
-                                // })}
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'
+                                    onClick={handle_click_logOut}
                                 >
-                                    Log out
+                                    log out
                                 </button>
-                            </a>
+                            </Link>
+
                         </li>
 
                     </ul>
