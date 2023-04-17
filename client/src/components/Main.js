@@ -149,7 +149,7 @@ export default function Main() {
           <div className="card-actions justify-end">
             <Link
               to={
-                `/shop/${item.Id}`
+                `/shop/${item.Name}`
               }>
               <button className="btn btn-primary">See more</button>
             </Link>
