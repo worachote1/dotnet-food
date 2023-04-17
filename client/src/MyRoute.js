@@ -22,7 +22,7 @@ export default function MyRoute() {
                 <Route path="/order/:username" exact element={<Order />} />
                 <Route path="/order-list-info/:orderId" exact element={<OrderListInfo />} />
                 <Route path="/basket" exact element={<Basket />} />
-                <Route path="/shop/:foodShopId" exact element={<Shop />} />
+                <Route path="/shop/:foodShopName" exact element={<Shop />} />
             </Routes>
         </BrowserRouter>
     )

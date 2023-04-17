@@ -25,11 +25,11 @@ const NavBar = () => {
         flex justify-between p-4 
         '>
             {/* left side */}
-            <div className='flex items-center'>
+            <div className='flex items-center '>
                 <div className='cursor-pointer md:hidden'
                     onClick={() => setNav(!nav)}>
                     <AiOutlineMenu size={30} />
-                </div>
+                </div> 
                 <Link to='/'>
                     <h1 className='text-2xl sm:text-3xl
                     lg:text-4xl px-2'>
@@ -81,7 +81,7 @@ const NavBar = () => {
                 {/* Login */}
                 <Link to='/login'>
                     <button className='hidden
-                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Log in
                     </button>
@@ -90,7 +90,7 @@ const NavBar = () => {
                 {/* Register */}
                 <Link to='/register'>
                     <button className='hidden
-                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Register
                     </button>
@@ -98,7 +98,7 @@ const NavBar = () => {
 
                 {/* Logout */}
                 <button className='hidden
-                px-7 py-3 mt-2 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'
                     onClick={handle_click_logOut}
                 >

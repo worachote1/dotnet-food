@@ -8,31 +8,23 @@ export default function Shop() {
   const { foodShopId } = useParams();
   const {shop ,setShop} = useState(null);
   
+  let test_menu_div = useState([])
 
-  const getSingleShop = (Id) => {
-    fetch(`http://localhost:5000/api/foodShop/${Id}`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        setShop(data)
-      })
-      .catch((err) => {
-        console.log("get shop failed !")
-      })    
+  const getItemsFromSingleShop = () => {
+     
   }
 
   useEffect(()=>{
-    getSingleShop(foodShopId)
+    getItemsFromSingleShop()
   },[])
 
   return (
     <div>
         <NavBar />
         this is food shop id : {foodShopId}
-        <div>
+        <div className='foodShop-section'>
           
-            {/* shop name : {shop} */}
+        
         </div>
         <Footer />
     </div>
