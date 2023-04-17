@@ -4,7 +4,7 @@ import NavBar from './NavBar'
 
 export default function Basket() {
   return (
-    <div>
+    <div className=''>
         <NavBar />
         <div>
             Basket

@@ -65,7 +65,7 @@ export default function Order() {
   }, [orderAllUser])
 
   return (
-    <div>
+    <div className='min-h-screen'>
       <NavBar />
       <div>
         <p> Order (display all order that relate to this user) </p>
