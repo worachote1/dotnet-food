@@ -6,7 +6,7 @@ import Main from './components/Main';
 
 function App() {
   return (
-    <div className="">
+    <div className="h-screen ">
       <Navbar />
       <Main />
       <Footer />

@@ -30,6 +30,7 @@ export default function Shop() {
         <NavBar />
         <div>
             this is food shop id : {foodShopId}
+            {/* shop name : {shop} */}
         </div>
         <Footer />
     </div>

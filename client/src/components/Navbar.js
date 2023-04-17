@@ -44,11 +44,19 @@ const NavBar = () => {
             <div>
 
                 {/* Go delivery mode */}
-                <Link to={`/main-rider`}>
+                <Link to={`/basket`}>
                     <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Delivery Mode
+                    </button>
+                </Link>
+
+                <Link to={`/basket`}>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                        BASKET
                     </button>
                 </Link>
 
@@ -67,15 +75,6 @@ const NavBar = () => {
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Register
-                    </button>
-                </Link>
-
-                {/* Go  page */}
-                <Link to={`/profile/:${42}`}>
-                    <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             md:inline-block'>
-                        profile
                     </button>
                 </Link>
 
@@ -120,9 +119,9 @@ const NavBar = () => {
                 </h2>
                 <nav>
                     <ul className='flex flex-col p-4  text-gray-800'>
-                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
+                        {/* <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
                         <li className='text-xl py-4 flex items-center'><MdFavorite size={25} className='mr-4' /> Favorites</li>
-                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li>
+                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li> */}
                         {/* <li className='text-xl py-4 flex items-center'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li> */}
                         
                         {/* Go delivery Mode */}
@@ -137,7 +136,7 @@ const NavBar = () => {
                         </li>                        
                         
                         {/* Login */}
-                        <li>
+                        <li className='mt-2'>
                             <Link to='/login'>
                                 <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
@@ -148,7 +147,7 @@ const NavBar = () => {
                         </li>
 
                         {/* Register */}
-                        <li>
+                        <li className='mt-2'>
                             <Link to='/register'>
                                 <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
@@ -157,21 +156,9 @@ const NavBar = () => {
                             </Link>
 
                         </li>
-
-                        {/* Go page */}
-                        <li>
-                            <Link to={`/profile/:${42}`}>
-                                <button className='
-                px-7 py-3 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             md:inline-block'>
-                                    Profile
-                                </button>
-                            </Link>
-
-                        </li>
-                        
+                  
                         {/* Logout */}
-                        <li>
+                        <li className='mt-2'>
                             <a>
                                 <button className='
                     px-7 py-3 mt-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
