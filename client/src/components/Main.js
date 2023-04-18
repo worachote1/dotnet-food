@@ -139,6 +139,7 @@ export default function Main() {
 
   }
 
+  console.log(user)
 
   // for test foodShops data to display in each div
   let test_foodShop_div = []
@@ -152,7 +153,7 @@ export default function Main() {
           <p> {item.address} </p>
           <div className="card-actions justify-end">
             {
-              (user !== "")
+              (user !== "" && user !== null)
                 ? <Link
                   to={
                     `/shop/${item.Name}`
@@ -194,6 +195,7 @@ export default function Main() {
       })
   }
 
+
   // useEffect(() => {
   //   getFoodShop()
   // })
@@ -201,10 +203,10 @@ export default function Main() {
 
   return (
     <div className="p-4 max-w-[1640px] mx-auto ">
-
+      
       <div>
-        {/* {user[0]?.userName} */}
-        {(user !== "")
+        
+        {(user !== "") && user !== null
           ? <p> you are login as : <span className='text-green-500'> {user} </span> </p>
           : <span className='text-orange-500'>Not log in</span>}
 

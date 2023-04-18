@@ -14,14 +14,15 @@ const NavBar = () => {
 
     const handle_click_logOut = () => {
         //clear session in browser
-        sessionStorage.setItem('current_user',"")
+        sessionStorage.setItem('current_user', "")
         // redirecct to login
         navigate("/login")
     }
 
     const check_IsUserLogIn = () => {
-        return (sessionStorage.getItem('current_user') !== "") ? true : false
+        return (sessionStorage.getItem('current_user') !== "" && sessionStorage.getItem('current_user') !== null) ? true : false
     }
+
     console.log(check_IsUserLogIn())
     return (
 
@@ -74,7 +75,7 @@ const NavBar = () => {
              md:inline-block'>
                             <div className='flex '>
                                 <SlBasket size={25} />
-                                {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                                {(true) ? <div className="badge badge-secondary"> 12</div> : ""}
                             </div>
                         </button>
                     </Link>
@@ -93,23 +94,30 @@ const NavBar = () => {
                 }
 
 
-                {/* Login */}
-                <Link to='/login'>
-                    <button className='hidden
+                {/* Login -> hidden if user not log in */}
+                {!(check_IsUserLogIn())
+                    ? <Link to='/login'>
+                        <button className='hidden
                 px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        Log in
-                    </button>
-                </Link>
+                            Log in
+                        </button>
+                    </Link>
+                    : ""
+                }
 
-                {/* Register */}
-                <Link to='/register'>
-                    <button className='hidden
+                {/* Register -> hidden if user not log in*/}
+                {!(check_IsUserLogIn())
+                    ? <Link to='/register'>
+                        <button className='hidden
                 px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        Register
-                    </button>
-                </Link>
+                            Register
+                        </button>
+                    </Link>
+                    : ""
+                }
+
 
                 {/* Logout */}
                 {(check_IsUserLogIn())
@@ -199,26 +207,32 @@ const NavBar = () => {
                             : ""
                         }
 
-                        {/* Login */}
-                        <li className='mt-2'>
-                            <Link to='/login'>
-                                <button className='
+                        {/* Login -> hidden */}
+                        {!(check_IsUserLogIn)
+                            ? <li className='mt-2'>
+                                <Link to='/login'>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Log in
-                                </button>
-                            </Link>
+                                        Log in
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
-                        </li>
-
-                        {/* Register */}
-                        <li className='mt-2'>
-                            <Link to='/register'>
-                                <button className='
+                        {/* Register -> hidden */}
+                        {!(check_IsUserLogIn)
+                            ? <li className='mt-2'>
+                                <Link to='/register'>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Register
-                                </button>
-                            </Link>
-                        </li>
+                                        Register
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
 
                         {/* Logout */}
                         {(check_IsUserLogIn())

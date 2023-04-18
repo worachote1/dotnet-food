@@ -20,7 +20,7 @@ export default function Order() {
     test_orderFromSingleUser_div.push(
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4 ">
         {/* use orderState in data base to check in order_status_imgPath*/}
-        <figure><img src={`${order_status_imgPath.waiting_accept}`} alt="Shoes" /></figure>
+        <figure><img src={`${order_status_imgPath.order_success}`} alt="Shoes" /></figure>
         <div className="card-body">
           <h2 className="card-title">
             Order ID : 44
