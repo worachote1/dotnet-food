@@ -111,7 +111,7 @@ namespace BasicASPTutorial.Controllers
 
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/[controller]/login")]
         public async Task<ActionResult<User>> login(string username,string password)
         {
@@ -132,29 +132,20 @@ namespace BasicASPTutorial.Controllers
 
         [HttpPost]
         [Route("api/[controller]/register")]
-        public async Task<ActionResult<User>> register(string username, string password)
+        public async Task<ActionResult<User>> register(User user)
         {
 
-            if(await _context.Users.AnyAsync(u => u.UserName == username))
+            if(await _context.Users.AnyAsync(u => u.UserName == user.UserName))
             {
                 return BadRequest(new { registerStatus = "Username already exists!" });
             }
 
-            if(password.Length <= 0)
+            if(user.Password == "")
             {
                 return BadRequest(new { registerStatus = "Password cannot empty!" });
             }
 
-            User newUser = new User
-            {
-                UserName = username,
-                Password = password,
-                isDelivering = false,
-                address = "",
-                phoneNum = ""
-            };
-
-            _context.Users.Add(newUser);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { registerStatus = "Register Success!" });
