@@ -50,6 +50,17 @@ namespace BasicASPTutorial.Controllers
             return Ok(foodItems);
         }
 
+        [HttpGet("{itemName}")]
+        public async Task<ActionResult<shopItems>> Get(string itemName)
+        {
+            var foodItems = await _context.shopItems.FindAsync(itemName);
+            if (foodItems == null)
+            {
+                return BadRequest("Food Name Not Found");
+            }
+            return Ok(foodItems);
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<shopItems>> addCount(int id, int count)
         {
