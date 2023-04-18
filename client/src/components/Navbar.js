@@ -14,11 +14,15 @@ const NavBar = () => {
 
     const handle_click_logOut = () => {
         //clear session in browser
-
+        sessionStorage.setItem('current_user',"")
         // redirecct to login
         navigate("/login")
     }
 
+    const check_IsUserLogIn = () => {
+        return (sessionStorage.getItem('current_user') !== "") ? true : false
+    }
+    console.log(check_IsUserLogIn())
     return (
 
         <div className='max-w-[1640px] mx-auto
@@ -29,7 +33,7 @@ const NavBar = () => {
                 <div className='cursor-pointer md:hidden'
                     onClick={() => setNav(!nav)}>
                     <AiOutlineMenu size={30} />
-                </div> 
+                </div>
                 <Link to='/'>
                     <h1 className='text-2xl sm:text-3xl
                     lg:text-4xl px-2'>
@@ -51,32 +55,43 @@ const NavBar = () => {
             <div className='flex items-center justify-center'>
 
                 {/* Go delivery mode */}
-                <Link to={`/main-rider`}>
-                    <button className='hidden
+
+                {(check_IsUserLogIn())
+                    ? <Link to={`/main-rider`}>
+                        <button className='hidden
+            px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+         md:inline-block'>
+                            Delivery Mode
+                        </button>
+                    </Link>
+                    : ""
+                }
+
+                {(check_IsUserLogIn())
+                    ? <Link to={`/basket`}>
+                        <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        Delivery Mode
-                    </button>
-                </Link>
+                            <div className='flex '>
+                                <SlBasket size={25} />
+                                {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                            </div>
+                        </button>
+                    </Link>
+                    : ""
+                }
 
-                <Link to={`/basket`}>
-                    <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             md:inline-block'>
-                        <div className='flex '>
-                            <SlBasket size={25} />
-                            {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
-                        </div>
-                    </button>
-                </Link>
+                {(check_IsUserLogIn())
+                    ? <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
+                        <button className='hidden
+            px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
+         md:inline-block'>
+                            your orders
+                        </button>
+                    </Link>
+                    : ""
+                }
 
-                <Link to={`/order/${"worachote"}`}>
-                    <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
-             md:inline-block'>
-                        your orders
-                    </button>
-                </Link>
 
                 {/* Login */}
                 <Link to='/login'>
@@ -97,13 +112,16 @@ const NavBar = () => {
                 </Link>
 
                 {/* Logout */}
-                <button className='hidden
+                {(check_IsUserLogIn())
+                    ? <button className='hidden
                 px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'
-                    onClick={handle_click_logOut}
-                >
-                    log out
-                </button>
+                        onClick={handle_click_logOut}
+                    >
+                        log out
+                    </button>
+                    : ""
+                }
 
             </div>
 
@@ -127,7 +145,7 @@ const NavBar = () => {
 
                 <h2 className='text-2xl p-4'>
                     <Link to='/'>
-                        <span className='text-teal-400'>D o t N e t</span> F O O D
+                        <span className='text-teal-400'>D o t N e t</span> Delivery
                     </Link>
                 </h2>
                 <nav>
@@ -138,42 +156,48 @@ const NavBar = () => {
                         {/* <li className='text-xl py-4 flex items-center'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li> */}
 
                         {/* Go delivery Mode */}
-                        <li>
-                            <Link to='/main-rider'>
-                                <button className='
+                        {(check_IsUserLogIn())
+                            ? <li>
+                                <Link to='/main-rider'>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Delivery Mode
-                                </button>
-                            </Link>
-
-                        </li>
+                                        Delivery Mode
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
                         {/* Basket */}
-                        <li className='mt-2'>
-                            <Link to={`/basket`}>
-                                <button className='
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to={`/basket`}>
+                                    <button className='
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                                    <div className='flex '>
-                                        <SlBasket size={25} />
-                                        {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
-                                    </div>
-                                </button>
-                            </Link>
-                        </li>
+                                        <div className='flex '>
+                                            <SlBasket size={25} />
+                                            {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                                        </div>
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
 
                         {/* your orders */}
-                        <li className='mt-2'>
-                            <Link to={`/order/${"worachote"}`}>
-                                <button className='
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Your orders
-                                </button>
-                            </Link>
-                        </li>
-
-
+                                        Your orders
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
                         {/* Login */}
                         <li className='mt-2'>
@@ -197,17 +221,20 @@ const NavBar = () => {
                         </li>
 
                         {/* Logout */}
-                        <li className='mt-2'>
-                            <Link to='/login'>
-                                <button className='
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to='/login'>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'
-                                    onClick={handle_click_logOut}
-                                >
-                                    log out
-                                </button>
-                            </Link>
+                                        onClick={handle_click_logOut}
+                                    >
+                                        log out
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
-                        </li>
 
                     </ul>
                 </nav>

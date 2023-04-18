@@ -28,10 +28,6 @@ export default function Shop() {
   }
 
 
-  const getAllFoodShopItem = () => {
-    //fetch all Menu from database
-  }
-
   const getItemsFromSingleShop = (foodShopName) => {
     //then get only item that  fromWhichFoodShop === foodShopName
 
