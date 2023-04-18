@@ -63,7 +63,7 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpPut("{username}")]
+        [HttpPut("delivery/{username}")]
         public async Task<ActionResult<List<User>>> setDelivery(string username, bool isDelivering)
         {
             var user = await _context.Users.FindAsync(username);
@@ -79,7 +79,7 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpPut("{username}")]
+        [HttpPut("state/{username}")]
         public async Task<ActionResult<User>> setState(string username, string state)
         {
             var user = await _context.Users.FindAsync(username);
@@ -109,6 +109,55 @@ namespace BasicASPTutorial.Controllers
 
             return Ok(await _context.Users.ToListAsync());
 
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/login")]
+        public async Task<ActionResult<User>> login(string username,string password)
+        {
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
+
+            if (user == null)
+            {
+                return BadRequest(new { loginStatus = "Username not found in database!" });
+            }
+
+            if(user.Password != password)
+            {
+                return BadRequest(new { loginStatus = "Password wrong!" });
+            }
+
+            return Ok(new { loginStatus = "Login Success!" });
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/register")]
+        public async Task<ActionResult<User>> register(string username, string password)
+        {
+
+            if(await _context.Users.AnyAsync(u => u.UserName == username))
+            {
+                return BadRequest(new { registerStatus = "Username already exists!" });
+            }
+
+            if(password.Length <= 0)
+            {
+                return BadRequest(new { registerStatus = "Password cannot empty!" });
+            }
+
+            User newUser = new User
+            {
+                UserName = username,
+                Password = password,
+                isDelivering = false,
+                address = "",
+                phoneNum = ""
+            };
+
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { registerStatus = "Register Success!" });
         }
 
     }
