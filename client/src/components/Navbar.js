@@ -13,14 +13,14 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const handle_click_logOut = () => {
-        //clear session in browser
-        sessionStorage.setItem('current_user', "")
+        //remove user in session
+        sessionStorage.clear();
         // redirecct to login
         navigate("/login")
     }
 
     const check_IsUserLogIn = () => {
-        return (sessionStorage.getItem('current_user') !== "" && sessionStorage.getItem('current_user') !== null) ? true : false
+        return (sessionStorage.getItem('current_user') !== null) ? true : false
     }
 
     console.log(check_IsUserLogIn())
@@ -75,7 +75,7 @@ const NavBar = () => {
              md:inline-block'>
                             <div className='flex '>
                                 <SlBasket size={25} />
-                                {(true) ? <div className="badge badge-secondary"> 12</div> : ""}
+                                {((sessionStorage.getItem('current_FoodShopInBasket')!==null)) ? <div className="badge badge-secondary"> 12</div> : ""}
                             </div>
                         </button>
                     </Link>
@@ -185,7 +185,7 @@ const NavBar = () => {
              md:inline-block'>
                                         <div className='flex '>
                                             <SlBasket size={25} />
-                                            {(true) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                                            {(sessionStorage.getItem('current_FoodShopInBasket')!==null) ? <div className="badge badge-secondary"> 12 </div> : ""}
                                         </div>
                                     </button>
                                 </Link>
@@ -208,7 +208,7 @@ const NavBar = () => {
                         }
 
                         {/* Login -> hidden */}
-                        {!(check_IsUserLogIn)
+                        {!(check_IsUserLogIn())
                             ? <li className='mt-2'>
                                 <Link to='/login'>
                                     <button className='
@@ -221,7 +221,7 @@ const NavBar = () => {
                         }
 
                         {/* Register -> hidden */}
-                        {!(check_IsUserLogIn)
+                        {!(check_IsUserLogIn())
                             ? <li className='mt-2'>
                                 <Link to='/register'>
                                     <button className='

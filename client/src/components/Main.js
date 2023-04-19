@@ -74,60 +74,6 @@ export default function Main() {
           imgPath: "https://test.com/img.jpg"
         }
       ]
-    },
-    {
-      Id: 4,
-      Name: "KMITL-RES 4",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
-    },
-    {
-      Id: 5,
-      Name: "KMITL-RES 5",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
-    },
-    {
-      Id: 6,
-      Name: "KMITL-RES 6",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
     }
   ]
 
@@ -139,7 +85,7 @@ export default function Main() {
 
   }
 
-  console.log(user)
+  
 
   // for test foodShops data to display in each div
   let test_foodShop_div = []
@@ -206,7 +152,7 @@ export default function Main() {
       
       <div>
         
-        {(user !== "") && user !== null
+        {user !== null
           ? <p> you are login as : <span className='text-green-500'> {user} </span> </p>
           : <span className='text-orange-500'>Not log in</span>}
 
@@ -214,7 +160,7 @@ export default function Main() {
 
       <div className='top-rated-menu-section'>
         <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-        <div className="carousel w-full sm:flex sm:justify-center">
+        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center">
 
           <div id="slide1" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
@@ -276,7 +222,7 @@ export default function Main() {
 
       <div className='all-foodShop-section mt-5 '>
         <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
-        <div className='foodshop-container flex flex-wrap justify-center'>
+        <div className='all-foodshop-container flex flex-wrap justify-center'>
           {test_foodShop_div}
 
         </div>
