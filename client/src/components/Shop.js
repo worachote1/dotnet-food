@@ -12,7 +12,7 @@ export default function Shop() {
 
 
   // for sweet alert
-  const alert_found_NotSameFoodShopInBasket = () => {
+  const alert_found_NotSameFoodShopInBasket = (id,itemName,itemPrice,type,imgPath) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         // prn custom for swal fire
@@ -39,6 +39,15 @@ export default function Shop() {
         // after accept to add Item from new FoodShop to Basket
         // assign new data to session
         sessionStorage.setItem("current_FoodShopInBasket", foodShopName)
+        let temp_obj = {
+          "id" : id,
+          "itemName" : itemName,
+          "itemPrice" : itemPrice,
+          "type" : type,
+          "imgPath" : imgPath,
+          "quantity" : 1
+        }
+        sessionStorage.setItem("currrent_menuInBasket",JSON.stringify([temp_obj]))
       }
     })
   }
@@ -57,22 +66,24 @@ export default function Shop() {
      
     if (fromWhichFoodShop_prn === null || fromWhichFoodShop_prn === foodShopName) {
       sessionStorage.setItem("current_FoodShopInBasket", foodShopName)
-      //not have any menu in basket create session : currrent_menuInBasket
+      // not have any menu in basket create session : currrent_menuInBasket
       if (sessionStorage.getItem("currrent_menuInBasket") === null) {
-        sessionStorage.setItem("currrent_menuInBasket", JSON.stringify([temp_obj]))
+        sessionStorage.setItem("currrent_menuInBasket",JSON.stringify([temp_obj]))
       }
-      //add property of that menu to array of JSON (currrent_menuInBasket Session)
-      //find if that menu not in basket  
-      else if(sessionStorage.getItem("currrent_menuInBasket").find(obj => obj.id === id)){
-        const cur_BasketData = sessionStorage.getItem("currrent_menuInBasket")
-        cur_BasketData.push(temp_obj)
-        sessionStorage.setItem("currrent_menuInBasket",  cur_BasketData)
+      // add property of that menu to array of JSON (currrent_menuInBasket Session)
+      // find if that menu not in basket  
+      else {
+        const cur_BasketData = JSON.parse((sessionStorage.getItem("currrent_menuInBasket")))
+        // 
+        if(cur_BasketData.find(obj => obj.id === id) === undefined){
+          cur_BasketData.push(temp_obj)
+          sessionStorage.setItem("currrent_menuInBasket",JSON.stringify(cur_BasketData))
+        }
       }
 
     }
-
     else {
-      alert_found_NotSameFoodShopInBasket();
+      alert_found_NotSameFoodShopInBasket(id,itemName,itemPrice,type,imgPath);
     }
 
   }
@@ -115,8 +126,8 @@ export default function Shop() {
           </div>
           <div className="card-actions justify-end">
             <button className="btn btn-success"
-              onClick={hanldeClickAdd_ForBasket}
-            >Add menu1</button>
+              onClick={() => hanldeClickAdd_ForBasket(item.id,item.itemName,item.itemPrice,item.type,item.imgPath)}
+            >Add menu</button>
           </div>
         </div>
       </div>
