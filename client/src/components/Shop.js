@@ -44,17 +44,30 @@ export default function Shop() {
   }
 
   // function for managing session : current_FoodShopInBasket , currrent_menuInBasket
-  const hanldeClickAdd_ForBasket = () => {
+  const hanldeClickAdd_ForBasket = (id,itemName,itemPrice,type,imgPath) => {
     let fromWhichFoodShop_prn = sessionStorage.getItem("current_FoodShopInBasket")
+    let temp_obj = {
+      "id" : id,
+      "itemName" : itemName,
+      "itemPrice" : itemPrice,
+      "type" : type,
+      "imgPath" : imgPath,
+      "quantity" : 1
+    }
+     
     if (fromWhichFoodShop_prn === null || fromWhichFoodShop_prn === foodShopName) {
       sessionStorage.setItem("current_FoodShopInBasket", foodShopName)
       //not have any menu in basket create session : currrent_menuInBasket
       if (sessionStorage.getItem("currrent_menuInBasket") === null) {
-        sessionStorage.setItem("currrent_menuInBasket", [])
+        sessionStorage.setItem("currrent_menuInBasket", JSON.stringify([temp_obj]))
       }
       //add property of that menu to array of JSON (currrent_menuInBasket Session)
-      //find if that menu already in basket
-
+      //find if that menu not in basket  
+      else if(sessionStorage.getItem("currrent_menuInBasket").find(obj => obj.id === id)){
+        const cur_BasketData = sessionStorage.getItem("currrent_menuInBasket")
+        cur_BasketData.push(temp_obj)
+        sessionStorage.setItem("currrent_menuInBasket",  cur_BasketData)
+      }
 
     }
 
@@ -65,32 +78,50 @@ export default function Shop() {
   }
 
   let test_foodShopItem_data = [
-    {},
-    {},
-    {}
+    {
+      "id" : 1,
+      "itemName" : "ข้าวผัด",
+      "itemPrice" : 42,
+      "type" : "อาหารคาร",
+      "imgPath" : 'http://food.mthai.com/app/uploads/2015/03/1324956564.jpg'  
+    },
+    {
+      "id" : 2,
+      "itemName" : "บัวลอย",
+      "itemPrice" : 55,
+      "type" : "อาหารหวาน",
+      "imgPath" : 'http://f.ptcdn.info/557/035/000/1442537793-IMG34862-o.jpg'  
+    },
+    {
+      "id" : 3,
+      "itemName" : "ไข่เจียว",
+      "itemPrice" : 35,
+      "type" : "อาหารทอด",
+      "imgPath" : 'https://img.kapook.com/u/2016/wanwanat/0_edit/385698979x.jpg'  
+    }
   ]
-  let test_item_div = [
-      
-  ]
-  for (let i = 1; i <= test_foodShopItem_data.length; i++) {
+  let test_item_div = []
+  
+  test_foodShopItem_data.map((item)=>{
     test_item_div.push(
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-        <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+        <figure className=' h-1/2 bg-red-400'>
+          <img src={item.imgPath} className='object-cover' alt="Shoes" />
+        </figure>
         <div className="card-body">
           <div className='name-menu-controller flex justify-between items-center'>
-            <h2 className="card-title">(ชื่อเมนู) </h2>
-            <h2 className="card-title">ราคา + Bath</h2>
+            <h2 className="card-title">{item.itemName} </h2>
+            <h2 className="card-title">{item.itemPrice}  Bath</h2>
           </div>
           <div className="card-actions justify-end">
             <button className="btn btn-success"
               onClick={hanldeClickAdd_ForBasket}
-            >Add menu</button>
+            >Add menu1</button>
           </div>
         </div>
       </div>
     )
-  }
-
+  })
 
   const getItemsFromSingleShop = (foodShopName) => {
     //then get only item that  fromWhichFoodShop === foodShopName

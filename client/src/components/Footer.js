@@ -14,6 +14,8 @@ export default function Footer() {
         <a href='https://github.com/worachote1/dotnet-food' target='_blank' className='cursor-pointer'> <FaGithub size={30} /> </a>
         <a className='cursor-pointer'> <FaDiscord size={30} /> </a>
         <a className='cursor-pointer'> <FaLinkedin size={30} /> </a>
+        
+        
       </div>
     </footer>
 
