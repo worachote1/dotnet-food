@@ -90,7 +90,6 @@ export default function Main() {
   // for test foodShops data to display in each div
   let test_foodShop_div = []
   foodShop.map((item) => {
-
     test_foodShop_div.push(
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Id}`} >
         <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
@@ -118,8 +117,6 @@ export default function Main() {
         </div>
       </div>)
   })
-
-
   // test for setFoodShop from fake data
   useEffect(() => {
     setFoodShop(test_foodShop_data)
@@ -140,15 +137,11 @@ export default function Main() {
         console.log("get food shop failed !")
       })
   }
-
-
   // useEffect(() => {
   //   getFoodShop()
   // })
-
-
   return (
-    <div className="p-4 max-w-[1640px] mx-auto ">
+    <div className=" max-w-[1640px] mx-auto ">
       
       <div>
         
@@ -158,14 +151,14 @@ export default function Main() {
 
       </div>
 
-      <div className='top-rated-menu-section'>
+      <div className='top-rated-menu-section  p-4' style={{background : '#F5B041'}}>
         <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center">
+        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center ">
 
           <div id="slide1" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
 
-            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4 ">
               <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
               <div className="card-body">
                 <h2 className="card-title">เมนูอันดับ 1 (ชื่อเมนู) </h2>
@@ -216,12 +209,11 @@ export default function Main() {
             </div>
           </div>
 
-
         </div>
       </div>
 
       <div className='all-foodShop-section mt-5 '>
-        <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
+        <p className='text-center text-4xl text-white-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
         <div className='all-foodshop-container flex flex-wrap justify-center'>
           {test_foodShop_div}
 

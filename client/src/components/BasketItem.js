@@ -1,6 +1,8 @@
 import React from 'react'
 
 export default function BasketItem({itemName,itemPrice,quantity,imgPath}) {
+
+    
     return (
         <div class="flex flex-col md:flex-row border-b border-gray-400 py-4">
             <div class="flex-shrink-0">

@@ -3,7 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
+
 
 export default function Shop() {
 
@@ -39,7 +39,7 @@ export default function Shop() {
         // after accept to add Item from new FoodShop to Basket
         // assign new data to session
         sessionStorage.setItem("current_FoodShopInBasket", foodShopName)
-        let temp_obj = {
+        let temp_obj_fromOtherFoodShop = {
           "id" : id,
           "itemName" : itemName,
           "itemPrice" : itemPrice,
@@ -47,7 +47,11 @@ export default function Shop() {
           "imgPath" : imgPath,
           "quantity" : 1
         }
-        sessionStorage.setItem("currrent_menuInBasket",JSON.stringify([temp_obj]))
+        sessionStorage.setItem("currrent_menuInBasket",JSON.stringify([temp_obj_fromOtherFoodShop]))
+        window.location.reload()
+
+        // console.log(typeof(JSON.parse(sessionStorage.getItem("currrent_menuInBasket"))))  --> Object  
+        // console.log(typeof(sessionStorage.getItem("currrent_menuInBasket"))) --> String 
       }
     })
   }
@@ -69,6 +73,7 @@ export default function Shop() {
       // not have any menu in basket create session : currrent_menuInBasket
       if (sessionStorage.getItem("currrent_menuInBasket") === null) {
         sessionStorage.setItem("currrent_menuInBasket",JSON.stringify([temp_obj]))
+        // window.location.reload()
       }
       // add property of that menu to array of JSON (currrent_menuInBasket Session)
       // find if that menu not in basket  
@@ -78,9 +83,9 @@ export default function Shop() {
         if(cur_BasketData.find(obj => obj.id === id) === undefined){
           cur_BasketData.push(temp_obj)
           sessionStorage.setItem("currrent_menuInBasket",JSON.stringify(cur_BasketData))
+          // window.location.reload()
         }
       }
-
     }
     else {
       alert_found_NotSameFoodShopInBasket(id,itemName,itemPrice,type,imgPath);
@@ -117,7 +122,7 @@ export default function Shop() {
     test_item_div.push(
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
         <figure className=' h-1/2 bg-red-400'>
-          <img src={item.imgPath} className='object-cover' alt="Shoes" />
+          <img src={item.imgPath} className='object-cover'  alt="Shoes" />
         </figure>
         <div className="card-body">
           <div className='name-menu-controller flex justify-between items-center'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose, AiFillTag } from 'react-icons/ai';
 
 import { FaUserFriends, FaWallet } from 'react-icons/fa'
@@ -11,6 +11,10 @@ const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
+    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("currrent_menuInBasket")!==null) 
+    ? JSON.parse(sessionStorage.getItem("currrent_menuInBasket")).length 
+    : 0)
+   
 
     const handle_click_logOut = () => {
         //remove user in session
@@ -23,7 +27,7 @@ const NavBar = () => {
         return (sessionStorage.getItem('current_user') !== null) ? true : false
     }
 
-    console.log(check_IsUserLogIn())
+   
     return (
 
         <div className='max-w-[1640px] mx-auto
@@ -69,20 +73,6 @@ const NavBar = () => {
                 }
 
                 {(check_IsUserLogIn())
-                    ? <Link to={`/basket`}>
-                        <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             md:inline-block'>
-                            <div className='flex '>
-                                <SlBasket size={25} />
-                                {((sessionStorage.getItem('current_FoodShopInBasket')!==null)) ? <div className="badge badge-secondary"> 12</div> : ""}
-                            </div>
-                        </button>
-                    </Link>
-                    : ""
-                }
-
-                {(check_IsUserLogIn())
                     ? <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
                         <button className='hidden
             px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
@@ -93,6 +83,19 @@ const NavBar = () => {
                     : ""
                 }
 
+                {(check_IsUserLogIn())
+                    ? <Link to={`/basket`}>
+                        <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                            <div className='flex '>
+                                <SlBasket size={25} />
+                                {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
+                            </div>
+                        </button>
+                    </Link>
+                    : ""
+                }
 
                 {/* Login -> hidden if user not log in */}
                 {!(check_IsUserLogIn())
@@ -176,6 +179,19 @@ const NavBar = () => {
                             : ""
                         }
 
+                        {/* your orders */}
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
+                                    <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                        Your orders
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
                         {/* Basket */}
                         {(check_IsUserLogIn())
                             ? <li className='mt-2'>
@@ -185,22 +201,8 @@ const NavBar = () => {
              md:inline-block'>
                                         <div className='flex '>
                                             <SlBasket size={25} />
-                                            {(sessionStorage.getItem('current_FoodShopInBasket')!==null) ? <div className="badge badge-secondary"> 12 </div> : ""}
+                                            {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
                                         </div>
-                                    </button>
-                                </Link>
-                            </li>
-                            : ""
-                        }
-
-
-                        {/* your orders */}
-                        {(check_IsUserLogIn())
-                            ? <li className='mt-2'>
-                                <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
-                                    <button className='
-                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                        Your orders
                                     </button>
                                 </Link>
                             </li>
