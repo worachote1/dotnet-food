@@ -1,9 +1,38 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import NavBar from './NavBar'
-import Footer from './Footer'
+import { Link, useNavigate } from 'react-router-dom'
 import { RevolvingDot } from 'react-loader-spinner'
 
 export default function OrderWaitRider() {
+
+  let test_riderDetial_data = [
+    {
+      "id": 1,
+      "riderName": "รับส่ง ปลอดภัย",
+      "riderTel": "08x-xxx-xxxx",
+      "imgPath": 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
+    }
+  ]
+  
+  const current_user = sessionStorage.getItem("current_user")
+
+  const [riderInfo, setRiderInfo] = useState([])
+
+  let test_riderDetail_div = []
+  test_riderDetial_data.map((item) => {
+    test_riderDetail_div.push(
+      <div key={`${item.riderName}-${item.id}`}>
+        <div class="flex flex-col md:flex-row py-4 bg-teal-200 p-8 justify-center items-center">
+            <img class='object-scale-down h-40 w-40 rounded-full' src={item.imgPath} alt=''></img>
+            <div class='flex flex-col justify-center items-center'>
+              <h2 className='text-2xl text-black p-2 px-10 text-xl md:text-3xl'>ชื่อผู้ส่ง : {item.riderName}</h2>
+              <h2 className='text-2xl text-black p-2 px-10 text-xl md:text-3xl'>เบอร์โทรศัพท์ : {item.riderTel}</h2>
+            </div>
+          </div>
+      </div>
+    )
+  })
+
   return (
     <div>
         <NavBar />
@@ -28,15 +57,11 @@ export default function OrderWaitRider() {
           </div>
           {/* Rider Information */}
           <div className='p-8'></div>
-          <div class="flex flex-row py-4 bg-teal-200 p-8">
-            <img class='object-scale-down h-40 w-40 rounded-full' src='https://i2-prod.manchestereveningnews.co.uk/incoming/article26496180.ece/ALTERNATES/s1200c/0_GettyImages-1473778315.jpg' alt=''></img>
-            <div class='flex flex-col justify-start'>
-              <h2 className='text-2xl text-black p-2 px-10'>ชื่อผู้ส่ง : Erling Braut Haaland</h2>
-              <h2 className='text-2xl text-black p-2 px-10'>เบอร์ผู้ส่ง : xxx-xxxx-xxxx</h2>
-            </div>
-          </div>
+          {test_riderDetail_div}
           <div className='flex justify-center p-8'>
-            <a href='#' class='p-3 px-20 pt-2 bg-teal-400 rounded-full baseline hover:bg-teal-300'>Back</a>
+          <Link to={`/order/${current_user}`}>
+            <button className='p-3 px-20 pt-2 bg-teal-400 rounded-full baseline hover:bg-teal-300'>Back</button>
+          </Link>
           </div>
         </div>
     </div>
