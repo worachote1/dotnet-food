@@ -27,7 +27,7 @@ export default function OrderWaitAcept() {
           <h4 className='text-2xl text-white mx-auto p-2 text-center'>Waiting for a moment...</h4>
         </div>
 
-        {/* Order Information */}
+        {/* Order Information ss*/}
         <div className='p-8'></div>
         <div class="flex flex-row px-10 py-4 bg-teal-200">
           <div class='flex flex-none flex-row bg-sky-600 rounded w-20 h-20 items-center justify-center'><h1 className='text-3xl font-bold'>2</h1></div>
@@ -50,7 +50,6 @@ export default function OrderWaitAcept() {
           <a href='#' class='p-3 px-20 pt-2 bg-teal-400 rounded-full baseline hover:bg-teal-300'>Cancle Order</a>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }
