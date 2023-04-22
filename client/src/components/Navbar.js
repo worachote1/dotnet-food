@@ -11,8 +11,8 @@ const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
-    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("currrent_menuInBasket")!==null) 
-    ? JSON.parse(sessionStorage.getItem("currrent_menuInBasket")).length 
+    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket")!==null) 
+    ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length 
     : 0)
    
 
