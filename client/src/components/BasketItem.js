@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function BasketItem({ menuObj, parentCallback }) {
+export default function BasketItem({ menuObj, callbackUpdate , cur_subTotal}) {
 
     const [displayQuantity, setDisplayQuantity] = useState(menuObj.quantity)
     const handle_ClickVote = (id, voteVal) => {
@@ -8,6 +8,7 @@ export default function BasketItem({ menuObj, parentCallback }) {
         cur_menuInBasket.forEach(item => {
             if (item.id === id) {
                 item.quantity += voteVal
+                cur_subTotal += voteVal * item.itemPrice
                 // if menu downvote to 0 -> remove that objecct from session from session
                 if (item.quantity <= 0) {
                     const filterData = cur_menuInBasket.filter(item => item.id !== id)
@@ -28,6 +29,9 @@ export default function BasketItem({ menuObj, parentCallback }) {
                     setDisplayQuantity(item.quantity)
                     // update that menu quantity after click vote to session
                     sessionStorage.setItem("current_menuInBasket", JSON.stringify(cur_menuInBasket))
+                    // display new sub total
+                    
+                    callbackUpdate(cur_subTotal)
                 }
             }
         });

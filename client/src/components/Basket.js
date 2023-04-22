@@ -10,17 +10,23 @@ export default function Basket() {
   //  fetch Item that user add to basket (must be the same foodShop) 
   //  ** fetch Object from session
   const [currentMenuInBasket, setCurrentMenuInBasket] = useState(JSON.parse(sessionStorage.getItem("current_menuInBasket")))
+  const navigate = useNavigate();
   const alert_EmptyBasket = () => {
     Swal.fire({
       title: 'Your Basket Is Empty',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
+      text: "Let's look at some food shops.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'green',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform any necessary delete action here
+        navigate("/")
       }
     })
-  }
+}
 
   const calSubTotal = () => {
     if(currentMenuInBasket === null){
@@ -32,8 +38,8 @@ export default function Basket() {
     }
     return cnt
   }
-  const upDateSubTotal = () => {
-    setSubTotal(calSubTotal())
+  const upDateSubTotal = (NewSubTotal) => {
+    setSubTotal(NewSubTotal)
   }
   const [subTotal,setSubTotal] = useState(calSubTotal())
 
@@ -47,18 +53,18 @@ export default function Basket() {
         </div> */}
         {(currentMenuInBasket !== null)
           ? currentMenuInBasket.map((item) => {
-            return <BasketItem key={`menu-${item.id}`} menuObj = {item} parentCallback = {upDateSubTotal}/>
+            return <BasketItem key={`menu-${item.id}`} menuObj = {item} callbackUpdate = {upDateSubTotal} cur_subTotal = {subTotal} />
           })
 
           : alert_EmptyBasket()
         }
         {(currentMenuInBasket !== null) ?
           <>
-            <div class="flex justify-end items-center mt-4 sm:mt-8">
-              <span class="text-gray-600 mr-4">Subtotal:</span>
-              <span class="text-xl font-bold">{subTotal} Bath</span>
+            <div className="flex justify-end items-center mt-4 sm:mt-8">
+              <span className="text-gray-600 mr-4">Subtotal:</span>
+              <span className="text-xl font-bold">{subTotal} Bath</span>
             </div>
-            <div class="flex justify-end items-center mt-2">
+            <div className="flex justify-end items-center mt-2">
               <button className="btn btn-success">place order</button>
             </div>
           </>
