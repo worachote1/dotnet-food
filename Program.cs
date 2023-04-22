@@ -1,3 +1,7 @@
+using BasicASPTutorial.Data;
+using dotnet_foodRelease.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
