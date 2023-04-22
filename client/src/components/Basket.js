@@ -9,11 +9,10 @@ export default function Basket() {
 
   //  fetch Item that user add to basket (must be the same foodShop) 
   //  ** fetch Object from session
-  const [currentMenuInBasket, setCurrentMenuInBasket] = useState(JSON.parse(sessionStorage.getItem("currrent_menuInBasket")))
-
+  const [currentMenuInBasket, setCurrentMenuInBasket] = useState(JSON.parse(sessionStorage.getItem("current_menuInBasket")))
   const alert_EmptyBasket = () => {
     Swal.fire({
-      title: 'Not add any menu',
+      title: 'Your Basket Is Empty',
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
       },
@@ -22,6 +21,21 @@ export default function Basket() {
       }
     })
   }
+
+  const calSubTotal = () => {
+    if(currentMenuInBasket === null){
+      return 0
+    }
+    let cnt = 0
+    for (let i = 0; i < currentMenuInBasket.length; i++){
+      cnt += currentMenuInBasket[i].itemPrice * currentMenuInBasket[i].quantity
+    }
+    return cnt
+  }
+  const upDateSubTotal = () => {
+    setSubTotal(calSubTotal())
+  }
+  const [subTotal,setSubTotal] = useState(calSubTotal())
 
   return (
     <div >
@@ -33,19 +47,19 @@ export default function Basket() {
         </div> */}
         {(currentMenuInBasket !== null)
           ? currentMenuInBasket.map((item) => {
-            return <BasketItem key={item.id} itemName={item.itemName} itemPrice={item.itemPrice} quantity={item.quantity} imgPath={item.imgPath} />
+            return <BasketItem key={`menu-${item.id}`} menuObj = {item} parentCallback = {upDateSubTotal}/>
           })
 
-          : "not add any menu"
+          : alert_EmptyBasket()
         }
         {(currentMenuInBasket !== null) ?
           <>
             <div class="flex justify-end items-center mt-4 sm:mt-8">
               <span class="text-gray-600 mr-4">Subtotal:</span>
-              <span class="text-xl font-bold">$35.00</span>
+              <span class="text-xl font-bold">{subTotal} Bath</span>
             </div>
             <div class="flex justify-end items-center mt-2">
-              <button className="btn btn-success">order now</button>
+              <button className="btn btn-success">place order</button>
             </div>
           </>
           : ""}

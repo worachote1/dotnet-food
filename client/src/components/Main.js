@@ -141,7 +141,7 @@ export default function Main() {
   //   getFoodShop()
   // })
   return (
-    <div className=" max-w-[1640px] mx-auto ">
+    <div className=" max-w-[1640px] mx-auto">
       
       <div>
         
@@ -153,7 +153,7 @@ export default function Main() {
 
       <div className='top-rated-menu-section  p-4' style={{background : '#F5B041'}}>
         <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center ">
+        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center mb-2">
 
           <div id="slide1" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
@@ -212,11 +212,10 @@ export default function Main() {
         </div>
       </div>
 
-      <div className='all-foodShop-section mt-5 '>
-        <p className='text-center text-4xl text-white-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
+      <div className='all-foodShop-section mb-5'>
+        {/* <p className='text-center text-4xl text-white-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p> */}
         <div className='all-foodshop-container flex flex-wrap justify-center'>
           {test_foodShop_div}
-
         </div>
       </div>
 
