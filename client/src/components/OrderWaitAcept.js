@@ -9,7 +9,7 @@ export default function OrderWaitAcept() {
       <NavBar />
       <div className='mx-auto bg-scale-300 h-screen'>
         
-        {/* Waiting Acept */}
+        {/* Waiting Acept  */}
         <div className='flex flex-col items-center bg-teal-400'>
           <div className='spinner-container p-2'>
             <MagnifyingGlass 
