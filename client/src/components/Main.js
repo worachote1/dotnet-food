@@ -77,6 +77,7 @@ export default function Main() {
     }
   ]
 
+<<<<<<< HEAD
   const [user, setUser] = useState(sessionStorage.getItem('current_user'))
   const [foodShop, setFoodShop] = useState([])
   const [topMenu, setTopMenu] = useState([])
@@ -85,6 +86,19 @@ export default function Main() {
 
   }
 
+=======
+  useEffect(()=>{
+    fetch(`http://localhost:5000/api/user`)
+    .then((res)=>{
+
+      return res.json()
+    })
+    .then((data)=>{
+      console.log("get user success !")
+      setTestData(data)
+    })
+  },[])
+>>>>>>> NV-frontend
   
 
   // for test foodShops data to display in each div
@@ -141,6 +155,7 @@ export default function Main() {
   //   getFoodShop()
   // })
   return (
+<<<<<<< HEAD
     <div className=" max-w-[1640px] mx-auto">
       
       <div>
@@ -149,6 +164,15 @@ export default function Main() {
           ? <p> you are login as : <span className='text-green-500'> {user} </span> </p>
           : <span className='text-orange-500'>Not log in</span>}
 
+=======
+    <div className=" text-black p-4 ">
+      This is main
+      {/* <div>
+        get message data fom testAPiController <span className='text-red-500'> {testData}</span> 
+      </div> */}
+      <div>
+        get User data fom UserController <span className='text-green-500'> {JSON.stringify(testData)} </span> 
+>>>>>>> NV-frontend
       </div>
 
       <div className='top-rated-menu-section  p-4' style={{background : '#F5B041'}}>
