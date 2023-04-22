@@ -3,6 +3,7 @@ using BasicASPTutorial.Models;
 using Microsoft.AspNetCore.Mvc;
 // using Microsoft.EntityFrameworkCore;
 
+
 namespace BasicASPTutorial.Controllers
 {
     [ApiController]
@@ -20,7 +21,7 @@ namespace BasicASPTutorial.Controllers
                        phoneNum = "081-0000000"
                     //    state = State.IDLE
             },
-            new User { 
+            new User {
                        id = 2,
                        UserName = "admin",
                        Password = "123456admin",
@@ -41,19 +42,12 @@ namespace BasicASPTutorial.Controllers
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
-            // User[] items = users.ToArray();
-            return Ok( new User { 
-                       id = 3,
-                       UserName = "admin333333333",
-                       Password = "123456admin",
-                       isDelivering = false,
-                       address = "KMITL",
-                       phoneNum = "081-0000000",
-                    //    state = State.IDLE
-            });
+            return Ok(
+                users
+            );
         }
 
-    
+
 
         // [HttpGet("{id}")]
         // public async Task<ActionResult<User>> Get(string username)

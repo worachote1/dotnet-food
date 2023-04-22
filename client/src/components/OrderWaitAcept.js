@@ -50,7 +50,6 @@ export default function OrderWaitAcept() {
           <a href='#' class='p-3 px-20 pt-2 bg-teal-400 rounded-full baseline hover:bg-teal-300'>Cancle Order</a>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

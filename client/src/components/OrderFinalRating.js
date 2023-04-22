@@ -1,8 +1,15 @@
 import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
+import { useState } from 'react';
 
 export default function OrderFinalRating() {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value)
+  }
+
   return (
     <div>
         <NavBar />
@@ -23,21 +30,59 @@ export default function OrderFinalRating() {
           <h1 className='text-4xl text-black text-center'>Enjoy Eating!!!</h1>
           <div className='p-4'></div>
           <div class='flex justify-center'>
+          {/* Rating Star */}
           <form>
             <fieldset>
-                <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4"></label>
-                <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3"></label>
-                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2"></label>
-                <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1"></label>
-                <input type="radio" id="rating-0" name="rating" value="0" /><label for="rating-0"></label>
-                <div className='flex justify-center p-8'>
-                  <input class='p-3 px-20 pt-2 bg-teal-400 rounded-full baseline hover:bg-teal-300' type="submit" value="Submit"></input>
-                </div>
+              <div className="flex justify-center rating rating-lg">
+                <input 
+                  type="radio" 
+                  name="rating-8" 
+                  className="mask mask-star-2 bg-orange-400" 
+                  value="1"
+                  checked={selectedOption === "1"}
+                  onChange={handleOptionChange}
+                />
+                <input 
+                  type="radio" 
+                  name="rating-8" 
+                  className="mask mask-star-2 bg-orange-400" 
+                  value="2"
+                  checked={selectedOption === "2"}
+                  onChange={handleOptionChange}
+                />
+                <input 
+                  type="radio" 
+                  name="rating-8" 
+                  className="mask mask-star-2 bg-orange-400" 
+                  value="3"
+                  checked={selectedOption === "3"}
+                  onChange={handleOptionChange}
+                />
+                <input 
+                  type="radio" 
+                  name="rating-8" 
+                  className="mask mask-star-2 bg-orange-400" 
+                  value="4"
+                  checked={selectedOption === "4"}
+                  onChange={handleOptionChange}
+                />
+                <input 
+                  type="radio" 
+                  name="rating-8" 
+                  className="mask mask-star-2 bg-orange-400" 
+                  value="5"
+                  checked={selectedOption === "5"}
+                  onChange={handleOptionChange}
+                />
+              </div>
+              <p class="text-center p-6">You Selected : {selectedOption}</p>
+              <div className='flex justify-center p-4'>
+                <input class='p-3 px-20 pt-3 bg-teal-400 rounded-full baseline hover:bg-teal-300' type="submit" value="Submit"></input>
+              </div>
             </fieldset>
           </form>
           </div>
         </div>
-        <Footer />
     </div>
   )
 }
