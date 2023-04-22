@@ -176,7 +176,7 @@ export default function Shop() {
     <div>
       <NavBar />
       this is food shop id : {foodShopName}
-      <div className='foodShop-section flex flex-wrap justify-center'>
+      <div className='foodShop-section flex flex-wrap justify-center min-h-screen'>
         {test_item_div}
           
       </div>
