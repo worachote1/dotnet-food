@@ -30,7 +30,6 @@ export default function BasketItem({ menuObj, callbackUpdate , cur_subTotal}) {
                     // update that menu quantity after click vote to session
                     sessionStorage.setItem("current_menuInBasket", JSON.stringify(cur_menuInBasket))
                     // display new sub total
-                    
                     callbackUpdate(cur_subTotal)
                 }
             }
