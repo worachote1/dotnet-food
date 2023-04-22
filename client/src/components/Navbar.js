@@ -21,7 +21,7 @@ const NavBar = () => {
         sessionStorage.clear();
         // redirecct to login
         navigate("/login")
-    }
+    } 
 
     const check_IsUserLogIn = () => {
         return (sessionStorage.getItem('current_user') !== null) ? true : false
