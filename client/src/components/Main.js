@@ -74,72 +74,22 @@ export default function Main() {
           imgPath: "https://test.com/img.jpg"
         }
       ]
-    },
-    {
-      Id: 4,
-      Name: "KMITL-RES 4",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
-    },
-    {
-      Id: 5,
-      Name: "KMITL-RES 5",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
-    },
-    {
-      Id: 6,
-      Name: "KMITL-RES 6",
-      imgPath: "https://test.com/img.jpg",
-      address: "sample address",
-      totalRating: 1000,
-      totalVote: 1000,
-      // itemList 
-      itemList: [
-        {
-          id: 1,
-          itemName: "Pizza",
-          itemPrice: 420.0,
-          type: "MAIN",
-          imgPath: "https://test.com/img.jpg"
-        }
-      ]
     }
   ]
 
-
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState(sessionStorage.getItem('current_user'))
   const [foodShop, setFoodShop] = useState([])
-  const [topMenu , setTopMenu] = useState([]) 
+  const [topMenu, setTopMenu] = useState([])
+
+  const handleClickAddMenu = () => {
+
+  }
+
+  
 
   // for test foodShops data to display in each div
   let test_foodShop_div = []
   foodShop.map((item) => {
-
     test_foodShop_div.push(
       <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4" key={`test-key-${item.Id}`} >
         <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
@@ -147,39 +97,31 @@ export default function Main() {
           <h2 className="card-title"> {item.Name} + จํานวนดาว</h2>
           <p> {item.address} </p>
           <div className="card-actions justify-end">
-            <Link
-              to={
-                `/shop/${item.Name}`
-              }>
-              <button className="btn btn-primary">See more</button>
-            </Link>
+            {
+              (user !== "" && user !== null)
+                ? <Link
+                  to={
+                    `/shop/${item.Name}`
+                  }>
+                  <button className="btn btn-primary">See more</button>
+                </Link>
+                : <Link
+                  to={
+                    `/login/`
+                  }>
+                  <button className="btn btn-primary">See more</button>
+                </Link>
+            }
+
           </div>
         </div>
       </div>)
   })
-
-
   // test for setFoodShop from fake data
   useEffect(() => {
     setFoodShop(test_foodShop_data)
   }, [])
 
-  // testfetch user api
-  const getUserApi = () => {
-    fetch(`http://localhost:5000/api/user`)
-      .then((res) => {
-
-        return res.json()
-      })
-      .then((data) => {
-        console.log("get user success !")
-        console.log(data)
-        setUser(data)
-      })
-      .catch((err) => {
-        console.log("get user failed !")
-      })
-  }
   //test fetch food shop api
   const getFoodShop = () => {
     fetch(`http://localhost:5000/api/foodShop`)
@@ -195,96 +137,89 @@ export default function Main() {
         console.log("get food shop failed !")
       })
   }
-
-
-  useEffect(() => {
-    getUserApi()
-  }, [])
-
   // useEffect(() => {
   //   getFoodShop()
   // })
-
-
   return (
-    <div className="p-4 max-w-[1640px] mx-auto ">
+    <div className=" max-w-[1640px] mx-auto">
       
-        <div>
-          {/* {user[0]?.userName} */}
-          get User data fom UserController <span className='text-green-500'> {JSON.stringify(user)} </span>
-        </div>
+      <div>
         
-        <div className='top-rated-menu-section'>
-          <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-          <div className="carousel w-full sm:flex sm:justify-center">
+        {user !== null
+          ? <p> you are login as : <span className='text-green-500'> {user} </span> </p>
+          : <span className='text-orange-500'>Not log in</span>}
 
-            <div id="slide1" className="carousel-item relative ">
-              {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+      </div>
 
-              <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-                <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 1 (ชื่อเมนู) </h2>
-                  <p>ชื่อร้าน + จํานวนดาว</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-success">Add menu</button>
-                  </div>
+      <div className='top-rated-menu-section  p-4' style={{background : '#F5B041'}}>
+        <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
+        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center mb-2">
+
+          <div id="slide1" className="carousel-item relative ">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4 ">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">เมนูอันดับ 1 (ชื่อเมนู) </h2>
+                <p>ชื่อร้าน + จํานวนดาว</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
                 </div>
               </div>
-              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
-                <a href="#slide3" className="btn btn-circle">❮</a>
-                <a href="#slide2" className="btn btn-circle">❯</a>
-              </div>
             </div>
-            <div id="slide2" className="carousel-item relative">
-              {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
-              <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-                <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 2 (ชื่อเมนู)</h2>
-                  <p>ชื่อร้าน + จํานวนดาว</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-success">Add menu</button>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
-                <a href="#slide1" className="btn btn-circle">❮</a>
-                <a href="#slide3" className="btn btn-circle">❯</a>
-              </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
+              <a href="#slide3" className="btn btn-circle">❮</a>
+              <a href="#slide2" className="btn btn-circle">❯</a>
             </div>
-            <div id="slide3" className="carousel-item relative ">
-              {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
-
-              <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-                <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                  <h2 className="card-title">เมนูอันดับ 3 (ชื่อเมนู)</h2>
-                  <p>ชื่อร้าน + จํานวนดาว</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-success">Add menu</button>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
-                <a href="#slide2" className="btn btn-circle">❮</a>
-                <a href="#slide1" className="btn btn-circle">❯</a>
-              </div>
-            </div>
-
-
           </div>
-        </div>
-
-        <div className='all-foodShop-section mt-5 '>
-          <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p>
-          <div className='foodshop-container flex flex-wrap justify-center'>
-            {test_foodShop_div}
-
+          <div id="slide2" className="carousel-item relative">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">เมนูอันดับ 2 (ชื่อเมนู)</h2>
+                <p>ชื่อร้าน + จํานวนดาว</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
+              <a href="#slide1" className="btn btn-circle">❮</a>
+              <a href="#slide3" className="btn btn-circle">❯</a>
+            </div>
           </div>
-        </div>
+          <div id="slide3" className="carousel-item relative ">
+            {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
 
-      
+            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+              <div className="card-body">
+                <h2 className="card-title">เมนูอันดับ 3 (ชื่อเมนู)</h2>
+                <p>ชื่อร้าน + จํานวนดาว</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-success">Add menu</button>
+                </div>
+              </div>
+            </div>
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 visible sm:invisible">
+              <a href="#slide2" className="btn btn-circle">❮</a>
+              <a href="#slide1" className="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div className='all-foodShop-section mb-5'>
+        {/* <p className='text-center text-4xl text-white-500' style={{ fontFamily: "Anton, sans-serif" }}>FOOD SHOP</p> */}
+        <div className='all-foodshop-container flex flex-wrap justify-center'>
+          {test_foodShop_div}
+        </div>
+      </div>
+
+
     </div>
   )
 }
