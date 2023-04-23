@@ -11,6 +11,10 @@ const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
+    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket")!==null) 
+    ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length 
+    : 0)
+   
     const [showBasketCount, setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket") !== null)
         ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length
         : 0)
@@ -21,7 +25,7 @@ const NavBar = () => {
         sessionStorage.clear();
         // redirecct to login
         navigate("/login")
-    }
+    } 
 
     const check_IsUserLogIn = () => {
         return (sessionStorage.getItem('current_user') !== null) ? true : false
