@@ -5,13 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function MainRider() {
 
-  const isDelivering = sessionStorage.getItem("User_isDelivering")
+  const riderStatus = sessionStorage.getItem("rider_status")
   const orderId = sessionStorage.getItem("current_customer_orderID")
 
-  const redirect = (isDelivering,orderId) => {
-    let destination = `/order-list-info/${orderId}`
-
-    if(isDelivering === true){
+  //ถ้ารับงานแล้วให้มันไปงานที่รับไว้เลย
+  const redirect = (riderStatus,orderId) => {
+    let destination = `/main-rider/order-list-info/${orderId}`
+    console.log(riderStatus)
+    if(riderStatus === "delivering"){
       window.location.replace(destination)
     }
   }
@@ -101,11 +102,12 @@ export default function MainRider() {
 
   let test_order_div = []
   order.map((item) => {
-    if(item.orderState=="waitAccept"){
+    //เช็คOrderที่ยังไม่มีrider รับ
+    if(item.orderState === "waitAccept"){
       test_order_div.push(
         <Link
             onClick={() => hanldeClickOrder_list_info(item.orderId,item.custumerName,item.itemList,item.address)}
-            to={ `/order-list-info/${item.orderId}`}
+            to={ `/main-rider/order-list-info/${item.orderId}`}
             class="group"
         >
           <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -123,7 +125,7 @@ export default function MainRider() {
   useEffect(() => {
     setOrder(test_order_data)
 
-    redirect(isDelivering,orderId)
+    redirect(riderStatus,orderId)
   }, [])
 
   const getOrder = () => {
@@ -146,7 +148,7 @@ export default function MainRider() {
     <div>
         
         <NavBar />
-        <div class="bg-white">
+        <div class="min-h-screen bg-gray-100 flex bg-white">
           <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {test_order_div}

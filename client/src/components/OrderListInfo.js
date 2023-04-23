@@ -1,6 +1,4 @@
 import React from 'react'
-import NavBar from './NavBar'
-import Footer from './Footer'
 import { useState, useEffect } from 'react'
 import OrderFinalRating from './OrderFinalRating'
 import OrderWaitAcept from './OrderWaitAcept'
@@ -8,14 +6,8 @@ import OrderWaitRider from './OrderWaitRider'
 
 export default function OrderListInfo() {
 
-  const [status,setStatus] = useState("order_success")
-  let default_component = <div>
-        <NavBar />
-        <div>
-            OrderListInfo
-        </div>
-        <Footer />
-    </div>
+  //คิดว่าจะใช้วิธีถ้ากดในnavbar แล้วใส่ current status ว่า ตอนนี้statusอะไร
+  const [status,setStatus] = useState("")
   const [statusComponent,setStatusComponent] = useState(null)
 
   useEffect(()=>{
@@ -29,7 +21,6 @@ export default function OrderListInfo() {
         setStatusComponent(<OrderFinalRating />)
 }
     else{
-    setStatusComponent(default_component)
 }
 
 },[])

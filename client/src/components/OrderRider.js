@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderRider() {
 
@@ -14,14 +15,31 @@ export default function OrderRider() {
 
   const [invoiceItem, setInvoiceItem] = useState([])
 
+  const [textRiderStatus, setTextRiderStatus] = useState("Apply Order")
+
   const orderID = sessionStorage.getItem("current_customer_orderID")
   const custumerName = sessionStorage.getItem("current_customer")
   const address = sessionStorage.getItem("customer_address")
   const [itemList, setItemList] = useState(JSON.parse(sessionStorage.getItem("customer_order_list")))
+  const riderStatus = sessionStorage.getItem("rider_status")
   
+  const navigate = useNavigate();
   const hanldeClickAppliedOrder = (orderID) => {
-    sessionStorage.setItem("User_isDelivering",true)
+    if(riderStatus === null || riderStatus === "complete"){
+      sessionStorage.setItem("rider_status","delivering")
+      setTextRiderStatus("Complete")
+    }
+    else{
+      sessionStorage.setItem("rider_status","complete")
+      navigate("/main-rider")
+    }
   }
+  const checkRS = () => {
+    if(riderStatus === "delivering"){
+      setTextRiderStatus("Complete")
+    }
+  }
+  
 
   const calSubTotal = () => {
     if(itemList === null){
@@ -39,6 +57,8 @@ export default function OrderRider() {
   }
 
   useEffect(() => {
+    checkRS()
+
     setInvoiceItem(itemList)
 
     setCoupon(0)
@@ -136,68 +156,66 @@ export default function OrderRider() {
   return (
     <div>
         <NavBar />
-        <section>
-          <div class="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-            <div class="mx-auto ">
-              <header class="text-center">
-                <h1 class="text-xl font-bold text-gray-900 sm:text-3xl">{custumerName}'s Cart</h1>
-              </header>
+        <div class="min-h-screen mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+          <div class="mx-auto ">
+            <header class="text-center">
+              <h1 class="text-xl font-bold text-gray-900 sm:text-3xl">{custumerName}'s Cart</h1>
+            </header>
 
-              <div class="mt-8">
-                <ul class="space-y-4">
-                  {test_item_div}
-                </ul>
+            <div class="mt-8">
+              <ul class="space-y-4">
+                {test_item_div}
+              </ul>
 
-                <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
-                  <div class="w-screen max-w-lg space-y-4">
-                    <dl class="space-y-0.5 text-sm text-gray-700">
-                      <div class="flex justify-between">
-                        <dt>Subtotal</dt>
-                        <dd>{subtotal} บาท</dd>
-                      </div>
-
-                      <div class="flex justify-between">
-                        <dt>Delivery Fee</dt>
-                        <dd>{deliveryFee} บาท</dd>
-                      </div>
-
-                      
-                      {coupon_div}
-
-                      <div class="flex justify-between !text-base font-medium">
-                        <dt>Total</dt>
-                        <dd>{calTotal()} บาท</dd>
-                      </div>
-                    </dl>
-
-                    <div class="flex justify-end">
-                      <span
-                        class="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-1500"
-                      >
-                        <img
-                          src = "https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
-                          alt = ""
-                          class = "h-4 w-4 mr-2"
-                        />
-
-                        <p class="whitespace-nowrap text-xs">Address : {address}</p>
-                      </span>
+              <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
+                <div class="w-screen max-w-lg space-y-4">
+                  <dl class="space-y-0.5 text-sm text-gray-700">
+                    <div class="flex justify-between">
+                      <dt>Subtotal</dt>
+                      <dd>{subtotal} บาท</dd>
                     </div>
 
-                    <div class="flex justify-end">
-                      <a
-                        onClick={() => hanldeClickAppliedOrder()}
-                        class="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
-                      >
-                        Applied Order
-                      </a>
+                    <div class="flex justify-between">
+                      <dt>Delivery Fee</dt>
+                      <dd>{deliveryFee} บาท</dd>
                     </div>
+
+                    
+                    {coupon_div}
+
+                    <div class="flex justify-between !text-base font-medium">
+                      <dt>Total</dt>
+                      <dd>{calTotal()} บาท</dd>
+                    </div>
+                  </dl>
+
+                  <div class="flex justify-end">
+                    <span
+                      class="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-1500"
+                    >
+                      <img
+                        src = "https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
+                        alt = ""
+                        class = "h-4 w-4 mr-2"
+                      />
+
+                      <p class="whitespace-nowrap text-xs">Address : {address}</p>
+                    </span>
+                  </div>
+
+                  <div class="flex justify-end">
+                    <a
+                      onClick={() => hanldeClickAppliedOrder()}
+                      class="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    >
+                      {textRiderStatus}
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
         <Footer />
     </div>
   )
