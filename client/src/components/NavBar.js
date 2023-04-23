@@ -42,6 +42,14 @@ const NavBar = () => {
 
             {/* Button */}
             <div>
+                {/* Rider page */}
+                <Link to='/main-rider'>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                        Rider
+                    </button>
+                </Link>
 
                 {/* Go  page */}
                 <Link to={`/profile/:${42}`}>
@@ -53,13 +61,23 @@ const NavBar = () => {
                 </Link>
                 
                 {/* Login */}
-                <Link to='/main-rider'>
+                <Link to='/login'>
                     <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
                         Log in
                     </button>
                 </Link>
+
+                {/* Login */}
+                <Link to='/basket'>
+                    <button className='hidden
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                        test basket
+                    </button>
+                </Link>
+
                 
 
                 {/* Logout */}
