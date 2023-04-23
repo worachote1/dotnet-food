@@ -39,14 +39,14 @@ namespace BasicASPTutorial.Controllers
         [HttpGet]
         public async Task<ActionResult<List<User>>> Get()
         {
-
+            // return Ok(new {msg = 44});
             return Ok(await _context.Users.ToListAsync());
         }
 
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> Get(string username)
         {
-            var user = await _context.Users.FindAsync(username);
+            var user = await _context.Users.SingleOrDefaultAsync(obj => obj.UserName == username);
             if (user == null)
             {
                 return BadRequest("User Not Found");
@@ -63,42 +63,63 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpPut("delivery/{username}")]
-        public async Task<ActionResult<List<User>>> setDelivery(string username, bool isDelivering)
+        // prn put -> update user by username
+        [HttpPut("{username}")]
+        public async Task<ActionResult<List<User>>> UpdateUser(string username,User user)
         {
-            var user = await _context.Users.FindAsync(username);
+            var cur_user = await _context.Users.SingleOrDefaultAsync(obj => obj.UserName == username);
             if (user == null)
             {
                 return BadRequest("User Not Found");
             }
-
-
-            user.isDelivering = isDelivering;
+            cur_user.UserName = user.UserName;
+            cur_user.Password = user.Password;
+            cur_user.isDelivering = user.isDelivering;
+            cur_user.address = user.address;
+            cur_user.phoneNum = user.phoneNum;
+        
+            _context.Update(cur_user);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Users.ToListAsync());
-        }
+        }       
 
-        [HttpPut("state/{username}")]
-        public async Task<ActionResult<User>> setState(string username, string state)
-        {
-            var user = await _context.Users.FindAsync(username);
-            if (user == null)
-            {
-                return BadRequest("User Not Found");
-            }
+        // [HttpPut("delivery/{username}")]
+        // public async Task<ActionResult<List<User>>> setDelivery(string username, bool isDelivering)
+        // {
+        //     var user = await _context.Users.FindAsync(username);
+        //     if (user == null)
+        //     {
+        //         return BadRequest("User Not Found");
+        //     }
 
-            user.state = state;
 
-            await _context.SaveChangesAsync();
+        //     user.isDelivering = isDelivering;
+        //     await _context.SaveChangesAsync();
 
-            return Ok(await _context.Users.ToListAsync());
-        }
+        //     return Ok(await _context.Users.ToListAsync());
+        // }
+
+        // [HttpPut("state/{username}")]
+        // public async Task<ActionResult<User>> setState(string username, string state)
+        // {
+        //     var user = await _context.Users.FindAsync(username);
+        //     if (user == null)
+        //     {
+        //         return BadRequest("User Not Found");
+        //     }
+
+        //     user.state = state;
+
+        //     await _context.SaveChangesAsync();
+
+        //     return Ok(await _context.Users.ToListAsync());
+        // }
 
         [HttpDelete("{username}")]
         public async Task<ActionResult<User>> Delete(string username)
         {
-            var dbuser = await _context.Users.FindAsync(username);
+            var dbuser = await _context.Users.SingleOrDefaultAsync(obj => obj.UserName == username);
             if (dbuser == null)
             {
                 return BadRequest("User Not Found");
