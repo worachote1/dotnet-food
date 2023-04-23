@@ -8,7 +8,7 @@ import OrderWaitRider from './OrderWaitRider'
 
 export default function OrderListInfo() {
 
-  const [status,setStatus] = useState("waiting_accept")
+  const [status,setStatus] = useState("order_success")
   let default_component = <div>
         <NavBar />
         <div>
@@ -25,7 +25,7 @@ export default function OrderListInfo() {
     else if(status === "waiting_rider"){
         setStatusComponent(<OrderWaitRider />)
 }
-    else if(status === "final_rating"){
+    else if(status === "order_success"){
         setStatusComponent(<OrderFinalRating />)
 }
     else{

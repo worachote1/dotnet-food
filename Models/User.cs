@@ -2,6 +2,7 @@ namespace BasicASPTutorial.Models
 {
     public class User
     {
+        internal string state;
 
         public int id {  get; set; }
         public string UserName { get; set; }

@@ -26,7 +26,7 @@ export default function Basket() {
         navigate("/")
       }
     })
-}
+  }
 
   const calSubTotal = () => {
     if(currentMenuInBasket === null){

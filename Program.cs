@@ -1,17 +1,35 @@
+using BasicASPTutorial.Data;
+using dotnet_foodRelease.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// prn 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("CorsPolicy",
-        builder => builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
-});
-
+builder.Services.AddDbContext<UserDataContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+)
+    );
+builder.Services.AddDbContext<ShopItemsDataContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ShopItemConnection")
+)
+    );
+builder.Services.AddDbContext<InvoiceItemsDataContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("InvoiceItemConnection")
+)
+    );
+builder.Services.AddDbContext<FoodShopContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("FoodShopConnection")
+)
+    );
+builder.Services.AddDbContext<InvoiceContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("InvoiceConnection")
+)
+    );
+builder.Services.AddDbContext<OrderContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrderConnection")
+)
+    );
 
 
 
@@ -29,18 +47,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors("CorsPolicy");
+
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller}/{action=Index}/{id?}");
-});
-
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Student}/{action=Index}/{id?}");
 
 app.Run();
