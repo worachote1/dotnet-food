@@ -59,7 +59,9 @@ export default function Register() {
   }
 
   const handleSubmitRegister = () => {
-
+      if(nameError === '' && passwordError === '' && confirmPasswordError === '' && addressError === '' && phone === ''){
+        
+      }
   }
 
   return (
