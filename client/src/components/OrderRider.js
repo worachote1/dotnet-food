@@ -3,7 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { useParams } from 'react-router-dom';
 
-export default function OrderListInfo() {
+export default function OrderRider() {
 
   
 

@@ -6,10 +6,13 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function MainRider() {
 
   const isDelivering = sessionStorage.getItem("User_isDelivering")
+  const orderId = sessionStorage.getItem("current_customer_orderID")
 
-  const redirect = (isDelivering) => {
+  const redirect = (isDelivering,orderId) => {
+    let destination = `/order-list-info/${orderId}`
+
     if(isDelivering === true){
-      window.location.replace(`/order-list-info/1`)
+      window.location.replace(destination)
     }
   }
 
@@ -81,11 +84,11 @@ export default function MainRider() {
 
   const [order, setOrder] = useState([])
   
-  const hanldeClickOrder_list_info = (orderID,custumerName,itemList,address) =>{
+  const hanldeClickOrder_list_info = (orderId,custumerName,itemList,address) =>{
     let fromWhichCustomer = sessionStorage.getItem("current_customer")
 
     if(fromWhichCustomer === null || fromWhichCustomer !== custumerName){
-      sessionStorage.setItem("current_customer_orderID")
+      sessionStorage.setItem("current_customer_orderID",orderId)
 
       sessionStorage.setItem("current_customer",custumerName)
 
@@ -101,7 +104,7 @@ export default function MainRider() {
     if(item.orderState=="waitAccept"){
       test_order_div.push(
         <Link
-            onClick={() => hanldeClickOrder_list_info(item.custumerName,item.itemList,item.address)}
+            onClick={() => hanldeClickOrder_list_info(item.orderId,item.custumerName,item.itemList,item.address)}
             to={ `/order-list-info/${item.orderId}`}
             class="group"
         >
@@ -119,6 +122,8 @@ export default function MainRider() {
 
   useEffect(() => {
     setOrder(test_order_data)
+
+    redirect(isDelivering,orderId)
   }, [])
 
   const getOrder = () => {
