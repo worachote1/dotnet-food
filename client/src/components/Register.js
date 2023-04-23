@@ -30,7 +30,7 @@ export default function Register() {
     // that contain at least 4 characters and don't count any spaces
     if (!((/^\S{4,}$/).test(password))) {
       setPasswordError("Password must be at least 4 characters");
-    } else {
+    } else { 
       setPasswordError('');
     }
   }
