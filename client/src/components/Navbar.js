@@ -15,11 +15,6 @@ const NavBar = () => {
     ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length 
     : 0)
    
-    const [showBasketCount, setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket") !== null)
-        ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length
-        : 0)
-
-
     const handle_click_logOut = () => {
         //remove user in session
         sessionStorage.clear();
