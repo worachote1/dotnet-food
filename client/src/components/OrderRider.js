@@ -15,7 +15,7 @@ export default function OrderRider() {
 
   const [invoiceItem, setInvoiceItem] = useState([])
 
-  const [textRiderStatus, setTextRiderStatus] = useState("Apply Order")
+  const [textRiderStatus, setTextRiderStatus] = useState("Accept Order")
 
   const orderID = sessionStorage.getItem("current_customer_orderID")
   const custumerName = sessionStorage.getItem("current_customer")
@@ -25,18 +25,18 @@ export default function OrderRider() {
   
   const navigate = useNavigate();
   const hanldeClickAppliedOrder = (orderID) => {
-    if(riderStatus === null || riderStatus === "complete"){
+    if(riderStatus === null || riderStatus === "complete" || riderStatus === "cancel"){
       sessionStorage.setItem("rider_status","delivering")
-      setTextRiderStatus("Complete")
+      setTextRiderStatus("Cancel")
     }
     else{
-      sessionStorage.setItem("rider_status","complete")
+      sessionStorage.setItem("rider_status","cancel")
       navigate("/main-rider")
     }
   }
   const checkRS = () => {
     if(riderStatus === "delivering"){
-      setTextRiderStatus("Complete")
+      setTextRiderStatus("cancel")
     }
   }
   

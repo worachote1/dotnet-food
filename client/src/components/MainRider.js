@@ -20,7 +20,7 @@ export default function MainRider() {
   let test_order_data = [
     {
       orderId: 1,
-      orderState:"waitAccept",
+      orderState:"waiting_accept",
       custumerName:"tester 1",
       address:"ชั้น 1",
       itemList:[
@@ -42,7 +42,7 @@ export default function MainRider() {
       ]
     },{
       orderId: 2,
-      orderState:"waitAccept",
+      orderState:"waiting_accept",
       custumerName:"tester 2",
       address:"ชั้น 2",
       itemList:[
@@ -103,7 +103,7 @@ export default function MainRider() {
   let test_order_div = []
   order.map((item) => {
     //เช็คOrderที่ยังไม่มีrider รับ
-    if(item.orderState === "waitAccept"){
+    if(item.orderState === "waiting_accept"){
       test_order_div.push(
         <Link
             onClick={() => hanldeClickOrder_list_info(item.orderId,item.custumerName,item.itemList,item.address)}
