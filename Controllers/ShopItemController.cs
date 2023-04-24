@@ -50,52 +50,28 @@ namespace BasicASPTutorial.Controllers
             return Ok(foodItems);
         }
 
-        [HttpGet("{itemName}")]
-        public async Task<ActionResult<shopItems>> Get(string itemName)
-        {
-            var foodItems = await _context.shopItems.FindAsync(itemName);
-            if (foodItems == null)
-            {
-                return BadRequest("Food Name Not Found");
-            }
-            return Ok(foodItems);
-        }
-
         [HttpPut("{id}")]
-        public async Task<ActionResult<shopItems>> addCount(int id, int count)
+        public async Task<ActionResult<shopItems>> addCount(int id, shopItems shopItems)
         {
-            var foodItems = await _context.shopItems.FindAsync(id);
-            if (foodItems == null)
+            var cur_shopItems = await _context.shopItems.FindAsync(id);
+            if (cur_shopItems == null)
             {
                 return BadRequest("Food ID Not Found");
             }
 
-            foodItems.totalItemOrder += count;
+            cur_shopItems.itemName = shopItems.itemName;
+            cur_shopItems.itemPrice = shopItems.itemPrice;
+            cur_shopItems.type = shopItems.type;
+            cur_shopItems.imgPath = shopItems.imgPath;
+            cur_shopItems.fromWhichFoodShop = shopItems.fromWhichFoodShop;
+            cur_shopItems.totalItemOrder = shopItems.totalItemOrder;
 
-            _context.shopItems.Add(foodItems);
-
+            _context.shopItems.Update(cur_shopItems);
             await _context.SaveChangesAsync();
 
-            return Ok(foodItems);
+            return Ok(cur_shopItems);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<shopItems>> setCount(int id, int count)
-        {
-            var foodItems = await _context.shopItems.FindAsync(id);
-            if (foodItems == null)
-            {
-                return BadRequest("Food ID Not Found");
-            }
-
-            foodItems.totalItemOrder = count;
-
-            _context.shopItems.Add(foodItems);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(foodItems);
-        }
 
         [HttpPost]
         public async Task<ActionResult<List<shopItems>>> AddFoods(shopItems shopItem)
