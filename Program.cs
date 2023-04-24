@@ -32,6 +32,14 @@ builder.Services.AddDbContext<OrderContext>(
     );
 
 
+//for enable Cross-Origin Resource Sharing (CORS) To fix the bug that the frontend cannot access the backend API,
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -53,5 +61,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Index}/{id?}");
+
+// for enable CORS
+app.UseCors("AllowAllOrigins");
 
 app.Run();

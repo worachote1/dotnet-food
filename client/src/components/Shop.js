@@ -141,7 +141,7 @@ export default function Shop() {
 
       <div className="card w-96 h-96 shadow-xl mr-4 mt-4" key={`${item.itemName}-${item.id}`} >
         <figure >
-          <img src={item.imgPath} className='object-cover ' />
+          <img src={item.imgPath} className='object-cover' />
         </figure>
         <div className="card-body">
           <div className='name-menu-controller flex justify-between items-center'>
