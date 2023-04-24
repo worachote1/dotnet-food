@@ -6,6 +6,7 @@ import { MdFavorite, MdHelp } from 'react-icons/md'
 import { SlBasket } from 'react-icons/sl'
 import { Link, useNavigate } from 'react-router-dom'
 // import { getUser, logout } from '../services/authorize';
+import { ReactComponent as Logo } from './logo.svg';
 
 const NavBar = () => {
 
@@ -40,10 +41,7 @@ const NavBar = () => {
                     <AiOutlineMenu size={30} />
                 </div>
                 <Link to='/'>
-                    <h1 className='text-2xl sm:text-3xl
-                    lg:text-4xl px-2'>
-                        <span className='text-teal-400'>D O T N E T</span> Delivery
-                    </h1>
+                    <Logo className='w-40 sm:w-48 md:w-52 lg:w-56 h-auto mx-2' />
                 </Link>
 
             </div>
@@ -156,7 +154,7 @@ const NavBar = () => {
 
                 <h2 className='text-2xl p-4'>
                     <Link to='/'>
-                        <span className='text-teal-400'>D o t N e t</span> Delivery
+                        <Logo className='w-40 sm:w-48 md:w-52 lg:w-56 h-auto mx-2' />
                     </Link>
                 </h2>
                 <nav>
