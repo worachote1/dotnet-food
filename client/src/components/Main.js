@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export default function Main() {
 
@@ -8,7 +9,85 @@ export default function Main() {
   const [foodShop, setFoodShop] = useState([])
   const [topMenu, setTopMenu] = useState([])
 
-  const handleClickAddMenu = () => {
+  // for sweet alert
+  const alert_found_NotSameFoodShopInBasket = (shopItemObj) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        // prn custom for swal fire
+        confirmButton: 'btn bg-green-500 ml-4',
+        cancelButton: 'btn bg-red-500',
+      },
+      buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+      title: 'Remove your previous items?',
+      text: "You still have products from another food shop. Shall we start over with a fresh basket?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          `Your Item from ${shopItemObj.fromWhichFoodShop} has been added.`,
+          'success'
+        )
+        // after accept to add Item from new FoodShop to Basket
+        // assign new data to session
+        sessionStorage.setItem("current_FoodShopInBasket", shopItemObj.fromWhichFoodShop)
+        let temp_obj_fromOtherFoodShop = {
+          "id": shopItemObj.id,
+          "itemName": shopItemObj.itemName,
+          "itemPrice": shopItemObj.itemPrice,
+          "type": shopItemObj.type,
+          "imgPath": shopItemObj.imgPath,
+          "quantity": 1
+        }
+        sessionStorage.setItem("current_menuInBasket", JSON.stringify([temp_obj_fromOtherFoodShop]))
+        window.location.reload()
+
+        // console.log(typeof(JSON.parse(sessionStorage.getItem("currrent_menuInBasket"))))  --> Object  
+        // console.log(typeof(sessionStorage.getItem("currrent_menuInBasket"))) --> String 
+      }
+    })
+  }
+
+  // function for managing session : current_FoodShopInBasket , currrent_menuInBasket
+  const hanldeClickAddTopMenu_ForBasket = (shopItemObj) => {
+    let fromWhichFoodShop_prn = sessionStorage.getItem("current_FoodShopInBasket")
+    let temp_obj = {
+      "id": shopItemObj.id,
+      "itemName": shopItemObj.itemName,
+      "itemPrice": shopItemObj.itemPrice,
+      "type": shopItemObj.type,
+      "imgPath": shopItemObj.imgPath,
+      "quantity": 1
+    }
+
+    if (fromWhichFoodShop_prn === null || fromWhichFoodShop_prn === shopItemObj.fromWhichFoodShop) {
+      sessionStorage.setItem("current_FoodShopInBasket", shopItemObj.fromWhichFoodShop)
+      // not have any menu in basket create session : currrent_menuInBasket
+      if (sessionStorage.getItem("current_menuInBasket") === null) {
+        sessionStorage.setItem("current_menuInBasket", JSON.stringify([temp_obj]))
+        // window.location.reload()
+      }
+      // add property of that menu to array of JSON (currrent_menuInBasket Session)
+      // find if that menu not in basket  
+      else {
+        const cur_BasketData = JSON.parse((sessionStorage.getItem("current_menuInBasket")))
+        // 
+        if (cur_BasketData.find(obj => obj.id === shopItemObj?.id) === undefined) {
+          cur_BasketData.push(temp_obj)
+          sessionStorage.setItem("current_menuInBasket", JSON.stringify(cur_BasketData))
+          // window.location.reload()
+        }
+      }
+    }
+    else {
+      alert_found_NotSameFoodShopInBasket(shopItemObj);
+    }
 
   }
 
@@ -231,8 +310,8 @@ export default function Main() {
 
   useEffect(() => {
     const divElements = foodShop.map((item) => (
-      <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4" key={`foodShop-${item.id}`}>
-        <figure><img src={item.imgPath} className='object-cover' /></figure>
+      <div className="card w-96 h-96 bg-green-100 shadow-xl mr-4 mt-4" key={`foodShop-${item.id}`}>
+        <figure className=''><img src={item.imgPath} className='object-cover' /></figure>
         <div className="card-body">
           <div className='flex justify-between'>
             <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.name}</h2>
@@ -240,7 +319,7 @@ export default function Main() {
           </div>
           <p style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.address} </p>
           <div className="card-actions justify-end">
-            {(user !== "" && user !== null)
+            {(user !== null)
               ? <Link to={`/shop/${item.name}`}>
                 <button className="btn btn-primary">See more</button>
               </Link>
@@ -255,6 +334,28 @@ export default function Main() {
 
     setAllFoodShopDiv(divElements)
   }, [foodShop])
+
+  // fetch top 3 menu
+  const getTopThreeMenu = () => {
+    fetch(`http://localhost:5000/api/shopitem`)
+      .then((res) => {
+
+        return res.json()
+      })
+      .then((data) => {
+        let sortDataByTotalItemOrder = data.sort((a, b) => b.totalItemOrder - a.totalItemOrder);
+        let topThreeMenu = sortDataByTotalItemOrder.slice(0, 3)
+        setTopMenu(topThreeMenu)
+        console.log(topThreeMenu)
+      })
+      .catch((err) => {
+        console.log("get menu failed !")
+      })
+  }
+
+  useEffect(() => {
+    getTopThreeMenu()
+  }, [])
 
   return (
     <div className="min-h-screen max-w-[1640px] mx-auto" >
@@ -274,13 +375,22 @@ export default function Main() {
           <div id="slide1" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
 
-            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4 ">
-              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+            <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4 ">
+              <figure><img src={topMenu[0]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">เมนูอันดับ 1 (ชื่อเมนู) </h2>
-                <p>ชื่อร้าน + จํานวนดาว</p>
+                <h2 className="card-title">{topMenu[0]?.itemName} </h2>
+                <p>{topMenu[0]?.fromWhichFoodShop} + จํานวนดาว</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-success">Add menu</button>
+                  {(user !== null)
+                    ?
+                    <button className="btn btn-success"
+                      onClick={() => hanldeClickAddTopMenu_ForBasket(topMenu[0])}
+                    >Add menu</button>
+
+                    : <Link to={`/login/`}>
+                      <button className="btn btn-success">Add menu</button>
+                    </Link>
+                  }
                 </div>
               </div>
             </div>
@@ -291,13 +401,22 @@ export default function Main() {
           </div>
           <div id="slide2" className="carousel-item relative">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
-            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+            <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src={topMenu[1]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">เมนูอันดับ 2 (ชื่อเมนู)</h2>
-                <p>ชื่อร้าน + จํานวนดาว</p>
+                <h2 className="card-title">{topMenu[1]?.itemName}</h2>
+                <p>{topMenu[1]?.fromWhichFoodShop} + จํานวนดาว</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-success">Add menu</button>
+                {(user !== null)
+                    ?
+                    <button className="btn btn-success"
+                      onClick={() => hanldeClickAddTopMenu_ForBasket(topMenu[1])}
+                    >Add menu</button>
+
+                    : <Link to={`/login/`}>
+                      <button className="btn btn-success">Add menu</button>
+                    </Link>
+                  }
                 </div>
               </div>
             </div>
@@ -309,13 +428,22 @@ export default function Main() {
           <div id="slide3" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}
 
-            <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4">
-              <figure><img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/restuarant-cafe-samui/thumbnail.jpg" alt="Shoes" /></figure>
+            <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4">
+              <figure><img src={topMenu[2]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">เมนูอันดับ 3 (ชื่อเมนู)</h2>
-                <p>ชื่อร้าน + จํานวนดาว</p>
+                <h2 className="card-title">{topMenu[2]?.itemName}</h2>
+                <p>{topMenu[2]?.fromWhichFoodShop} + จํานวนดาว</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-success">Add menu</button>
+                {(user !== null)
+                    ?
+                    <button className="btn btn-success"
+                      onClick={() => hanldeClickAddTopMenu_ForBasket(topMenu[2])}
+                    >Add menu</button>
+
+                    : <Link to={`/login/`}>
+                      <button className="btn btn-success">Add menu</button>
+                    </Link>
+                  }
                 </div>
               </div>
             </div>
