@@ -1,33 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose, AiFillTag } from 'react-icons/ai';
 
 import { FaUserFriends, FaWallet } from 'react-icons/fa'
 import { MdFavorite, MdHelp } from 'react-icons/md'
+import { SlBasket } from 'react-icons/sl'
 import { Link, useNavigate } from 'react-router-dom'
-
 // import { getUser, logout } from '../services/authorize';
+import { ReactComponent as Logo } from './logo.svg';
 
 const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
+    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket")!==null) 
+    ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length 
+    : 0)
+   
 
+    const handle_click_logOut = () => {
+        //remove user in session
+        sessionStorage.clear();
+        // redirecct to login
+        navigate("/login")
+    } 
+
+    const check_IsUserLogIn = () => {
+        return (sessionStorage.getItem('current_user') !== null) ? true : false
+    }
+
+   
     return (
 
         <div className='max-w-[1640px] mx-auto
         flex justify-between p-4 
         '>
             {/* left side */}
-            <div className='flex items-center'>
+            <div className='flex items-center '>
                 <div className='cursor-pointer md:hidden'
                     onClick={() => setNav(!nav)}>
                     <AiOutlineMenu size={30} />
                 </div>
                 <Link to='/'>
-                    <h1 className='text-2xl sm:text-3xl
-                    lg:text-4xl px-2'>
-                        <span className='text-teal-400'>D O T N E T</span> F O O D
-                    </h1>
+                    <Logo className='w-40 sm:w-48 md:w-52 lg:w-56 h-auto mx-2' />
                 </Link>
 
             </div>
@@ -41,40 +55,83 @@ const NavBar = () => {
             </div> */}
 
             {/* Button */}
-            <div>
+            <div className='flex items-center justify-center'>
 
-                {/* Go  page */}
-                <Link to={`/profile/:${42}`}>
-                    <button className='hidden
+                {/* Go delivery mode */}
+
+                {(check_IsUserLogIn())
+                    ? <Link to={`/main-rider`}>
+                        <button className='hidden
+            px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+         md:inline-block'>
+                            Delivery Mode
+                        </button>
+                    </Link>
+                    : ""
+                }
+
+                {(check_IsUserLogIn())
+                    ? <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
+                        <button className='hidden
+            px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
+         md:inline-block'>
+                            your orders
+                        </button>
+                    </Link>
+                    : ""
+                }
+
+                {(check_IsUserLogIn())
+                    ? <Link to={`/basket`}>
+                        <button className='hidden
                 px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        profile
-                    </button>
-                </Link>
-                
-                {/* Login */}
-                <Link to='/login'>
-                    <button className='hidden
-                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                            <div className='flex '>
+                                <SlBasket size={25} />
+                                {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
+                            </div>
+                        </button>
+                    </Link>
+                    : ""
+                }
+
+                {/* Login -> hidden if user not log in */}
+                {!(check_IsUserLogIn())
+                    ? <Link to='/login'>
+                        <button className='hidden
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'>
-                        Log in
-                    </button>
-                </Link>
-                
+                            Log in
+                        </button>
+                    </Link>
+                    : ""
+                }
+
+                {/* Register -> hidden if user not log in*/}
+                {!(check_IsUserLogIn())
+                    ? <Link to='/register'>
+                        <button className='hidden
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                            Register
+                        </button>
+                    </Link>
+                    : ""
+                }
+
 
                 {/* Logout */}
-                <a>
-                    <button className='hidden
-                    "px-7 py-3 mx-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                {(check_IsUserLogIn())
+                    ? <button className='hidden
+                px-7 py-3  mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
              md:inline-block'
-                    // onClick={() => logout(() => {
-                    //     navigate('/')
-                    //     window.location.reload(false)
-                    //     })}
+                        onClick={handle_click_logOut}
                     >
-                        Log out
+                        log out
                     </button>
-                </a>
+                    : ""
+                }
+
             </div>
 
 
@@ -97,54 +154,102 @@ const NavBar = () => {
 
                 <h2 className='text-2xl p-4'>
                     <Link to='/'>
-                        <span className='text-teal-400'>D o t N e t</span> F O O D
+                        <Logo className='w-40 sm:w-48 md:w-52 lg:w-56 h-auto mx-2' />
                     </Link>
                 </h2>
                 <nav>
                     <ul className='flex flex-col p-4  text-gray-800'>
-                    <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
+                        {/* <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Order Status</li>
                         <li className='text-xl py-4 flex items-center'><MdFavorite size={25} className='mr-4' /> Favorites</li>
-                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li>
+                        <li className='text-xl py-4 flex items-center'><MdHelp size={25} className='mr-4' /> Help</li> */}
                         {/* <li className='text-xl py-4 flex items-center'><FaUserFriends size={25} className='mr-4' /> Invite Friends</li> */}
-                        {/* Go page */}
-                        <li>
-                            <Link to={`/profile/:${42}`}>
-                                <button className='
-                px-7 py-3 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             md:inline-block'>
-                                    Profile
-                                </button>
-                            </Link>
-                            
-                        </li>
 
-                        {/* Login */}
-                        <li>
-                            <Link to='/login'>
-                                <button className='
+                        {/* Go delivery Mode */}
+                        {(check_IsUserLogIn())
+                            ? <li>
+                                <Link to='/main-rider'>
+                                    <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                        Delivery Mode
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
+                        {/* your orders */}
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to={`/order/${sessionStorage.getItem('current_user')}`}>
+                                    <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                        Your orders
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
+                        {/* Basket */}
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to={`/basket`}>
+                                    <button className='
+                px-7 py-3 mx-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-teal-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+             md:inline-block'>
+                                        <div className='flex '>
+                                            <SlBasket size={25} />
+                                            {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
+                                        </div>
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
+                        {/* Login -> hidden */}
+                        {!(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to='/login'>
+                                    <button className='
                 px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
-                                    Log in
-                                </button>
-                            </Link>
-                            
-                        </li>
+                                        Log in
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
+                        {/* Register -> hidden */}
+                        {!(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to='/register'>
+                                    <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'>
+                                        Register
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
+
 
                         {/* Logout */}
-                        <li>
-                            <a>
-                                <button className='
-                    px-7 py-3 mt-2 bg-transparent text-black rounded-full font-medium text-sm leading-snug uppercase  shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-                                    // onClick={() => logout(() => {
-                                    //     navigate('/')
-                                    //     window.location.reload(false)
-                                    // })}
-                                >
-                                    Log out
-                                </button>
-                            </a>
-                            
+                        {(check_IsUserLogIn())
+                            ? <li className='mt-2'>
+                                <Link to='/login'>
+                                    <button className='
+                px-7 py-3 mt-2 bg-transparent rounded-full text-black font-medium text-sm leading-snug uppercase shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"'
+                                        onClick={handle_click_logOut}
+                                    >
+                                        log out
+                                    </button>
+                                </Link>
+                            </li>
+                            : ""
+                        }
 
-                        </li>
+
                     </ul>
                 </nav>
             </div>

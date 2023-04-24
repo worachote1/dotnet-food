@@ -5,8 +5,11 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: false,
+  },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
