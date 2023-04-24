@@ -10,7 +10,7 @@ namespace BasicASPTutorial.Models
         public Boolean isDelivering { get; set; }
         public string address { get; set; }
         public string phoneNum { get; set; }
-        // public State state { get; set; }
+        public string state { get; set; }
 
     }
 }

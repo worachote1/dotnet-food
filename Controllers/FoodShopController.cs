@@ -49,6 +49,18 @@ namespace dotnet_foodRelease.Controllers
             return Ok(foodShop);
         }
 
+        // prn get food shop by name
+        [HttpGet("{foodShopName}")]
+        public async Task<ActionResult<FoodShop>> Get(string foodShopName)
+        {
+            var foodShop = await _context.foodShop.SingleOrDefaultAsync(obj => obj.Name == foodShopName);
+            if (foodShop == null)
+            {
+                return BadRequest("FoodShop Not Found");
+            }
+            return Ok(foodShop);
+        }      
+
         [HttpPut("{id}")]
         public async Task<ActionResult<FoodShop>> UpdateRating(int id,int rating)
         {

@@ -26,7 +26,7 @@ const NavBar = () => {
     const check_IsUserLogIn = () => {
         return (sessionStorage.getItem('current_user') !== null) ? true : false
     }
-
+ 
    
     return (
 
