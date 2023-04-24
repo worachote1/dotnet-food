@@ -68,7 +68,7 @@ export default function OrderWaitAcept() {
           <div class="flex flex-col md:flex-row px-10 py-4 bg-teal-200 items-center">
             <img src={item.imgPath} alt="Product image" class="w-72 h-44 object-cover rounded-lg" />
             <div class='flex justify-center md:justify-start flex-1 w-64 items-center px-10 text-xl md:text-3xl'> {item.itemName} <span className='text-xl font-bold md:text-3xl ml-3'>x</span><span className='text-xl font-bold md:text-3xl ml-3'>{item.quantity}</span></div>
-            <div class='flex justify-center md:justify-end flex-1 w-32 items-center  mx-10 text-xl md:text-3xl'>{item.quantity * item.itemPrice} Baht</div>
+            <div class='flex justify-center md:justify-end flex-1 w-32 items-center  mx-10 text-xl md:text-3xl'> {item.quantity * item.itemPrice} Baht</div>
           </div>
         <div className='p-4'></div>
       </div>
@@ -96,6 +96,7 @@ export default function OrderWaitAcept() {
           </div>
           <h1 className='text-3xl font-bold mx-auto text-white p-4 text-center'>Order Status : Waiting for rider accept a order</h1>
           <h4 className='text-2xl text-white mx-auto p-2 text-center'>Waiting for a moment...</h4>
+          <h4 className='text-2xl text-white mx-auto p-2 text-center'></h4>
         </div>
 
         {/* Order Information */}

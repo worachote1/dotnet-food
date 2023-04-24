@@ -10,6 +10,7 @@ export default function OrderWaitRider() {
       "id": 1,
       "riderName": "รับส่ง ปลอดภัย",
       "riderTel": "08x-xxx-xxxx",
+      "riderAddr":"โรงพระเทพ",
       "imgPath": 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
     }
   ]
@@ -27,6 +28,7 @@ export default function OrderWaitRider() {
             <div class='flex flex-col justify-center items-center'>
               <h2 className='text-2xl text-black p-2 px-10 text-xl md:text-3xl'>ชื่อผู้ส่ง : {item.riderName}</h2>
               <h2 className='text-2xl text-black p-2 px-10 text-xl md:text-3xl'>เบอร์โทรศัพท์ : {item.riderTel}</h2>
+              <h2 className='text-2xl text-black p-2 px-10 text-xl md:text-3xl'>ที่อยู่ : {item.riderAddr}</h2>
             </div>
           </div>
       </div>

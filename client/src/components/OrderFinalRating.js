@@ -58,7 +58,7 @@ export default function OrderFinalRating() {
         <div className='mx-auto bg-scale-300 h-screen'>
           {test_riderDetail_div}
           <div className='p-8'></div>
-          <div class="flex flex-row px-4 py-2 bg-teal-200">
+          <div class="flex justify-center flex-row px-4 py-2 bg-teal-200">
             <h4 className='text-2xl font-bold text-black'>Please rating food quality!</h4>
           </div>
           <div className='p-4'></div>
