@@ -93,32 +93,6 @@ export default function Shop() {
 
   }
 
-
-
-  // test_foodShopItem_data.map((item) => {
-  //   test_item_div.push(
-  //     <div className="card w-96 h-96 shadow-xl mr-4 mt-4" key={`${item.itemName}-${item.id}`} >
-  //       <figure >
-  //         <img src={item.imgPath} className='object-cover' />
-  //       </figure>
-  //       <div className="card-body">
-  //         <div className='name-menu-controller flex justify-between items-center'>
-  //           <h2 className="card-title">{item.itemName} </h2>
-  //           <h2 className="card-title">{item.itemPrice}  Bath</h2>
-  //         </div>
-  //         <div className="card-actions justify-end">
-  //           <button className="btn btn-success"
-  //             onClick={() => hanldeClickAdd_ForBasket(item.id, item.itemName, item.itemPrice, item.type, item.imgPath)}
-  //           >
-  //             Add menu
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </div>
-
-  //   )
-  // })
-
   const getItemsFromSingleShop = (foodShopName) => {
     //then get only item that  fromWhichFoodShop === foodShopName
     fetch(`http://localhost:5000/api/shopitem/byfoodshopname/${foodShopName}`)
