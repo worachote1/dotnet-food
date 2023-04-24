@@ -8,8 +8,8 @@ import Swal from 'sweetalert2'
 export default function Shop() {
 
   const { foodShopName } = useParams();
-  const [itemFromFoodShop, setItemFromFoodShop] = useState();
-
+  const [itemFromFoodShop, setItemFromFoodShop] = useState([]);
+  const [all_shopItem_div,setAllShopItemDiv] = useState([]);
 
   // for sweet alert
   const alert_found_NotSameFoodShopInBasket = (id, itemName, itemPrice, type, imgPath) => {
@@ -93,53 +93,54 @@ export default function Shop() {
 
   }
 
-  let test_foodShopItem_data = [
-    {
-      "id": 1,
-      "itemName": "ข้าวผัด",
-      "itemPrice": 42,
-      "type": "อาหารคาร",
-      "imgPath": 'http://food.mthai.com/app/uploads/2015/03/1324956564.jpg'
-    }
-    ,
-    {
-      "id": 2,
-      "itemName": "บัวลอย",
-      "itemPrice": 55,
-      "type": "อาหารหวาน",
-      "imgPath": 'http://f.ptcdn.info/557/035/000/1442537793-IMG34862-o.jpg'
-    },
-    {
-      "id": 3,
-      "itemName": "ไข่เจียว",
-      "itemPrice": 35,
-      "type": "อาหารทอด",
-      "imgPath": 'https://img.kapook.com/u/2016/wanwanat/0_edit/385698979x.jpg'
-    }
-  ]
-  let test_item_div = []
 
-  test_foodShopItem_data.map((item) => {
-    test_item_div.push(
-      // bg-base-100
-      // <div className="card w-96 bg-red-100 shadow-xl mr-4 mt-4 h-25">
-      //   <figure className='h-1/2  bg-blue-400'>
-      //     <img src={item.imgPath} className='object-cover h-full w-full' alt="Shoes" />
-      //   </figure>
-      //   <div className="card-body">
-      //     <div className='name-menu-controller flex justify-between items-center'>
-      //       <h2 className="card-title">{item.itemName} </h2>
-      //       <h2 className="card-title">{item.itemPrice}  Bath</h2>
-      //     </div> 
-      //     <div className="card-actions justify-end">
-      //       <button className="btn btn-success"
-      //         onClick={() => hanldeClickAdd_ForBasket(item.id,item.itemName,item.itemPrice,item.type,item.imgPath)}
-      //       >Add menu</button>
-      //     </div>
-      //   </div>
-      // </div>
 
-      <div className="card w-96 h-96 shadow-xl mr-4 mt-4" key={`${item.itemName}-${item.id}`} >
+  // test_foodShopItem_data.map((item) => {
+  //   test_item_div.push(
+  //     <div className="card w-96 h-96 shadow-xl mr-4 mt-4" key={`${item.itemName}-${item.id}`} >
+  //       <figure >
+  //         <img src={item.imgPath} className='object-cover' />
+  //       </figure>
+  //       <div className="card-body">
+  //         <div className='name-menu-controller flex justify-between items-center'>
+  //           <h2 className="card-title">{item.itemName} </h2>
+  //           <h2 className="card-title">{item.itemPrice}  Bath</h2>
+  //         </div>
+  //         <div className="card-actions justify-end">
+  //           <button className="btn btn-success"
+  //             onClick={() => hanldeClickAdd_ForBasket(item.id, item.itemName, item.itemPrice, item.type, item.imgPath)}
+  //           >
+  //             Add menu
+  //           </button>
+  //         </div>
+  //       </div>
+  //     </div>
+
+  //   )
+  // })
+
+  const getItemsFromSingleShop = (foodShopName) => {
+    //then get only item that  fromWhichFoodShop === foodShopName
+    fetch(`http://localhost:5000/api/shopitem/byfoodshopname/${foodShopName}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      setItemFromFoodShop(data)
+    })
+    .catch((err) => {
+      console.log("get menu failed !")
+    })
+    
+  }
+
+  useEffect(() => {
+    getItemsFromSingleShop(foodShopName)
+  }, [])
+
+  useEffect(()=>{
+    const divElements = itemFromFoodShop.map((item) => (
+      <div className="card w-96 h-96 shadow-xl mr-4 mt-4" key={`menu-${item.itemName}`} >
         <figure >
           <img src={item.imgPath} className='object-cover' />
         </figure>
@@ -157,20 +158,10 @@ export default function Shop() {
           </div>
         </div>
       </div>
+    ))
 
-    )
-  })
-
-  const getItemsFromSingleShop = (foodShopName) => {
-    //then get only item that  fromWhichFoodShop === foodShopName
-
-  }
-
-  useEffect(() => {
-    getItemsFromSingleShop(foodShopName)
-  }, [])
-
-
+    setAllShopItemDiv(divElements)
+  },[itemFromFoodShop])
 
   return (
     <div>
@@ -178,8 +169,8 @@ export default function Shop() {
       <div className='foodShop-section-controller min-h-screen mb-5'>
         this is food shop id : {foodShopName}
         <div className='foodShop-section flex flex-wrap justify-center '>
-          {test_item_div}
-
+          {all_shopItem_div}
+        
         </div>
       </div>
       <Footer />

@@ -37,7 +37,7 @@ export default function Main() {
       <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4" key={`foodShop-${item.id}`}>
         <figure><img src={item.imgPath} className='object-cover'/></figure>
         <div className="card-body">
-          <h2 className="card-title"> {item.name} + จํานวนดาว</h2>
+          <h2 className="card-title"> {item.name} + ดาว</h2>
           <p> {item.address} </p>
           <div className="card-actions justify-end">
             {(user !== "" && user !== null)

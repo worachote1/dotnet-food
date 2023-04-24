@@ -50,6 +50,18 @@ namespace BasicASPTutorial.Controllers
             return Ok(foodItems);
         }
 
+        // prn get by foodshop name
+        [HttpGet("byFoodShopName/{foodShopName}")]
+        public async Task<ActionResult<shopItems>> Get(string foodShopName)
+        {
+            var foodItems = await _context.shopItems.Where(obj => obj.fromWhichFoodShop == foodShopName).ToListAsync();
+            if (foodItems == null)
+            {
+                return BadRequest("Food ID Not Found");
+            }
+            return Ok(foodItems);
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<shopItems>> addCount(int id, shopItems shopItems)
         {

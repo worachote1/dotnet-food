@@ -19,7 +19,14 @@ builder.Services.AddDbContext<InvoiceItemsDataContext>(
 )
     );
 builder.Services.AddDbContext<FoodShopContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("FoodShopConnection")
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("FoodShopConnection"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 10,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        }
 )
     );
 builder.Services.AddDbContext<InvoiceContext>(
