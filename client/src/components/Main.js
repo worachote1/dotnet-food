@@ -112,13 +112,13 @@ export default function Main() {
       // create an array of star elements
       const stars = []
       for (let i = 0; i < fullStars; i++) {
-        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400" checked />)
+        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400" checked disabled/>)
       }
       if (halfStars === 1) {
-        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400 half" checked />)
+        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400 half" checked disabled/>)
       }
       for (let i = 0; i < emptyStars; i++) {
-        // stars.push(<input type="radio" name="rating" className="mask mask-star-2" />)
+        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-200" disabled/>)
       }
     
       return (
@@ -220,7 +220,7 @@ export default function Main() {
               <div className="card-body">
                 <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[0]?.itemName} </h2>
                 <div className='flex'>
-                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[0]?.fromWhichFoodShop}</h2>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" , marginRight : '1rem' }}>{topMenu[0]?.fromWhichFoodShop}</h2>
                   {DisplayStarTopMenu(topMenu[0])}
                 </div>
                 <div className="card-actions justify-end">
@@ -249,7 +249,7 @@ export default function Main() {
               <div className="card-body">
               <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[1]?.itemName} </h2>
               <div className='flex'>
-                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[1]?.fromWhichFoodShop}</h2>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" , marginRight : '1rem'}}>{topMenu[1]?.fromWhichFoodShop}</h2>
                   {DisplayStarTopMenu(topMenu[1])}
                 </div>
                 <div className="card-actions justify-end">
@@ -279,7 +279,7 @@ export default function Main() {
               <div className="card-body">
               <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[2]?.itemName} </h2>
               <div className='flex'>
-                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[2]?.fromWhichFoodShop}</h2>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" , marginRight : '1rem' }}>{topMenu[2]?.fromWhichFoodShop}</h2>
                   {DisplayStarTopMenu(topMenu[2])}
                 </div>
                 <div className="card-actions justify-end">

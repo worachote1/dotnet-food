@@ -10,6 +10,12 @@ namespace BasicASPTutorial.Models
         public string deliveryManName { get; set; }
         public string customerName { get; set; }
         public string orderState { get; set; }
-        public ICollection<InvoiceItem> itemsList { get; set; }
+
+        public string date { get; set; }
+
+        // public ICollection<InvoiceItem> itemsList { get; set; }
+        public string menuInBasket {get; set;}
+
+        public string foodshopInBasket {get; set;}
     }
 }

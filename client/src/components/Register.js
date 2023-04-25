@@ -71,7 +71,7 @@ export default function Register() {
           password: password,
           isDelivering: false,
           address: address,
-          phoneNum: phone,
+          phoneNum: phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
           state: ""
         }),
         headers: {
