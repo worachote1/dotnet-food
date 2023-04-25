@@ -97,197 +97,36 @@ export default function Main() {
   }
 
   const DisplayStarFoodShop = (totalRating, totalVote, isFoodShop) => {
-    const style_of_stars = (isFoodShop) ? "rating rating-md rating-half" : "rating rating-sm rating-half"
-    const star = totalRating / totalVote
-    if (star === 5) {
+      const style_of_stars = (isFoodShop) ? "rating rating-md" : "rating rating-sm"
+      const star = totalRating / totalVote
+    
+      // calculate the number of full stars
+      const fullStars = Math.floor(star)
+      
+      // calculate the number of half stars
+      const halfStars = Math.round((star - fullStars) * 2)
+    
+      // calculate the number of empty stars
+      const emptyStars = 5 - fullStars - halfStars
+      
+      // create an array of star elements
+      const stars = []
+      for (let i = 0; i < fullStars; i++) {
+        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400" checked />)
+      }
+      if (halfStars === 1) {
+        stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400 half" checked />)
+      }
+      for (let i = 0; i < emptyStars; i++) {
+        // stars.push(<input type="radio" name="rating" className="mask mask-star-2" />)
+      }
+    
       return (
         <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly checked />
+          {stars}
         </div>
       )
     }
-    else if (star >= 4.5) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 4) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 3.5) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 3) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 2.5) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 2) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 1.5) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 1) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else if (star >= 0.5) {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-    else {
-      return (
-        <div className={style_of_stars}>
-          <input type="radio" name="rating-10" className="rating-hidden" />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly checked />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-1" readOnly />
-          <input type="radio" name="rating-10" className="bg-orange-400 mask mask-star-2 mask-half-2" readOnly />
-        </div>
-      )
-    }
-  }
-
   //fetch food shop api
   const getFoodShop = () => {
     fetch(`http://localhost:5000/api/foodShop`)
@@ -310,12 +149,12 @@ export default function Main() {
 
   useEffect(() => {
     const divElements = foodShop.map((item) => (
-      <div className="card w-96 h-96 bg-green-100 shadow-xl mr-4 mt-4" key={`foodShop-${item.id}`}>
+      <div className="card w-96 h-96 bg-green-100 shadow-lg mr-4 mt-4" key={`foodShop-${item.id}`}>
         <figure className=''><img src={item.imgPath} className='object-cover' /></figure>
         <div className="card-body">
           <div className='flex justify-between'>
             <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.name}</h2>
-            {DisplayStarFoodShop(item.totalRating, item.totalVote, true)}
+            {DisplayStarFoodShop(item.totalRating,item.totalVote, true)}
           </div>
           <p style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.address} </p>
           <div className="card-actions justify-end">
@@ -367,10 +206,11 @@ export default function Main() {
           : <span className='text-orange-500'>Not log in</span>}
 
       </div>
-
-      <div className='top-rated-menu-section p-4' style={{ background: '#F5B041' }}>
+      
+      {/*  */}
+      <div className='top-rated-menu-section p-4' >
         <p className='text-center text-4xl text-red-500' style={{ fontFamily: "Anton, sans-serif" }}>TOP MENU</p>
-        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center mb-2">
+        <div className="carousel w-full sm:flex sm:flex-wrap sm:justify-center mb-2 p-4">
 
           <div id="slide1" className="carousel-item relative ">
             {/* <img src="https://www.honestfoodtalks.com/wp-content/uploads/2020/11/Seafood-platter.jpg" className="w-full" /> */}

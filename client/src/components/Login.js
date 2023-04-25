@@ -42,23 +42,23 @@ export default function Login() {
   return (
     <div>
       <NavBar />
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="bg-white p-8 rounded shadow-xl w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4">Log In</h2>
           <form className="space-y-4" onSubmit={handleLogIn}>
             <div>
-              <label className="block mb-1 font-bold text-gray-500">Username <HiOutlineUser className="inline-block mr-2 mb-1" /></label>
+              <label className="block mb-1 font-bold text-gray-500"><HiOutlineUser className="inline-block mr-2 mb-1" />Username </label>
               <input type="username" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Enter your username"
                 onChange={(e)=>setUserName(e.target.value)}
               />
             </div>
             <div>
-              <label className="block mb-1 font-bold text-gray-500">Password <HiOutlineLockClosed className="inline-block mr-2 mb-1" /></label>
+              <label className="block mb-1 font-bold text-gray-500"><HiOutlineLockClosed className="inline-block mr-2 mb-1" />Password</label>
               <input type="password" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-300" placeholder="Enter your password"
                 onChange={(e)=>setPassword(e.target.value)} 
               />
             </div>
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+            <button type="submit" className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300"
               
             >
               Log In

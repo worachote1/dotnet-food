@@ -59,8 +59,8 @@ namespace dotnet_foodRelease.Controllers
             cur_foodShop.Name = foodShop.Name;
             cur_foodShop.imgPath = foodShop.imgPath;
             cur_foodShop.address = foodShop.address;
-            cur_foodShop.totalRating = cur_foodShop.totalRating;
-            cur_foodShop.totalVote = cur_foodShop.totalVote;
+            cur_foodShop.totalRating = foodShop.totalRating;
+            cur_foodShop.totalVote = foodShop.totalVote;
 
             _context.foodShop.Update(cur_foodShop);
 
