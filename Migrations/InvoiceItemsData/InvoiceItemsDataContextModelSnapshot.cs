@@ -32,6 +32,10 @@ namespace dotnet_food.Migrations.InvoiceItemsData
                     b.Property<int>("amt")
                         .HasColumnType("int");
 
+                    b.Property<string>("imgPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("itemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -41,6 +45,10 @@ namespace dotnet_food.Migrations.InvoiceItemsData
 
                     b.Property<double>("price")
                         .HasColumnType("float");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
@@ -58,6 +66,10 @@ namespace dotnet_food.Migrations.InvoiceItemsData
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderId"));
 
                     b.Property<string>("customerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

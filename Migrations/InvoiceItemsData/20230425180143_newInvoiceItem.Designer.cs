@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnet_foodRelease.Data;
 
 #nullable disable
 
-namespace dotnet_food.Migrations.Order
+namespace dotnet_food.Migrations.InvoiceItemsData
 {
-    [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(InvoiceItemsDataContext))]
+    [Migration("20230425180143_newInvoiceItem")]
+    partial class newInvoiceItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace dotnet_food.Migrations.Order
 
                     b.HasIndex("orderId");
 
-                    b.ToTable("InvoiceItem");
+                    b.ToTable("invoiceItems");
                 });
 
             modelBuilder.Entity("BasicASPTutorial.Models.Order", b =>
@@ -83,7 +86,7 @@ namespace dotnet_food.Migrations.Order
 
                     b.HasKey("orderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("BasicASPTutorial.Models.InvoiceItem", b =>
