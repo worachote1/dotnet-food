@@ -50,7 +50,7 @@ export default function Order() {
           <p>Food Shop : <span className='font-bold' style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.foodshopInBasket} </span></p>
           <p>Date : <span className='font-bold'>{item.date}</span></p>
           <div className="card-actions justify-end">
-            <Link
+            <Link 
               to={
                 `/order-list-info/${item.orderId}`
               }>
