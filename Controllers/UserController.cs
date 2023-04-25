@@ -110,12 +110,14 @@ namespace BasicASPTutorial.Controllers
 
             if (user == null)
             {
+                Console.WriteLine("Username not found in database!");
                 return BadRequest(new { loginStatus = "Username not found in database!" });
             }
 
             if (user.Password != password)
             {
-                return BadRequest(new { loginStatus = "Password wrong!" });
+                Console.WriteLine("The password is incorrect. Please try again!");
+                return BadRequest(new { loginStatus = "The password is incorrect. Please try again!" });
             }
 
             return Ok(new { loginStatus = "Login Success!" });

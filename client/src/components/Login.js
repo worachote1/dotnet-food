@@ -3,6 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { HiOutlineUser, HiOutlineLockClosed } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export default function Login() {
   
@@ -10,17 +11,33 @@ export default function Login() {
   const [password,setPassword] = useState("");
   const navigate = useNavigate();
   const handleLogIn = (event) => {
-      // if login success redirecct to main page
-      // and create current user login in session
       event.preventDefault();
       console.log(`user -> ${userName} , password -> ${password}`)
-      
-      // save username to session storage
-      sessionStorage.setItem('current_user', userName);
-      navigate("/")
+      // if login success redirecct to main page
+      // and create current user login in session
+      fetch(`http://localhost:5000/api/user/login/?username=${userName}&password=${password}`)
+      .then((res) => {
+        if(res.ok){
+          return res.json();
+        }
+        else {
+          return res.json().then(data => { throw Error(`${data.loginStatus}`) });
+        }
+      })
+      .then((data) => {
+        console.log(data.loginStatus);
+        sessionStorage.setItem('current_user', userName);
+        navigate("/");
+      })
+      .catch((err) => {
+        // console.log(err)
+        Swal.fire({
+          icon: 'error',
+          title: 'Warning...',
+          text: `${err}`
+        })
+      })
   }
-
-
 
   return (
     <div>

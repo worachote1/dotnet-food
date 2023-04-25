@@ -92,12 +92,12 @@ export default function Main() {
   }
 
   const DisplayStarTopMenu = (topMenuItem) => {
-    const obj_foodShopOfMenu = foodShop.find(obj => obj.name === topMenuItem.fromWhichFoodShop)
-    return DisplayStarFoodShop(obj_foodShopOfMenu.totalRating, obj_foodShopOfMenu.totalVote, false)
+    const obj_foodShopOfMenu = foodShop.find(obj => obj.name === topMenuItem?.fromWhichFoodShop)
+    return DisplayStarFoodShop(obj_foodShopOfMenu?.totalRating, obj_foodShopOfMenu?.totalVote, false)
   }
 
   const DisplayStarFoodShop = (totalRating, totalVote, isFoodShop) => {
-    const style_of_stars = (isFoodShop) ? "rating rating-md rating-half" : "rating rating-lg rating-half"
+    const style_of_stars = (isFoodShop) ? "rating rating-md rating-half" : "rating rating-sm rating-half"
     const star = totalRating / totalVote
     if (star === 5) {
       return (
@@ -378,8 +378,11 @@ export default function Main() {
             <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4 ">
               <figure><img src={topMenu[0]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">{topMenu[0]?.itemName} </h2>
-                <p>{topMenu[0]?.fromWhichFoodShop} + จํานวนดาว</p>
+                <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[0]?.itemName} </h2>
+                <div className='flex'>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[0]?.fromWhichFoodShop}</h2>
+                  {DisplayStarTopMenu(topMenu[0])}
+                </div>
                 <div className="card-actions justify-end">
                   {(user !== null)
                     ?
@@ -404,8 +407,11 @@ export default function Main() {
             <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4">
               <figure><img src={topMenu[1]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">{topMenu[1]?.itemName}</h2>
-                <p>{topMenu[1]?.fromWhichFoodShop} + จํานวนดาว</p>
+              <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[1]?.itemName} </h2>
+              <div className='flex'>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[1]?.fromWhichFoodShop}</h2>
+                  {DisplayStarTopMenu(topMenu[1])}
+                </div>
                 <div className="card-actions justify-end">
                 {(user !== null)
                     ?
@@ -431,8 +437,11 @@ export default function Main() {
             <div className="card w-96 h-96 bg-base-100 shadow-xl mr-4 mt-4">
               <figure><img src={topMenu[2]?.imgPath} alt="Shoes" /></figure>
               <div className="card-body">
-                <h2 className="card-title">{topMenu[2]?.itemName}</h2>
-                <p>{topMenu[2]?.fromWhichFoodShop} + จํานวนดาว</p>
+              <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[2]?.itemName} </h2>
+              <div className='flex'>
+                  <h2 style={{ fontFamily: "'Noto Serif Thai', serif" }}>{topMenu[2]?.fromWhichFoodShop}</h2>
+                  {DisplayStarTopMenu(topMenu[2])}
+                </div>
                 <div className="card-actions justify-end">
                 {(user !== null)
                     ?
