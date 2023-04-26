@@ -64,7 +64,7 @@ namespace BasicASPTutorial.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        // prn put -> update user by username
+        //update user by username
         [HttpPut("{username}")]
         public async Task<ActionResult<List<User>>> UpdateUser(string username, User user)
         {
@@ -84,54 +84,6 @@ namespace BasicASPTutorial.Controllers
 
             return Ok(await _context.Users.ToListAsync());
         }
-
-        [HttpPut("delivery/{username}")]
-        public async Task<ActionResult<List<User>>> setDelivery(string username, bool isDelivering)
-        {
-            var user = await _context.Users.FindAsync(username);
-            if (user == null)
-            {
-                return BadRequest("User Not Found");
-            }
-
-
-            user.isDelivering = isDelivering;
-            await _context.SaveChangesAsync();
-
-            return Ok(await _context.Users.ToListAsync());
-        }
-
-        [HttpPut("state/{username}")]
-        public async Task<ActionResult<User>> setState(string username, string state)
-        {
-            var user = await _context.Users.FindAsync(username);
-            if (user == null)
-            {
-                return BadRequest("User Not Found");
-            }
-
-            user.state = state;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(await _context.Users.ToListAsync());
-        }
-
-        // [HttpDelete("{username}")]
-        // public async Task<ActionResult<User>> Delete(string username)
-        // {
-        //     var dbuser = await _context.Users.SingleOrDefaultAsync(obj => obj.UserName == username);
-        //     if (dbuser == null)
-        //     {
-        //         return BadRequest("User Not Found");
-        //     }
-
-        //     _context.Users.Remove(dbuser);
-        //     await _context.SaveChangesAsync();
-
-        //     return Ok(await _context.Users.ToListAsync());
-
-        // }
 
         //Deleted by ID by AJ-Fullstack
 
@@ -160,12 +112,14 @@ namespace BasicASPTutorial.Controllers
 
             if (user == null)
             {
+                Console.WriteLine("Username not found in database!");
                 return BadRequest(new { loginStatus = "Username not found in database!" });
             }
 
             if (user.Password != password)
             {
-                return BadRequest(new { loginStatus = "Password wrong!" });
+                Console.WriteLine("The password is incorrect. Please try again!");
+                return BadRequest(new { loginStatus = "The password is incorrect. Please try again!" });
             }
 
             return Ok(new { loginStatus = "Login Success!" });
