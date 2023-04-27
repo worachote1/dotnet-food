@@ -144,7 +144,7 @@ export default function OrderRider() {
     .then((res)=>{
 
       return res.json()
-    })
+    }) 
     .then((data)=>{
       console.log("get user success !")
       setTestData(data)
