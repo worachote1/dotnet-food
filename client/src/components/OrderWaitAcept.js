@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import { MagnifyingGlass } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 export default function OrderWaitAcept() {
@@ -101,7 +102,6 @@ export default function OrderWaitAcept() {
 
         {/* Order Information */}
         <div className='p-8'></div>
-          {test_foodDetail_div}
           <div className='flex flex-col justify-center md:justify-end items-end px-10 bg-teal-400 p-10'>
           <span className="text-xl font-bold text-gray-600">Subtotal : </span>
             <span className="text-3xl font-bold">{subTotal} Baht</span>
