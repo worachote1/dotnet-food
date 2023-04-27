@@ -9,7 +9,6 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function OrderListInfo() {
 
   //คิดว่าจะใช้วิธีถ้ากดในnavbar แล้วใส่ current status ว่า ตอนนี้statusอะไร
-  const [status,setStatus] = useState("")
   const [statusComponent,setStatusComponent] = useState(null)
 
   const [status,setStatus] = useState("waiting_accept")

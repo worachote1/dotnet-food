@@ -109,7 +109,7 @@ export default function Main() {
       // calculate the number of empty stars
       const emptyStars = 5 - fullStars - halfStars
       
-      // create an array of star elements
+      // create an array of star el    ements
       const stars = []
       for (let i = 0; i < fullStars; i++) {
         stars.push(<input type="radio" name="rating" className="mask mask-star-2 bg-orange-400" checked disabled/>)
