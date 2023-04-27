@@ -29,62 +29,45 @@ namespace dotnet_foodRelease.Controllers
             _context = context;
         }
 
-
         [HttpGet]
         public async Task<ActionResult<List<FoodShop>>> Get()
         {
-
-
             return Ok(await _context.foodShop.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<FoodShop>> Get(int id)
+        // prn get food shop by name
+        [HttpGet("{foodShopName}")]
+        public async Task<ActionResult<FoodShop>> Get(string foodShopName)
         {
-            var foodShop = await _context.foodShop.FindAsync(id);
+            var foodShop = await _context.foodShop.SingleOrDefaultAsync(obj => obj.Name == foodShopName);
             if (foodShop == null)
             {
-                return BadRequest("foodShop ID Not Found");
+                return BadRequest("FoodShop Not Found");
             }
             return Ok(foodShop);
-        }
+        }      
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<FoodShop>> UpdateRating(int id,int rating)
+        public async Task<ActionResult<FoodShop>> UpdateRating(int id,FoodShop foodShop)
         {
-            var foodShop = await _context.foodShop.FindAsync(id);
+            var cur_foodShop = await _context.foodShop.FindAsync(id);
             if (foodShop == null)
             {
                 return BadRequest("foodShop ID Not Found");
             }
 
-            foodShop.totalRating = rating;
+            cur_foodShop.Name = foodShop.Name;
+            cur_foodShop.imgPath = foodShop.imgPath;
+            cur_foodShop.address = foodShop.address;
+            cur_foodShop.totalRating = foodShop.totalRating;
+            cur_foodShop.totalVote = foodShop.totalVote;
 
-            _context.foodShop.Update(foodShop);
+            _context.foodShop.Update(cur_foodShop);
 
             await _context.SaveChangesAsync();
 
-            return Ok(foodShop);
+            return Ok(cur_foodShop);
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<FoodShop>> UpdateVote(int id, int vote)
-        {
-            var foodShop = await _context.foodShop.FindAsync(id);
-            if (foodShop == null)
-            {
-                return BadRequest("foodShop ID Not Found");
-            }
-
-            foodShop.totalVote = vote;
-
-            _context.foodShop.Update(foodShop);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(foodShop);
-        }
-
 
         [HttpPost]
         public async Task<ActionResult<List<FoodShop>>> AddFoods(FoodShop foodShop)

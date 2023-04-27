@@ -19,27 +19,27 @@ namespace dotnet_foodRelease.Controllers
                 deliveryManName = "XXX",
                 customerName = "xxxxY",
                 orderState = "Sample",
-                itemsList = new List<InvoiceItem>
-                    {
-                        new InvoiceItem
-                        {
-                            itemName = "Item 1",
-                            price = 10.0,
-                            amt = 2
-                        },
-                        new InvoiceItem
-                        {
-                            itemName = "Item 2",
-                            price = 20.0,
-                            amt = 1
-                        },
-                        new InvoiceItem
-                        {
-                            itemName = "Item 3",
-                            price = 5.0,
-                            amt = 3
-                        }
-                    }
+                // itemsList = new List<InvoiceItem>
+                //     {
+                //         new InvoiceItem
+                //         {
+                //             itemName = "Item 1",
+                //             price = 10.0,
+                //             amt = 2
+                //         },
+                //         new InvoiceItem
+                //         {
+                //             itemName = "Item 2",
+                //             price = 20.0,
+                //             amt = 1
+                //         },
+                //         new InvoiceItem
+                //         {
+                //             itemName = "Item 3",
+                //             price = 5.0,
+                //             amt = 3
+                //         }
+                //     }
             }
         };
 
@@ -59,13 +59,15 @@ namespace dotnet_foodRelease.Controllers
             return Ok(await _context.Orders.ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> Get(int id)
+        //prn : get orders rom customerName
+        [HttpGet]
+        [Route("by_customer")]
+        public async Task<ActionResult<Order>> getByCustomerName(string customerName)
         {
-            var orders = await _context.Orders.FindAsync(id);
+            var orders = await _context.Orders.Where(obj => obj.customerName == customerName).ToListAsync() ;
             if (orders == null)
             {
-                return BadRequest("Orders ID Not Found");
+                return BadRequest("Not Found orders belong to user");
             }
             return Ok(orders);
         }

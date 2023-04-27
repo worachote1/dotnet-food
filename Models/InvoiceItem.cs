@@ -11,8 +11,12 @@ namespace BasicASPTutorial.Models
         public double price { get; set; } //Per items
         public int amt { get; set; }
 
-        [ForeignKey("orderId")]
-        public Order Order { get; set; }
-        
+        public string imgPath { get; set; }
+
+        public string type { get; set; }
+
+        // [ForeignKey("orderId")]
+        // public Order Order { get; set; }
+    
     }
 }
