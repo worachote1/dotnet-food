@@ -59,6 +59,18 @@ namespace dotnet_foodRelease.Controllers
             return Ok(await _context.Orders.ToListAsync());
         }
 
+        // prn : get order by orderId
+        [HttpGet("{orderId}")]
+        public async Task<ActionResult<Order>> Get(int orderId)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order == null)
+            {
+                return BadRequest("Order ID Not Found");
+            }
+            return Ok(order);
+        }       
+
         //prn : get orders rom customerName
         [HttpGet]
         [Route("by_customer")]
