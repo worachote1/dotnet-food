@@ -1,6 +1,4 @@
 import React from 'react'
-import NavBar from './NavBar'
-import Footer from './Footer'
 import { useState, useEffect } from 'react'
 import OrderFinalRating from './OrderFinalRating'
 import OrderWaitAcept from './OrderWaitAcept'
@@ -10,33 +8,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderListInfo() {
 
-  const { username } = useParams();
-  const [ordersFromUser, setOrderFromUser] = useState([])
-
-  const getOrderFromSingleUser = () => {
-    fetch(`http://localhost:5000/api/orders/by_customer?customerName=${username}`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        setOrderFromUser(data.slice().reverse())
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  useEffect(() => {
-    getOrderFromSingleUser()
-  }, [])
-
-  let default_component = <div>
-        <NavBar />
-        <div>
-            OrderListInfo
-        </div>
-        <Footer />
-    </div>
+  //คิดว่าจะใช้วิธีถ้ากดในnavbar แล้วใส่ current status ว่า ตอนนี้statusอะไร
+  const [status,setStatus] = useState("")
   const [statusComponent,setStatusComponent] = useState(null)
 
   const [status,setStatus] = useState("waiting_accept")
@@ -52,8 +25,7 @@ export default function OrderListInfo() {
         setStatusComponent(<OrderFinalRating />)
     }
     else{
-    setStatusComponent(default_component)
-    }
+}
 
 },[])
 

@@ -19,7 +19,8 @@ namespace BasicASPTutorial.Controllers
                        address = "KMITL",
                        phoneNum = "081-0000000"
             },
-            new User {
+            new User { 
+
                        id = 2,
                        UserName = "admin",
                        Password = "123456admin",
