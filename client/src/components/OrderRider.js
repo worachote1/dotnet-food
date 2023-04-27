@@ -5,9 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderRider() {
-
   
-
   const [subtotal, setSubtotal] = useState([])
   const [deliveryFee, setDeliveryFee] = useState([])
   const [coupon, setCoupon] = useState([])

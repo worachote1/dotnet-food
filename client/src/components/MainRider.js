@@ -29,6 +29,7 @@ export default function MainRider() {
           itemName: "Noodles",
           itemPrice: 50.0,
           quantity: 2,
+          shopName: "Noodles store",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
 
         },
@@ -37,6 +38,7 @@ export default function MainRider() {
           itemName: "Noodles2",
           itemPrice: 75.0,
           quantity: 1,
+          shopName: "Noodles store",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
         }
       ]
@@ -51,6 +53,7 @@ export default function MainRider() {
           itemName: "Pizza",
           itemPrice: 420.0,
           quantity: 1,
+          shopName: "Pizza store",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
         }
       ]
@@ -65,18 +68,189 @@ export default function MainRider() {
           itemName: "ข้าวมันไก่ทอด",
           itemPrice: 60.0,
           quantity: 1,
+          shopName: "ร้านข้าวมันไก",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
         }, {
           id: 2,
           itemName: "ข้าวผัด",
           itemPrice: 50.0,
           quantity: 2,
+          shopName: "ร้านอาหารตามสั่ง",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
         }, {
           id: 3,
           itemName: "ผัดหมี่",
           itemPrice: 55.0,
           quantity: 3,
+          shopName: "ร้านอาหารตามสั่ง",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 4,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 5,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 6,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 7,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 8,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 9,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+        }
+      ]
+    },{
+      orderId: 10,
+      orderState:"waiting_accept",
+      custumerName:"tester 1",
+      address:"ชั้น 1",
+      itemList:[
+        {
+          id: 1,
+          itemName: "Noodles",
+          itemPrice: 50.0,
+          quantity: 2,
+          shopName: "Noodles store",
+          imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
+
+        },
+        {
+          id: 2,
+          itemName: "Noodles2",
+          itemPrice: 75.0,
+          quantity: 1,
+          shopName: "Noodles store",
           imgPath: "https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbGlmZW9mcGl4MDAwMDEtaW1hZ2VfMS1renhsdXd3ci5wbmc.png"
         }
       ]
@@ -110,12 +284,22 @@ export default function MainRider() {
             to={ `/main-rider/order-list-info/${item.orderId}`}
             class="group"
         >
-          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-            <img src="https://cdn4.vectorstock.com/i/1000x1000/08/28/shop-store-flat-icon-vector-14270828.jpg" alt="Food shop img" class="h-full w-full object-cover object-center group-hover:opacity-75"></img>
+          <div class="card w-96 bg-base-100 shadow-xl">
+            <figure><img src="https://cdn4.vectorstock.com/i/1000x1000/08/28/shop-store-flat-icon-vector-14270828.jpg" alt="Shoes" /></figure>
+            <div class="card-body">
+              <h2 class="card-title">Order {item.orderId}</h2>
+              <p>{item.custumerName}</p>
+              <div class="card-actions justify-end">
+                <button 
+                  onClick={() => hanldeClickOrder_list_info(item.orderId,item.custumerName,item.itemList,item.address)} 
+                  to={ `/main-rider/order-list-info/${item.orderId}`}
+                  class="btn btn-primary"
+                >
+                  View
+                </button>
+              </div>
+            </div>
           </div>
-          <h3 class="mt-4 text-base text-gray-700">
-            {item.orderId}. Name : {item.custumerName}
-          </h3>
         </Link>
       )
     }
@@ -150,7 +334,7 @@ export default function MainRider() {
         <NavBar />
         <div class="min-h-screen bg-gray-100 flex bg-white">
           <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
               {test_order_div}
             </div>
           </div>
