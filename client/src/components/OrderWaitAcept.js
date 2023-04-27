@@ -27,7 +27,7 @@ export default function OrderWaitAcept({ orderData }) {
       <div key={`menu-item-${item.itemName}`}>
         <div class="flex flex-col md:flex-row px-10 py-4 bg-teal-200 items-center">
           <img src={item.imgPath} alt="Product image" class="w-72 h-44 object-cover rounded-lg" />
-          <div class='flex justify-center mt-4 md:justify-start flex-1   items-center px-10 text-xl md:text-3xl md:mt-0 '
+          <div class='flex justify-center mt-4 md:justify-start flex-1 items-center px-10 text-xl md:text-3xl md:mt-0 '
             style={{ fontFamily: "'Noto Serif Thai', serif" }}
           >
             <p>
@@ -36,7 +36,7 @@ export default function OrderWaitAcept({ orderData }) {
             </p>
 
           </div>
-          <div class='flex justify-center md:justify-end flex-1 w-32 items-center  mx-10 text-xl md:text-3xl'> {item.quantity * item.itemPrice} Baht</div>
+          <div class='flex justify-center md:justify-end flex-1 w-32 items-center mx-10 text-xl md:text-3xl'> {item.quantity * item.itemPrice} Baht</div>
 
         </div>
         <div className='p-4'></div>

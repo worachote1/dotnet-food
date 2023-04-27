@@ -10,7 +10,7 @@ import OrderWaitRider from './OrderWaitRider'
 export default function OrderListInfo() {
   
   const { orderId } = useParams();
-  // const [status,setStatus] = useState("waiting_accept")
+  const [status,setStatus] = useState("order_success")
   const [orderData,setOrderData] = useState([])
   
   const getOrderData = () => {
@@ -40,13 +40,13 @@ export default function OrderListInfo() {
   const [statusComponent,setStatusComponent] = useState(null)
 
   useEffect(()=>{
-    if(orderData.orderState === "waiting_accept"){
+    if(status === "waiting_accept"){
         setStatusComponent(<OrderWaitAcept orderData = {orderData}/>)
 }
-    else if(orderData.orderState === "waiting_rider"){
+    else if(status === "waiting_rider"){
         setStatusComponent(<OrderWaitRider orderData = {orderData}/>)
 }
-    else if(orderData.orderState === "order_success"){
+    else if(status === "order_success"){
         setStatusComponent(<OrderFinalRating orderData = {orderData}/>)
 }
     else{
