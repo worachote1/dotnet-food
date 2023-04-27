@@ -11,23 +11,22 @@ const NavBar = () => {
 
     const [nav, setNav] = useState(false)
     const navigate = useNavigate();
-    const [showBasketCount,setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket")!==null) 
-    ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length 
-    : 0)
-   
+    const [showBasketCount, setBasketCount] = useState((sessionStorage.getItem("current_menuInBasket") !== null)
+        ? JSON.parse(sessionStorage.getItem("current_menuInBasket")).length
+        : 0)
 
     const handle_click_logOut = () => {
-        //remove user in session
+        //remove user in session 
         sessionStorage.clear();
         // redirecct to login
         navigate("/login")
-    } 
+    }
 
     const check_IsUserLogIn = () => {
         return (sessionStorage.getItem('current_user') !== null) ? true : false
     }
 
-   
+
     return (
 
         <div className='max-w-[1640px] mx-auto
@@ -90,7 +89,7 @@ const NavBar = () => {
              md:inline-block'>
                             <div className='flex '>
                                 <SlBasket size={25} />
-                                {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
+                                {((showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
                             </div>
                         </button>
                     </Link>
@@ -201,7 +200,7 @@ const NavBar = () => {
              md:inline-block'>
                                         <div className='flex '>
                                             <SlBasket size={25} />
-                                            {(( showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
+                                            {((showBasketCount !== 0)) ? <div className="badge badge-secondary"> {showBasketCount}</div> : ""}
                                         </div>
                                     </button>
                                 </Link>

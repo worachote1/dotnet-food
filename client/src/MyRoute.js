@@ -9,6 +9,7 @@ import OrderListInfo from './components/OrderListInfo'
 import Shop from "./components/Shop"
 import Basket from './components/Basket'
 import Order from './components/Order'
+import OrderRider from './components/OrderRider'
 
 export default function MyRoute() {
     return (
@@ -23,6 +24,10 @@ export default function MyRoute() {
                 <Route path="/order-list-info/:orderId" exact element={<OrderListInfo />} />
                 <Route path="/basket" exact element={<Basket />} />
                 <Route path="/shop/:foodShopName" exact element={<Shop />} />
+
+                {/*Route for Rider Mode */}
+                <Route path="/main-rider/order-list-info/:orderId" exact element={<OrderRider />} />
+
             </Routes>
         </BrowserRouter>
     )

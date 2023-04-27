@@ -7,6 +7,13 @@ import Swal from 'sweetalert2'
 
 export default function Basket() {
 
+  // test prn
+  // let prn = sessionStorage.getItem('current_menuInBasket')
+  // // alert(typeof(JSON.parse(prn)))
+  // let x = JSON.parse(prn)
+  // console.log(x[0])
+
+//  ---------------------------
   //  fetch Item that user add to basket (must be the same foodShop) 
   //  ** fetch Object from session
   const [currentMenuInBasket, setCurrentMenuInBasket] = useState(JSON.parse(sessionStorage.getItem("current_menuInBasket")))
@@ -43,6 +50,37 @@ export default function Basket() {
   }
   const [subTotal,setSubTotal] = useState(calSubTotal())
 
+  const handle_placeOrder = () => {
+    // POST API : create new Order
+    fetch(`http://localhost:5000/api/orders/`,{
+      method : "POST",
+      body : JSON.stringify({
+        "deliveryManName" : "",
+        "customerName" : sessionStorage.getItem('current_user'),
+        "orderState" : "waiting_accept",
+        "date" : new Date().toLocaleString(),
+        "menuInBasket" : sessionStorage.getItem('current_menuInBasket'),
+        "foodshopInBasket" : sessionStorage.getItem('current_FoodShopInBasket')
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      // alert(data)
+      sessionStorage.removeItem('current_FoodShopInBasket');
+      sessionStorage.removeItem('current_menuInBasket');
+      navigate('/')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    
+  }
+
   return (
     <div >
       <NavBar />
@@ -53,7 +91,7 @@ export default function Basket() {
         </div> */}
         {(currentMenuInBasket !== null)
           ? currentMenuInBasket.map((item) => {
-            return <BasketItem key={`menu-${item.id}`} menuObj = {item} callbackUpdate = {upDateSubTotal} cur_subTotal = {subTotal} />
+            return <BasketItem key={`menu-${item.id}`} menuObj = {item} callbackUpdate = {upDateSubTotal} cur_subTotal = {subTotal} /> 
           })
 
           : alert_EmptyBasket()
@@ -65,7 +103,9 @@ export default function Basket() {
               <span className="text-xl font-bold">{subTotal} Bath</span>
             </div>
             <div className="flex justify-end items-center mt-2">
-              <button className="btn btn-success">place order</button>
+              <button className="btn btn-success"
+              onClick={handle_placeOrder}
+              >place order</button>
             </div>
           </>
           : ""}
