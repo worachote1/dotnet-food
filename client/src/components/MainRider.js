@@ -28,7 +28,8 @@ export default function MainRider() {
   }
 
   const filter_allWaitingOrders = () => {
-    const filteredOrders = allOrders.filter(order => order.orderState === "waiting_accept");
+    const currentUser = sessionStorage.getItem('current_user');
+    const filteredOrders = allOrders.filter(order => order.orderState === "waiting_accept" && order.customerName !== currentUser );
     setAllWaitingOrders(filteredOrders);
   }
 
@@ -61,7 +62,7 @@ export default function MainRider() {
               Order ID : {item.orderId} 
               {(item.orderState === "waiting_accept") ? <div className="badge badge-secondary"> NEW </div> : ""}
             </h2>
-            <p>Order Status : <span className='font-bold text-green-600'> {item.orderState} </span></p>
+            <p>Order Status : <span className='font-bold text-warning'> {item.orderState} </span></p>
             <p>Customer : <span className='font-bold'> {item.customerName} </span></p>
             <p>Food Shop : <span className='font-bold' style={{ fontFamily: "'Noto Serif Thai', serif" }}> {item.foodshopInBasket} </span></p>
             <p>Date : <span className='font-bold'>{item.date}</span></p>

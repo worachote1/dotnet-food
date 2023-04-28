@@ -5,216 +5,174 @@ import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderRider() {
-  
-  const [subtotal, setSubtotal] = useState([])
-  const [deliveryFee, setDeliveryFee] = useState([])
-  const [coupon, setCoupon] = useState([])
-  const [total, setTotal] = useState([])
 
-  const [invoiceItem, setInvoiceItem] = useState([])
-
-  const [textRiderStatus, setTextRiderStatus] = useState("Accept Order")
-
-  const orderID = sessionStorage.getItem("current_customer_orderID")
-  const custumerName = sessionStorage.getItem("current_customer")
-  const address = sessionStorage.getItem("customer_address")
-  const [itemList, setItemList] = useState(JSON.parse(sessionStorage.getItem("customer_order_list")))
-  const riderStatus = sessionStorage.getItem("rider_status")
-  
-  const navigate = useNavigate();
-  const hanldeClickAppliedOrder = (orderID) => {
-    if(riderStatus === null || riderStatus === "complete" || riderStatus === "cancel"){
-      sessionStorage.setItem("rider_status","delivering")
-      setTextRiderStatus("Cancel")
-    }
-    else{
-      sessionStorage.setItem("rider_status","cancel")
-      navigate("/main-rider")
-    }
-  }
-  const checkRS = () => {
-    if(riderStatus === "delivering"){
-      setTextRiderStatus("cancel")
-    }
-  }
-  
+  const orderId = useParams().orderId
+  const [orderData, setOrderData] = useState([])
+  const [menuInOrder, setMenuInOrder] = useState([])
+  const [all_MenuOrderDiv, setAllMenuOrderDiv] = useState([])
+  const [foodShopInOrder, setFoodShopInOrder] = useState([])
+  const [customerInOrder, setCustomerInOrder] = useState([])
+  const [deliveryMan, setDeliveryMan] = useState([])
 
   const calSubTotal = () => {
-    if(itemList === null){
-      return 0
+    let subTotal = 0
+    for (let i = 0; i < menuInOrder.length; i++) {
+      subTotal += menuInOrder[i].itemPrice * menuInOrder[i].quantity
     }
-    let cnt = 0
-    for (let i = 0; i < itemList.length; i++){
-      cnt += itemList[i].itemPrice * itemList[i].quantity
-    }
-    return cnt
+    return subTotal
   }
 
-  const calTotal = () => {
-    return parseFloat(calSubTotal())-parseFloat(coupon)+parseFloat(deliveryFee)
-  }
-
-  useEffect(() => {
-    checkRS()
-
-    setInvoiceItem(itemList)
-
-    setCoupon(0)
-    setSubtotal(calSubTotal())
-    setDeliveryFee(25)
-
-  }, [])
-
-  
-  const getInvoiceItem = () => {
-    fetch(`http://localhost:5000/api/order`)
+  const getOrderData = () => {
+    fetch(`http://localhost:5000/api/orders/${orderId}`)
       .then((res) => {
-
         return res.json()
       })
       .then((data) => {
-        console.log("get order success !")
-        setInvoiceItem(data)
+        setOrderData(data)
       })
       .catch((err) => {
-        console.log("get order failed !")
+        console.log(err)
       })
   }
 
-  let coupon_div = []
-  if(coupon != 0){
-    coupon_div.push(
-      <div class="flex justify-between">
-        <dt>Coupon</dt>
-         <dd>{coupon} บาท</dd>
-      </div>
-    )
+  const getCustomerData = (customerName) => {
+    fetch(`http://localhost:5000/api/user/${customerName}`)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setCustomerInOrder(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-  let test_item_div = []
-  invoiceItem.map((item) => {
-    test_item_div.push(
+  const getFoodShopData = (foodShopName) => {
+    fetch(`http://localhost:5000/api/foodshop/${foodShopName}`)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setFoodShopInOrder(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+
+  useEffect(() => {
+    getOrderData()
+  }, [])
+
+  useEffect(() => {
+    if (orderData && orderData.menuInBasket) {
+      const menuData = JSON.parse(orderData.menuInBasket);
+      setMenuInOrder(menuData);
+      getFoodShopData(orderData.foodshopInBasket)
+      getCustomerData(orderData.customerName)
+    }
+  }, [orderData]);
+
+  useEffect(() => {
+    const divElements = menuInOrder.map((item) => (
       <li class="flex items-center gap-4">
-        <img  
+        <img
           src={item.imgPath}
           alt=""
-          class="h-20 w-20 rounded object-cover"
+          class="h-24 w-32 md:h-44 md:w-72 rounded object-cover"
         />
 
         <div>
-          <h3 class="text-sm text-gray-900">{item.itemName}</h3>
-
-          <dl class="mt-0.5 space-y-px text-[10px]">
-            <div>
-              <dt class="inline">Shop Name : </dt>
-              <dd class="inline">{item.shopName}</dd>
-            </div>
-          </dl>
+          <h3 class="text:xl md:text-3xl text-gray-900 ">
+            <span style={{ fontFamily: "'Noto Serif Thai', serif" }}>{item.itemName}</span>
+            <span className='font-bold'> X {item.quantity}</span>
+          </h3>
         </div>
 
-        <div class="ml-3 items-center justify-start">
-          X
+
+
+        <div class="flex flex-1 items-center justify-end gap-2 text:xl md:text-3xl">
+          {item.itemPrice * item.quantity} Bath
         </div>
 
-        <div class="flex flex-1 items-center justify-start gap-2">
-          <form>
-            <label for="Line1Qty" class="sr-only"> Quantity </label>
-
-            <input
-              type = "number"
-              min = "1"
-              value = {item.quantity}
-              id = "disabled-input"
-              class = "h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-            />
-          </form>
-        </div>
-
-        <div class="flex flex-1 items-center justify-end gap-2">
-          {item.itemPrice} บาท
-        </div>
       </li>
     )
-  })
+    )
+    setAllMenuOrderDiv(divElements)
+  }, [menuInOrder])
 
-  const [testData,setTestData] = useState("")
-
-  useEffect(()=>{
-    fetch(`http://localhost:5000/api/user`)
-    .then((res)=>{
-
-      return res.json()
-    })
-    .then((data)=>{
-      console.log("get user success !")
-      setTestData(data)
-    })
-  },[])
 
   return (
     <div>
-        <NavBar />
-        <div class="min-h-screen mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-          <div class="mx-auto ">
-            <header class="text-center">
-              <h1 class="text-xl font-bold text-gray-900 sm:text-3xl">{custumerName}'s Cart</h1>
-            </header>
+      <NavBar />
+      <div class="min-h-screen mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div class="mx-auto ">
+          <header class="text-center">
+            <h1 class="font-bold text-gray-900 text-3xl md:text-4xl" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{orderData.foodshopInBasket}</h1>
+            <h3 class="font-bold text-gray-500 text-xl md:text-2xl" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{foodShopInOrder.address}</h3>
+          </header>
 
-            <div class="mt-8">
-              <ul class="space-y-4">
-                {test_item_div}
-              </ul>
+          <div class="mt-8">
+            <ul class="space-y-4">
+              {all_MenuOrderDiv}
+            </ul>
 
-              <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
-                <div class="w-screen max-w-lg space-y-4">
-                  <dl class="space-y-0.5 text-sm text-gray-700">
-                    <div class="flex justify-between">
-                      <dt>Subtotal</dt>
-                      <dd>{subtotal} บาท</dd>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <dt>Delivery Fee</dt>
-                      <dd>{deliveryFee} บาท</dd>
-                    </div>
-
-                    
-                    {coupon_div}
-
-                    <div class="flex justify-between !text-base font-medium">
-                      <dt>Total</dt>
-                      <dd>{calTotal()} บาท</dd>
-                    </div>
-                  </dl>
-
-                  <div class="flex justify-end">
-                    <span
-                      class="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-1500"
-                    >
-                      <img
-                        src = "https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
-                        alt = ""
-                        class = "h-4 w-4 mr-2"
-                      />
-
-                      <p class="whitespace-nowrap text-xs">Address : {address}</p>
-                    </span>
+            <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
+              <div class="w-screen max-w-lg space-y-4 ">
+                <dl class="space-y-0.5 text-md md:text-xl text-gray-700">
+                  <div class="flex justify-between text-xl md:text-3xl">
+                    <dt>Total</dt>
+                    <dd>{calSubTotal()} Bath</dd>
                   </div>
+                </dl>
 
-                  <div class="flex justify-end">
-                    <a
-                      onClick={() => hanldeClickAppliedOrder()}
-                      class="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
-                    >
-                      {textRiderStatus}
-                    </a>
-                  </div>
+                <div class="flex justify-start">
+                    <img
+                      src="https://www.svgrepo.com/show/514283/user.svg"
+                      alt=""
+                      class="h-6 w-6 md:h-8 md:w-8 mr-2"
+                    />
+
+                    {/* whitespace-nowrap */}
+                    {/*  {customerInOrder.address} */}
+                    <div class="text-xl md:text-3xl w-full">
+                        Customer Name : {customerInOrder.userName}
+                    </div>
+                </div>
+
+
+                <div class="flex justify-start">
+                    <img
+                      src="https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
+                      alt=""
+                      class="h-6 w-6 md:h-8 md:w-8 mr-2"
+                    />
+
+                    {/* whitespace-nowrap */}
+                    {/*  {customerInOrder.address} */}
+                    <div class="text-xl md:text-3xl w-full">
+                      Address : {customerInOrder.address}
+                    </div>
+                </div>
+
+
+
+                <div class="flex justify-end">
+                  <a
+
+                    class="block cursor-pointer bg-green-500 text-white py-3 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300"
+                  >
+                    Accept Order
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
+      </div>
+      <Footer />
     </div>
   )
 }
