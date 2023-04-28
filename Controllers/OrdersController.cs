@@ -69,14 +69,14 @@ namespace dotnet_foodRelease.Controllers
                 return BadRequest("Order ID Not Found");
             }
             return Ok(order);
-        }       
+        }
 
         //prn : get orders rom customerName
         [HttpGet]
         [Route("by_customer")]
         public async Task<ActionResult<Order>> getByCustomerName(string customerName)
         {
-            var orders = await _context.Orders.Where(obj => obj.customerName == customerName).ToListAsync() ;
+            var orders = await _context.Orders.Where(obj => obj.customerName == customerName).ToListAsync();
             if (orders == null)
             {
                 return BadRequest("Not Found orders belong to user");
@@ -84,20 +84,27 @@ namespace dotnet_foodRelease.Controllers
             return Ok(orders);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Order>> setState(int id, string state)
+        [HttpPut("{orderId}")]
+        public async Task<ActionResult<Order>> UpdateOrder(int orderId, [FromBody] Order updatedOrder)
         {
-            var orders = await _context.Orders.FindAsync(id);
-            if (orders == null)
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order == null)
             {
-                return BadRequest("Orders ID Not Found");
+                return NotFound();
             }
 
-            orders.orderState = state;
+            order.deliveryManName = updatedOrder.deliveryManName;
+            order.customerName = updatedOrder.customerName;
+            order.orderState = updatedOrder.orderState;
+            order.date = updatedOrder.date;
+            order.menuInBasket = updatedOrder.menuInBasket;
+            order.foodshopInBasket = updatedOrder.foodshopInBasket;
 
+            // _context.Entry(order).State = EntityState.Modified;
+            _context.Orders.Update(order);
             await _context.SaveChangesAsync();
 
-            return Ok(orders);
+            return Ok(order);
         }
 
         [HttpPost]

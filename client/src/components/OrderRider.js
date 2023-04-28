@@ -22,6 +22,10 @@ export default function OrderRider() {
     return subTotal
   }
 
+  const handle_ClickAcceptOrder = () => {
+    
+  }
+
   const getOrderData = () => {
     fetch(`http://localhost:5000/api/orders/${orderId}`)
       .then((res) => {
@@ -123,7 +127,7 @@ export default function OrderRider() {
               <div class="w-screen max-w-lg space-y-4 ">
                 <dl class="space-y-0.5 text-md md:text-xl text-gray-700">
                   <div class="flex justify-between text-xl md:text-3xl">
-                    <dt>Total</dt>
+                    <dt className='font-bold'>Total</dt>
                     <dd>{calSubTotal()} Bath</dd>
                   </div>
                 </dl>
@@ -138,10 +142,9 @@ export default function OrderRider() {
                     {/* whitespace-nowrap */}
                     {/*  {customerInOrder.address} */}
                     <div class="text-xl md:text-3xl w-full">
-                        Customer Name : {customerInOrder.userName}
+                    Customer : <span className='font-bold'>{customerInOrder.userName}</span>
                     </div>
                 </div>
-
 
                 <div class="flex justify-start">
                     <img
@@ -153,19 +156,16 @@ export default function OrderRider() {
                     {/* whitespace-nowrap */}
                     {/*  {customerInOrder.address} */}
                     <div class="text-xl md:text-3xl w-full">
-                      Address : {customerInOrder.address}
+                      Address : <span className='font-bold'>{customerInOrder.address}</span>
                     </div>
                 </div>
 
+                <div class="flex justify-center md:justify-end">
+                <button className="btn btn-success text-white"
 
-
-                <div class="flex justify-end">
-                  <a
-
-                    class="block cursor-pointer bg-green-500 text-white py-3 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300"
-                  >
-                    Accept Order
-                  </a>
+                >
+              Accept Order
+            </button>
                 </div>
               </div>
             </div>

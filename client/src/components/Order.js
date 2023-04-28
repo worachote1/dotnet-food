@@ -87,7 +87,7 @@ export default function Order() {
         </div> */}
 
         {/* test select option */}
-        <div className={`p-4 md:ml-7`}>
+        <div className={`p-4`}>
           <div className={`dropdown`}>
             <label tabIndex={0} className={`btn m-1 ${selectStatusStyle[selectStatus]}`}>{selectStatus}</label>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
