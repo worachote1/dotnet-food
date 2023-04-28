@@ -3,6 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { Link, useNavigate } from 'react-router-dom'
 import OrderRider from './OrderRider'
+import OrderDelivering from './OrderDelivering'
 
 export default function MainRider() {
 
@@ -29,7 +30,7 @@ export default function MainRider() {
 
   const filter_allWaitingOrders = () => {
     const currentUser = sessionStorage.getItem('current_user');
-    const filteredOrders = allOrders.filter(order => order.orderState === "waiting_accept" && order.customerName !== currentUser );
+    const filteredOrders = allOrders.filter(order => order.orderState === "waiting_accept" && order.customerName !== currentUser);
     setAllWaitingOrders(filteredOrders);
   }
 
@@ -56,10 +57,10 @@ export default function MainRider() {
       >
         <div className="card w-96 bg-base-100 shadow-xl mr-4 mt-4 ">
           {/* use orderState in data base to check in order_status_imgPath*/}
-          <figure><img src="https://cdn4.vectorstock.com/i/1000x1000/08/28/shop-store-flat-icon-vector-14270828.jpg" className='object-cover h-44 w-full'/></figure>
+          <figure><img src="https://cdn4.vectorstock.com/i/1000x1000/08/28/shop-store-flat-icon-vector-14270828.jpg" className='object-cover h-44 w-full' /></figure>
           <div className="card-body">
             <h2 className="card-title">
-              Order ID : {item.orderId} 
+              Order ID : {item.orderId}
               {(item.orderState === "waiting_accept") ? <div className="badge badge-secondary"> NEW </div> : ""}
             </h2>
             <p>Order Status : <span className='font-bold text-warning'> {item.orderState} </span></p>
@@ -90,14 +91,12 @@ export default function MainRider() {
         ?
         <div>
           <NavBar />
-          <div class="min-h-screen flex">
-              <div class='flex flex-wrap justify-center mb-5'>
-                {all_waitingOrders_div}
-              </div>
+          <div class="min-h-screen flex flex-wrap justify-center mb-5">
+            {all_waitingOrders_div}
           </div>
           <Footer />
         </div>
-        : <OrderRider deliveringOrder={deliveringOrder} />
+        : <OrderDelivering deliveringOrder={deliveringOrder[0]} />
       }
     </div>
   )

@@ -99,7 +99,8 @@ export default function Register() {
       })
     }
   }
-    return (
+
+  return (
       <div>
         <NavBar />
         <div className="min-h-screen flex items-center justify-center">

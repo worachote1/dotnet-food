@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import { useParams } from 'react-router-dom';
+import { redirect, useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderRider() {
 
+  const navigate = useNavigate();
   const orderId = useParams().orderId
   const [orderData, setOrderData] = useState([])
   const [menuInOrder, setMenuInOrder] = useState([])
@@ -22,26 +23,26 @@ export default function OrderRider() {
     return subTotal
   }
 
-  //
   const handle_ClickAcceptOrder = () => {
-    console.log("Ghd")
     fetch(`http://localhost:5000/api/orders/${orderId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        deliveryManName : sessionStorage.getItem("current_user"),
-        customerName : orderData.customerName,
-        orderState : "waiting_rider",
+        deliveryManName : sessionStorage.getItem('current_user'),
+        customerName: orderData.customerName,
+        orderState: "waiting_rider",
         date : orderData.date,
-        menuInBasket : orderData.menuInBasket,
-        foodshopInBasket : orderData.foodshopInBasket
+        menuInBasket: orderData.menuInBasket,
+        foodshopInBasket: orderData.foodshopInBasket
       })
     })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error)) 
+    .then(data => {
+      console.log(data)
+    })
+    .catch(error => console.error(error))
   }
 
   const getOrderData = () => {
