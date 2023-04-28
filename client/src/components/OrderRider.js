@@ -22,8 +22,26 @@ export default function OrderRider() {
     return subTotal
   }
 
+  //
   const handle_ClickAcceptOrder = () => {
-    
+    console.log("Ghd")
+    fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        deliveryManName : sessionStorage.getItem("current_user"),
+        customerName : orderData.customerName,
+        orderState : "waiting_rider",
+        date : orderData.date,
+        menuInBasket : orderData.menuInBasket,
+        foodshopInBasket : orderData.foodshopInBasket
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error)) 
   }
 
   const getOrderData = () => {
@@ -162,7 +180,7 @@ export default function OrderRider() {
 
                 <div class="flex justify-center md:justify-end">
                 <button className="btn btn-success text-white"
-
+                  onClick={handle_ClickAcceptOrder}
                 >
               Accept Order
             </button>
