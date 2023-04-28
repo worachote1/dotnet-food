@@ -116,10 +116,10 @@ namespace dotnet_foodRelease.Controllers
             return Ok(await _context.Orders.ToListAsync());
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Order>> Delete(int id)
+        [HttpDelete("{orderId}")]
+        public async Task<ActionResult<Order>> Delete(int orderId)
         {
-            var dbOrder = await _context.Orders.FindAsync(id);
+            var dbOrder = await _context.Orders.FindAsync(orderId);
             if (dbOrder == null)
             {
                 return BadRequest("Orders ID Not Found");

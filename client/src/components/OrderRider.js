@@ -31,7 +31,7 @@ export default function OrderRider() {
       },
       body: JSON.stringify({
         deliveryManName : sessionStorage.getItem('current_user'),
-        customerName: orderData.customerName,
+        customerName: orderData.customerName, 
         orderState: "waiting_rider",
         date : orderData.date,
         menuInBasket: orderData.menuInBasket,
@@ -43,6 +43,8 @@ export default function OrderRider() {
       console.log(data)
     })
     .catch(error => console.error(error))
+
+    navigate('/main-rider')
   }
 
   const getOrderData = () => {
