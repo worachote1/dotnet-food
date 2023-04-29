@@ -41,7 +41,7 @@ export default function OrderDelivering({deliveringOrder}) {
     })
     .catch(error => console.error(error))
 
-    window.location.reload()
+    window.location.reload() 
   }
 
   const handle_CompleteOrder = () => {
