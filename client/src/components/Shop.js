@@ -120,8 +120,8 @@ export default function Shop() {
         </figure>
         <div className="card-body">
           <div className='name-menu-controller flex justify-between items-center'>
-            <h2 className="card-title">{item.itemName} </h2>
-            <h2 className="card-title">{item.itemPrice}  Bath</h2>
+            <h2 className="card-title" style={{ fontFamily: "'Noto Serif Thai', serif" }}>{item.itemName} </h2>
+            <h2 className="card-title">{item.itemPrice} Bath</h2>
           </div>
           <div className="card-actions justify-end">
             <button className="btn btn-success"

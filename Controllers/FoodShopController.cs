@@ -47,10 +47,10 @@ namespace dotnet_foodRelease.Controllers
             return Ok(foodShop);
         }      
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<FoodShop>> UpdateRating(int id,FoodShop foodShop)
+        [HttpPut("{foodShopName}")]
+        public async Task<ActionResult<FoodShop>> UpdateRating(string foodShopName,FoodShop foodShop)
         {
-            var cur_foodShop = await _context.foodShop.FindAsync(id);
+            var cur_foodShop = await _context.foodShop.SingleOrDefaultAsync(obj => obj.Name == foodShopName);
             if (foodShop == null)
             {
                 return BadRequest("foodShop ID Not Found");

@@ -7,15 +7,8 @@ import Swal from 'sweetalert2'
 
 export default function Basket() {
 
-  // test prn
-  // let prn = sessionStorage.getItem('current_menuInBasket')
-  // // alert(typeof(JSON.parse(prn)))
-  // let x = JSON.parse(prn)
-  // console.log(x[0])
-
-//  ---------------------------
   //  fetch Item that user add to basket (must be the same foodShop) 
-  //  ** fetch Object from session
+  //  fetch Object from session
   const [currentMenuInBasket, setCurrentMenuInBasket] = useState(JSON.parse(sessionStorage.getItem("current_menuInBasket")))
   const navigate = useNavigate();
   const alert_EmptyBasket = () => {
