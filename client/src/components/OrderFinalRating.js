@@ -74,7 +74,7 @@ export default function OrderFinalRating({ orderData }) {
   }
 
 
-  const update_SingleMenuTotalOrder = (singleMenu) => {
+  const update_SingleMenuTotalOrder = (singleMenu,quantity) => {
     console.log(singleMenu);
     fetch(`http://localhost:5000/api/shopitem/${singleMenu.id}`, {
       method: 'PUT',
@@ -87,7 +87,7 @@ export default function OrderFinalRating({ orderData }) {
         type: singleMenu.type,
         imgPath: singleMenu.imgPath,
         fromWhichFoodShop: singleMenu.fromWhichFoodShop,
-        totalItemOrder: singleMenu.totalItemOrder + 1,
+        totalItemOrder: singleMenu.totalItemOrder + quantity,
       }),
     })
       .then((res) => {
@@ -101,6 +101,7 @@ export default function OrderFinalRating({ orderData }) {
       });
   };
   
+  
   const update_AllMenuTotalOrder = () => {
     for (let i = 0; i < allMenuData.length; i++) {
       fetch(`http://localhost:5000/api/shopitem/${allMenuData[i].id}`)
@@ -108,7 +109,7 @@ export default function OrderFinalRating({ orderData }) {
           return res.json();
         })
         .then((data) => {
-          update_SingleMenuTotalOrder(data);
+          update_SingleMenuTotalOrder(data,allMenuData[i].quantity);
         })
         .catch((err) => {
           console.log(err);
@@ -119,7 +120,7 @@ export default function OrderFinalRating({ orderData }) {
   const handle_submitVote = (event) => {
     event.preventDefault();
     update_foodShopRatingandVote()
-    console.log(allMenuData)
+    // console.log(allMenuData) 
     update_AllMenuTotalOrder()
     delete_orderSuccessStatus(orderData.orderId)
     alert_RatingSuccess()
