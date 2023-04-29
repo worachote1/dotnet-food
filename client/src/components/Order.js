@@ -3,6 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
+import { AiFillCaretDown } from 'react-icons/ai'
 
 export default function Order() {
 
@@ -89,7 +90,7 @@ export default function Order() {
         {/* test select option */}
         <div className={`p-4`}>
           <div className={`dropdown`}>
-            <label tabIndex={0} className={`btn m-1 ${selectStatusStyle[selectStatus]}`}>{selectStatus}</label>
+            <label tabIndex={0} className={`btn m-1 ${selectStatusStyle[selectStatus]}`}>{selectStatus} <span className='ml-1'> {<AiFillCaretDown size={20}/>} </span></label>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
               <li className='hover:bg-yellow-400'><button onClick={() => handle_ClickSelectStatus("waiting_accept")}>waiting_accept</button></li>
               <li className='hover:bg-green-400'><button onClick={() => handle_ClickSelectStatus("waiting_rider")}>waiting_rider</button></li>

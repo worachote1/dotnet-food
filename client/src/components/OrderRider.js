@@ -169,6 +169,20 @@ export default function OrderRider() {
 
                 <div class="flex justify-start">
                     <img
+                      src="https://www.svgrepo.com/show/507389/phone.svg"
+                      alt=""
+                      class="h-6 w-6 md:h-8 md:w-8 mr-2"
+                    />
+
+                    {/* whitespace-nowrap */}
+                    {/*  {customerInOrder.address} */}
+                    <div class="text-xl md:text-3xl w-full">
+                      Phone : <span className='font-bold'>{customerInOrder.phoneNum}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-start">
+                    <img
                       src="https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
                       alt=""
                       class="h-6 w-6 md:h-8 md:w-8 mr-2"

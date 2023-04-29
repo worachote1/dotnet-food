@@ -6,9 +6,10 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function OrderFinalRating({ orderData }) {
   const navigate = useNavigate();
   const allMenuData = JSON.parse(orderData.menuInBasket)
+  const [cur_menu, setCurMenu] = useState([])
   const [deliveryManData, setDeliveryManData] = useState([])
   const [selectedStar, setSelectedStar] = useState("5");
-  const [foodShopOrder,setFoodShopOrder] = useState([])
+  const [foodShopOrder, setFoodShopOrder] = useState([])
 
   const handleOptionChange = (event) => {
     setSelectedStar(event.target.value)
@@ -17,15 +18,15 @@ export default function OrderFinalRating({ orderData }) {
 
   const getFoodShopOrder = () => {
     fetch(`http://localhost:5000/api/foodShop/${orderData.foodshopInBasket}`)
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      setFoodShopOrder(data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setFoodShopOrder(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const getDeliveryManData = () => {
@@ -41,6 +42,7 @@ export default function OrderFinalRating({ orderData }) {
       })
   }
 
+  // console.log(foodShopOrder)
   const delete_orderSuccessStatus = (orderId) => {
     fetch(`http://localhost:5000/api/orders/${orderId}`, {
       method: 'DELETE'
@@ -52,39 +54,73 @@ export default function OrderFinalRating({ orderData }) {
       .catch(error => console.error(error));
   }
 
-  console.log("Ggf00")
-  console.log(foodShopOrder)
   const update_foodShopRatingandVote = () => {
     fetch(`http://localhost:5000/api/foodshop/${foodShopOrder.name}`, {
-  method: 'PUT',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    Name: foodShopOrder.name,
-    imgPath: foodShopOrder.imgPath,
-    address: foodShopOrder.address,
-    totalRating: foodShopOrder.totalRating + parseInt(selectedStar),
-    totalVote: foodShopOrder.totalVote + 1
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error));
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        Name: foodShopOrder.name,
+        imgPath: foodShopOrder.imgPath,
+        address: foodShopOrder.address,
+        totalRating: foodShopOrder.totalRating + parseInt(selectedStar),
+        totalVote: foodShopOrder.totalVote + 1
+      })
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
 
 
-  const update_SingleMenuTotalOrder = () => {
-
-  }
-
+  const update_SingleMenuTotalOrder = (singleMenu) => {
+    console.log(singleMenu);
+    fetch(`http://localhost:5000/api/shopitem/${singleMenu.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        itemName: singleMenu.itemName,
+        itemPrice: singleMenu.itemPrice,
+        type: singleMenu.type,
+        imgPath: singleMenu.imgPath,
+        fromWhichFoodShop: singleMenu.fromWhichFoodShop,
+        totalItemOrder: singleMenu.totalItemOrder + 1,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
   const update_AllMenuTotalOrder = () => {
+    for (let i = 0; i < allMenuData.length; i++) {
+      fetch(`http://localhost:5000/api/shopitem/${allMenuData[i].id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          update_SingleMenuTotalOrder(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
-  }
   const handle_submitVote = (event) => {
     event.preventDefault();
     update_foodShopRatingandVote()
-    // update_AllMenuTotalOrder()
+    console.log(allMenuData)
+    update_AllMenuTotalOrder()
     delete_orderSuccessStatus(orderData.orderId)
     alert_RatingSuccess()
   }
@@ -97,7 +133,7 @@ export default function OrderFinalRating({ orderData }) {
       showConfirmButton: false,
       timer: 1000
     }).then((result) => {
-      // navigate('/')
+      navigate(`/order/${sessionStorage.getItem('current_user')}`, { replace: true })
     })
   }
 
@@ -181,7 +217,7 @@ export default function OrderFinalRating({ orderData }) {
               </div>
               <p class="text-center p-6">You Selected : {selectedStar}</p>
               <div className='flex justify-center p-4'>
-                <button  class='p-3 px-20 pt-3 bg-teal-400 rounded-full baseline hover:bg-teal-300 cursor-pointer'
+                <button class='p-3 px-20 pt-3 bg-teal-400 rounded-full baseline hover:bg-teal-300 cursor-pointer'
                   type="submit"
                 >
                   Submit

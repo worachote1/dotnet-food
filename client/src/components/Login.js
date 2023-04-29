@@ -15,14 +15,14 @@ export default function Login() {
   const navigate = useNavigate();
 
   const validateName = () => {
-    if (userName==="") {
+    if ((/^\s*$/gm).test(userName)) {
       setNameError("username cannot be empty");
     } else {
       setNameError('');
     }
   }
   const validatePassword = () => {
-    if (password==="") {
+    if ((/^\s*$/gm).test(password)) {
       setPasswordError("Password cannot be empty");
     } else {
       setPasswordError('');

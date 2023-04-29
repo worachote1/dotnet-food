@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import { useParams } from 'react-router-dom';
+import { redirect, useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderDelivering({deliveringOrder}) {
@@ -65,7 +65,7 @@ export default function OrderDelivering({deliveringOrder}) {
     })
     .catch(error => console.error(error))
 
-    window.location.reload()
+    navigate('/')
   }
 
 
@@ -169,6 +169,20 @@ export default function OrderDelivering({deliveringOrder}) {
                   <div class="text-xl md:text-2xl w-full">
                     Customer : <span className='font-bold'>{customerInOrder.userName}</span>
                   </div>
+                </div>
+
+                <div class="flex justify-start">
+                    <img
+                      src="https://www.svgrepo.com/show/507389/phone.svg"
+                      alt=""
+                      class="h-6 w-6 md:h-8 md:w-8 mr-2"
+                    />
+
+                    {/* whitespace-nowrap */}
+                    {/*  {customerInOrder.address} */}
+                    <div class="text-xl md:text-3xl w-full">
+                      Phone : <span className='font-bold'>{customerInOrder.phoneNum}</span>
+                    </div>
                 </div>
 
                 <div class="flex justify-start">
