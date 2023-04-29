@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import App from "./App"
-import Profile from "./components/Profile"
 import Login from "./components/Login"
 import Register from "./components/Register"
 import MainRider from "./components/MainRider"

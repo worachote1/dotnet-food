@@ -47,14 +47,6 @@ const NavBar = () => {
 
             </div>
 
-            {/* Search Input */}
-            {/* <div className='bg-gray-200 rounded-full flex items-center mx-4 px-2
-            w-[200px] sm:w-[400px] lg:w-[500px]'>
-                <AiOutlineSearch size={20.44} />
-                <input className='p-2 focus:outline-none w-[100%] bg-transparent'
-                    type="text" placeholder='Search...' />
-            </div> */}
-
             {/* Button */}
             <div className='flex items-center justify-center'>
 
@@ -155,7 +147,7 @@ const NavBar = () => {
 
                 <h2 className='text-2xl p-4'>
                     <Link to='/'>
-                        <span className='text-teal-400'>D o t N e t</span> Delivery
+                        <span className='text-teal-400'>D O T N E T</span> Delivery
                     </Link>
                 </h2>
                 <nav>

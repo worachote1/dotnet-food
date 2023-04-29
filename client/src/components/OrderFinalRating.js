@@ -4,12 +4,28 @@ import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function OrderFinalRating({ orderData }) {
-
   const navigate = useNavigate();
+  const allMenuData = JSON.parse(orderData.menuInBasket)
   const [deliveryManData, setDeliveryManData] = useState([])
-  const [selectedStar, setSelectedStar] = useState("");
+  const [selectedStar, setSelectedStar] = useState("5");
+  const [foodShopOrder,setFoodShopOrder] = useState([])
+
   const handleOptionChange = (event) => {
     setSelectedStar(event.target.value)
+  }
+
+
+  const getFoodShopOrder = () => {
+    fetch(`http://localhost:5000/api/foodShop/${orderData.foodshopInBasket}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      setFoodShopOrder(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   const getDeliveryManData = () => {
@@ -29,26 +45,48 @@ export default function OrderFinalRating({ orderData }) {
     fetch(`http://localhost:5000/api/orders/${orderId}`, {
       method: 'DELETE'
     })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         console.log(`deleted : ${JSON.stringify(data)}`);
       })
       .catch(error => console.error(error));
   }
 
+  console.log("Ggf00")
+  console.log(foodShopOrder)
   const update_foodShopRatingandVote = () => {
+    fetch(`http://localhost:5000/api/foodshop/${foodShopOrder.name}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    Name: foodShopOrder.name,
+    imgPath: foodShopOrder.imgPath,
+    address: foodShopOrder.address,
+    totalRating: foodShopOrder.totalRating + parseInt(selectedStar),
+    totalVote: foodShopOrder.totalVote + 1
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+  }
+
+
+  const update_SingleMenuTotalOrder = () => {
 
   }
 
-  const update_shopItemTotalOrder = () => {
+  const update_AllMenuTotalOrder = () => {
 
   }
-
-  const handle_submitVote = () => {
-    console.log("dgbbbbbbbbbbbbbbbbbbbbb")
+  const handle_submitVote = (event) => {
+    event.preventDefault();
     update_foodShopRatingandVote()
-    update_shopItemTotalOrder()
-    delete_orderSuccessStatus(deliveryManData.orderId)
+    // update_AllMenuTotalOrder()
+    delete_orderSuccessStatus(orderData.orderId)
+    alert_RatingSuccess()
   }
 
   const alert_RatingSuccess = () => {
@@ -59,12 +97,13 @@ export default function OrderFinalRating({ orderData }) {
       showConfirmButton: false,
       timer: 1000
     }).then((result) => {
-      navigate(`/order/${sessionStorage.getItem('current_user')}`)
+      // navigate('/')
     })
   }
 
   useEffect(() => {
     getDeliveryManData()
+    getFoodShopOrder()
   }, [])
 
   let test_riderDetail_div = []
@@ -142,11 +181,11 @@ export default function OrderFinalRating({ orderData }) {
               </div>
               <p class="text-center p-6">You Selected : {selectedStar}</p>
               <div className='flex justify-center p-4'>
-                <btn class='p-3 px-20 pt-3 bg-teal-400 rounded-full baseline hover:bg-teal-300 cursor-pointer'
+                <button  class='p-3 px-20 pt-3 bg-teal-400 rounded-full baseline hover:bg-teal-300 cursor-pointer'
                   type="submit"
                 >
                   Submit
-                </btn>
+                </button>
               </div>
             </fieldset>
           </form>

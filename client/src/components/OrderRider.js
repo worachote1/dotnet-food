@@ -44,7 +44,7 @@ export default function OrderRider() {
     })
     .catch(error => console.error(error))
 
-    navigate('/main-rider')
+    navigate('/')
   }
 
   const getOrderData = () => {
