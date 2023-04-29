@@ -201,9 +201,9 @@ export default function Main() {
 
       <div>
 
-        {user !== null
+        {/* {user !== null
           ? <p> you are login as : <span className='text-green-500'> {user} </span> </p>
-          : <span className='text-orange-500'>Not log in</span>}
+          : <span className='text-orange-500'>Not log in</span>} */}
 
       </div>
       
